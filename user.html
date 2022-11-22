@@ -9,64 +9,70 @@
 <body>
 <!-- partial:index.partial.html -->
 <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 
   <div class="login">
     <div class="login__content">
       <div class="login__img">
-        <img src="https://thomaskinkade.com/wp-content/uploads/2022/08/chreve-1024x770.jpg" alt="user login">
+        <img src="https://mblogthumb-phinf.pstatic.net/20151114_13/windcastle78_1447504309914Aj32t_JPEG/mona-lisa.jpg?type=w800" alt="user login">
       </div>
       <div class="login__forms">
 
 <!--         login form -->
         <form action="" class="login__register" id="login-in">
-          <h1 class="login__title">Sign In</h1>
+          <h1 class="login__title">로그인</h1>
           <div class="login__box">
             <i class='bx bx-at login__icon'></i>
-            <input type="text" placeholder="Email" class="login__input" name="signin_email">
+            <input type="text" placeholder="Email" class="login__input" id="signin_email">
           </div>
           <div class="login__box">
-            <i class='bx bx-lock login__icon'></i>
-            <input type="password" placeholder="Password" class="login__input" name="signin_password">
+            <i class='bx bx-lock login__icon' id="lock_icon_login"></i>
+            <input type="password" placeholder="Password" class="login__input" id="login_password">
           </div>
-          <a href="#" class="login__forgot">Forgot Password? </a>
-          
-          <a href="#" class="login__button">Sign In</a>
-          
+          <a href="index.html" class="login__forgot">비회원으로 보기</a>
+          <p></p><p></p>
+          <a onclick="Login()" class="btn btn-gradient btn-small">Sign In</a>
+          <p></p><p></p>
           <div>
-            <span class="login__account login__account--account">Don't Have an Account?</span>
-            <span class="login__signin login__signin--signup" id="sign-up">Sign Up</span>
+            <span class="login__account login__account--account">계정을 잊으셨나요?</span>
+            <span class="login__signin login__signin--signup" id="sign-up">회원가입</span>
           </div>
         </form>
         
 <!--         create account form -->
         <form action="" class="login__create none" id="login-up">
-          <h1 class="login__title">Create Account</h1>
+          <h1 class="login__title">회원가입</h1>
           
           <div class="login__box">
             <i class='bx bx-at login__icon'></i>
-            <input type="text" placeholder="Email" class="login__input" name="email">
+            <input type="text" placeholder="Email" class="login__input" id="email">
           </div>
 
           <div class="login__box">
             <i class='bx bx-user login__icon'></i>
-            <input type="text" placeholder="Nickname" class="login__input" name="nickname">
+            <input type="text" placeholder="Nickname" class="login__input" id="nickname">
           </div>
+          <div style="color:white; font-size:10px;">닉네임은 3자 이상 또는 특수문자 제외 </div> 
           
           <div class="login__box">
-            <i class='bx bx-lock login__icon'></i>
-            <input type="password" placeholder="Password" class="login__input" name="password">
+            <i class='bx bx-lock login__icon' id="lock_icon_signup"></i>
+            <input type="password" placeholder="Password" class="login__input" id="signup_password" name="pass">
           </div>
-          
-          <div class="login__box">
-            <i class='bx bx-lock login__icon'></i>
-            <input type="password" placeholder="Confrim Password" class="login__input" name="repassword">
-          </div>
+          <div style="color:white; font-size:10px;">비밀번호는 8자 이상 16자이하의 영문 대/소문자, 숫자, 특수문자 필수</div>
 
-          <a href="#" class="login__button" id="sign_in_btn">Sign Up</a>
+          <div class="login__box">
+            <i class='bx bx-lock login__icon' id="lock_icon_re_signup"></i>
+            <input type="password" placeholder="Confrim Password" class="login__input" id="repassword">
+          </div>
           
+          <p></p><p></p>
+          <a onclick="Sign_Up()" class="btn btn-gradient btn-small">Sign Up</a>
+          <p></p><p></p>
+          <div class="alert alert-danger" style="border:solid 1px; font-size:10px" id="alert-danger"></div>
           <div>
-            <span class="login__account login__account--account">Already have an Account?</span>
-            <span class="login__signup login__signup--signup" id="sign-in">Sign In</span>
+            <span class="login__account login__account--account">이미 계정이 있으신가요?</span>
+            <span class="login__signup login__signup--signup" id="sign-in" >로그인</span>
           </div>
           
           <!-- <div class="login__social">

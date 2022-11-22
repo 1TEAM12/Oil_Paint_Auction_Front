@@ -8,11 +8,11 @@ function service(){
 service();
 
 //회원가입
-async function signup() {
+async function Sign_Up() {
 
     const signupData = {
         repassword: document.getElementById("repassword").value,
-        password: document.getElementById("password").value,
+        password: document.getElementById("signup_password").value,
         nickname: document.getElementById("nickname").value,
         email: document.getElementById("email").value,
     }
@@ -26,10 +26,10 @@ async function signup() {
     })
 
     const result = await response.json()
-
+    
     if (response.status === 201) {
         alert("회원가입 성공")
-        document.getElementById('sign_in_btn').click()
+        document.getElementById('sign-in').click()
         
     } else if (response.status === 400) {
         document.getElementById('alert-danger').style.display ="block"
@@ -55,7 +55,7 @@ function makeAlert(key, errorText){
 //로그인
 async function Login() {
     const email = document.getElementById("signin_email").value;
-    const password = document.getElementById("signin_password").value;
+    const password = document.getElementById("login_password").value;
 
     const response = await fetch(
         `${backendBaseUrl}/users/api/token/`,
@@ -71,9 +71,9 @@ async function Login() {
 
     localStorage.setItem("access", response_json.access); 
     localStorage.setItem("refresh", response_json.refresh);
-
+    
     if (response.status === 200) {
-        alert("로그인 완료");
+        alert("로그인 성공");
 
         const base64Url = response_json.access.split('.')[1];
         const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -86,6 +86,9 @@ async function Login() {
         );
         localStorage.setItem("payload", jsonPayload);
         location.replace('index.html')
+
+    } else if(response.status === 400 && response_json["non_field_errors"])  {
+        alert(response_json["non_field_errors"])
 
     } else {
         alert("이메일과 비밀번호를 확인해주세요.");
