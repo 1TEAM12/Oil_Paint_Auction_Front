@@ -28,7 +28,7 @@ async function signup() {
     const result = await response.json()
 
     if (response.status === 201) {
-        alert("회원가입완료")
+        alert("회원가입 성공")
         document.getElementById('sign_in_btn').click()
         
     } else if (response.status === 400) {
