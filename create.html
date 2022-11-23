@@ -411,34 +411,28 @@
               <!-- file upload area -->
               <div class="upload-area">
 
-                <div class="upload-formate mb-6">
+                <!-- <div class="upload-formate mb-6">
                   <h5 class="title mb-1">
                     Upload Item File
                   </h5>
                   <p class="formate">
                     Drag or choose your file to upload
                   </p>
-                </div>
+                </div> -->
 
                 <div class="brows-file-wrapper">
                   <!-- actual upload which is hidden -->
-                  <input name="file" id="file" type="file" class="inputfile"
-                    data-multiple-caption="{count} files selected" multiple />
+                  <!-- <input name="file" id="file" type="file" class="inputfile"
+                    data-multiple-caption="{count} files selected" multiple /> -->
                   <!-- our custom upload button -->
-                  <label for="file" title="No File Choosen">
-                    <i class="ri-upload-cloud-line"></i>
-                    <span class="text-center mb-2">Choose a File</span>
-                    <span class="file-type text-center mt--10">PNG, GIF, WEBP, MP4 or MP3. <br> Max 200Mb.</span>
-                  </label>
+                  <div for="file" title="No File Choosen">
+                    <!-- <i class="ri-upload-cloud-line"></i> -->
+                    <!-- <span class="text-center mb-2">Choose a File</span>
+                    <span class="file-type text-center mt--10">PNG, GIF, WEBP <br> Max 200Mb.</span> -->
+                  </div>
                 </div>
               </div>
               <!-- end upoad file area -->
-
-              <div class="mt-12 d-none d-lg-block">
-                <h5 class="mb-1"> Note: </h5>
-                <span> Service fee : <strong>1.5%</strong> </span> <br>
-                <span> You will receive : <strong>15.00 ETH $45000</strong></span>
-              </div>
 
             </div>
 
@@ -449,16 +443,17 @@
                   <div class="col-md-12 mb-4">
                     <div class="field-box">
                       <label for="name" class="form-label">Item Title</label>
-                      <input id="name" type="text" placeholder="e. g. `Banu Digital Art`">
+                      <!-- <input id="name" type="text" placeholder=""> -->
+                      <div>안녕하세요</div>
                     </div>
                   </div>
 
-                  <div class="col-md-12 mb-4">
+                  <!-- <div class="col-md-12 mb-4">
                     <div class="field-box">
                       <label for="discription" class="form-label">Discription</label>
                       <textarea id="discription" rows="3" placeholder="e. g. “Banu Design Gallery is...”"></textarea>
                     </div>
-                  </div>
+                  </div> -->
 
                   <div class="col-md-12 mb-4">
                     <div class="field-box">
@@ -470,22 +465,16 @@
                         <option value="03.00 ETH">03.00 ETH</option>
                       </select>
                     </div>
-
                   </div>
 
                   <div class="col-md-6 mb-4">
                     <div class="field-box">
-                      <label for="royality" class="form-label">Royality</label>
-                      <input type="text" id="royality" placeholder="e. g. `10%`">
+                      <label for="royality" class="form-label">경매 종료</label>
+                      <input type="datetime-local" id="royality" value='2022-12-31T24:00' style="color:black; border-radius: 6px; height: 47px;" ">
                     </div>
                   </div>
 
-                  <div class="col-md-6 mb-4">
-                    <div class="field-box">
-                      <label for="sizes" class="form-label">Size</label>
-                      <input type="text" id="sizes" placeholder="e. g. `Size`">
-                    </div>
-                  </div>
+                  
                 </div>
                 <!-- End .row -->
               </div>
