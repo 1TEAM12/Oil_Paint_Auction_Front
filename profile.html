@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+  <!--제이쿼리문-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <head>
   <!-- Basic metas
@@ -173,34 +175,8 @@
             <!-- ***** Start My Painting ***** -->
             <div class="tab-content author-tabs-content">
               <div id="on-sale" class="tab-pane fade show active">
-                <div class="row">
-                  <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-6 mb-6">
-                    <div class="explore-style-one">
-                      <div class="thumb">
-                      <img src="./assets/images/explore/19.jpg"alt="nft live auction thumbnail">
-                        <button class="reaction-btn"><i class="ri-heart-fill"></i><span>49</span></button>
-                        <!-- End .reaction-count -->
-                      </div>
-                      <!-- End .thumb -->
-                      <div class="content">
-                        <div class="header d-flex-between pt-4 pb-3">
-                          <h3 class="title" style="text-align:center;">Painting</h3>
-                          <div class="more-dropdown "><i class="ri-more-fill" data-bs-toggle="dropdown"></i>
-                            <ul class="dropdown-menu dropdown-menu-dark">
-                              <li><a class="dropdown-item" href="#">Edit</a></li>
-                              <li><a class="dropdown-item" href="#">Delete</a></li>
-                            </ul>
-                          </div>
-                        </div>
-                        <!-- .header -->
-                        <div class="action-wrapper d-flex-between pt-4">
-                          <a href="#" data-bs-toggle="modal" data-bs-target="#placeBit"class="btn  btn-outline btn-small"><span><i class="ri-add-fill"></i>More</span></a>
-                        </div>
-                        <!-- action-wrapper -->
-                      </div>
-                      <!-- End .content -->
-                    </div>
-                  </div>
+                <div class="row" id="mypage">
+                  
                   <!-- End .col -->
                 </div>
                 <!-- End .row -->
@@ -375,6 +351,18 @@
 
 
   <!-- JS ============================================ -->
+  <script src="./static/script/base_api.js"></script>
+  <script src="./static/script/mypage_view_api.js"></script>
+  <script src="./static/style/js/mypage_veiw.js"></script>
+  <script>
+    $(document).ready(function(){
+        MypageVeiw();
+    })
+  </script>
+
+
+
+
   <script src="assets/js/vendor/jquery.js"></script>
   <script src="assets/js/vendor/jquery.nice-select.min.js"></script>
   <script src="assets/js/vendor/modernizer.min.js"></script>
