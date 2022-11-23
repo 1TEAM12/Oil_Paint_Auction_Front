@@ -130,54 +130,13 @@
     <div class="container">
       <form action="#">
         <div class="create-item-wrapper">
+          <h5 class="title mb-1" style="font-size: 30px;">원하는 작품을 만들어보세요</h5>
           <div class="row">
-            <div class="col-lg-4">
-              <!-- file upload area -->
-              <div class="upload-area">
 
-
-                
-
-                <div class="upload-formate mb-6">
-                  <h5 class="title mb-1">
-                    Upload Item File
-                  </h5>
-                </div>
-
-                <div class="brows-file-wrapper">
-                  <!-- actual upload which is hidden -->
-                  <form method="post" enctype="multipart/form-data"></form>
-                    <input name="file" id="upload_img"  type="file" class="inputfile"
-                      data-multiple-caption="{count} files selected" onclick="uploadImg()" />
-                  </form>
-                  <!-- our custom upload button -->
-                  <label for="file" title="No File Choosen">
-                    <i class="ri-upload-cloud-line"></i>
-                    <span class="text-center mb-2">Choose a File</span>
-                    <span class="file-type text-center mt--10">PNG, GIF, WEBP, MP4 or MP3. <br> Max 200Mb.</span>
-                  </label>
-                </div>
-              </div>
-
-              <div class="upload-area">
-
-                <div class="brows-file-wrapper">
-                  <!-- our custom upload button -->
-                  <label title="Result">
-                    <i class="ri-download-cloud-line"></i>
-                    <span class="text-center mb-2">Result</span>
-                  </label>
-                </div>
-              </div>
-              <!-- end upoad file area -->
-
-              
-
-            </div>
 
             <div class="col-lg-8">
 
-              <div class="form-field-wrapper" style="margin-top:50px;">
+              <div class="form-field-wrapper" style="margin-top:30px;">
                 <div class="row">
                   <div class="col-md-12 mb-4">
                     <div class="field-box">
@@ -196,23 +155,7 @@
                   <div class="col-md-12 mb-4">
                     <div class="field-box">
                       <label for="content" class="form-label">Content</label>
-                      <textarea id="content" rows="3" placeholder="내용을 입력하세요"></textarea>
-                    </div>
-                  </div>
-
-                  
-
-                  <div class="col-md-6 mb-4">
-                    <div class="field-box">
-                      <label for="royality" class="form-label">Royality</label>
-                      <input type="text" id="royality" placeholder="e. g. `10%`">
-                    </div>
-                  </div>
-
-                  <div class="col-md-6 mb-4">
-                    <div class="field-box">
-                      <label for="sizes" class="form-label">Size</label>
-                      <input type="text" id="sizes" placeholder="e. g. `Size`">
+                      <textarea id="content" rows="10" placeholder="내용을 입력하세요"></textarea>
                     </div>
                   </div>
                 </div>
@@ -220,6 +163,42 @@
               </div>
               <!--  -->
             </div>
+
+            <div class="col-lg-4">
+              <!-- file upload area -->
+              <div class="upload-area" style="margin-top: 30px;">
+
+                <div id="drop-file" class="drag-file brows-file-wrapper">
+                  <!-- actual upload which is hidden -->
+                  <form method="post" enctype="multipart/form-data">
+                    <label for="file" title="No File Choosen" style="overflow:hidden;">
+                      <input class="file" id="upload_img" type="file" onchange="dropFile.handleFiles(this.files)"
+                        accept="image/png, image/jpeg, image/gif">
+                      <img src="./model_imgs/default_image(1).png" class="preview"
+                        style="width: 100%;top: 50%;left: 50%;">
+                    </label>
+                  </form>
+                </div>
+              </div>
+
+              <div class="upload-area">
+
+                <div class="brows-file-wrapper">
+                  <!-- our custom upload button -->
+                  <a href="#" onclick="uploadImg()" >
+                    <label title="Result">
+                      <img src="./model_imgs/default_image(2).png" class="preview"
+                        style="width: 100%;top: 50%;left: 50%;">
+                    </label>
+                  </a>
+                </div>
+              </div>
+              <!-- end upoad file area -->
+
+
+
+            </div>
+
           </div>
           <!-- End .row -->
         </div>
@@ -229,8 +208,7 @@
           <div class="col-md-12">
             <div class="d-flex-between upload-btn-wrapper flex-wrap">
               <div class="d-flex-center ">
-                <button class="btn btn-gradient btn-medium mr-3"><span>Cancel</span></button>
-                <button class="btn btn-outline btn-medium"><span>Preview</span></button>
+                <button class="btn btn-outline btn-medium" href=""><span>Preview</span></button>
               </div>
               <div class="input-box">
                 <button class="btn btn-gradient btn-medium justify-content-center"><span>Create Item</span></button>
@@ -272,7 +250,7 @@
 
   <!-- partial -->
   <!-- <script  src="./static/style/js/user_script.js"></script> -->
-  <script  src="./static/script/base_api.js"></script>
+  <script src="./static/script/base_api.js"></script>
   <!--<script  src="./static/script/user_api.js"></script> -->
   <script src="./static/script/paint_create_api.js"></script>
 </body>
