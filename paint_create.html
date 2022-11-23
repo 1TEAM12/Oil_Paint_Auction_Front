@@ -126,7 +126,7 @@
   <!-- End banner area -->
 
   <!-- Start create item area -->
-  <section class="pt-120 pb-90">
+  <section style="margin-top: 50px;">
     <div class="container">
       <form action="#">
         <div class="create-item-wrapper">
@@ -135,19 +135,21 @@
               <!-- file upload area -->
               <div class="upload-area">
 
+
+                
+
                 <div class="upload-formate mb-6">
                   <h5 class="title mb-1">
                     Upload Item File
                   </h5>
-                  <p class="formate">
-                    Drag or choose your file to upload
-                  </p>
                 </div>
 
                 <div class="brows-file-wrapper">
                   <!-- actual upload which is hidden -->
-                  <input name="file" id="file" type="file" class="inputfile"
-                    data-multiple-caption="{count} files selected" multiple />
+                  <form method="post" enctype="multipart/form-data"></form>
+                    <input name="file" id="upload_img"  type="file" class="inputfile"
+                      data-multiple-caption="{count} files selected" onclick="uploadImg()" />
+                  </form>
                   <!-- our custom upload button -->
                   <label for="file" title="No File Choosen">
                     <i class="ri-upload-cloud-line"></i>
@@ -156,41 +158,49 @@
                   </label>
                 </div>
               </div>
+
+              <div class="upload-area">
+
+                <div class="brows-file-wrapper">
+                  <!-- our custom upload button -->
+                  <label title="Result">
+                    <i class="ri-download-cloud-line"></i>
+                    <span class="text-center mb-2">Result</span>
+                  </label>
+                </div>
+              </div>
               <!-- end upoad file area -->
 
+              
 
             </div>
 
             <div class="col-lg-8">
 
-              <div class="form-field-wrapper ">
+              <div class="form-field-wrapper" style="margin-top:50px;">
                 <div class="row">
                   <div class="col-md-12 mb-4">
                     <div class="field-box">
-                      <label for="name" class="form-label">Item Title</label>
-                      <input id="name" type="text" placeholder="e. g. `Banu Digital Art`">
+                      <label for="style" class="form-label">Style : </label>
+                      <p id="style_name"></p>
                     </div>
                   </div>
 
                   <div class="col-md-12 mb-4">
                     <div class="field-box">
-                      <label for="discription" class="form-label">Discription</label>
-                      <textarea id="discription" rows="3" placeholder="e. g. “Banu Design Gallery is...”"></textarea>
+                      <label for="title" class="form-label">Title</label>
+                      <input id="title" type="text" placeholder="제목을 입력하세요">
                     </div>
                   </div>
 
                   <div class="col-md-12 mb-4">
                     <div class="field-box">
-                      <label for="price" class="form-label">Price</label>
-                      <select id="price">
-                        <option selected>00.00 ETH</option>
-                        <option value="01.00 ETH">01.00 ETH</option>
-                        <option value="02.00 ETH">02.00 ETH</option>
-                        <option value="03.00 ETH">03.00 ETH</option>
-                      </select>
+                      <label for="content" class="form-label">Content</label>
+                      <textarea id="content" rows="3" placeholder="내용을 입력하세요"></textarea>
                     </div>
-
                   </div>
+
+                  
 
                   <div class="col-md-6 mb-4">
                     <div class="field-box">
@@ -220,9 +230,10 @@
             <div class="d-flex-between upload-btn-wrapper flex-wrap">
               <div class="d-flex-center ">
                 <button class="btn btn-gradient btn-medium mr-3"><span>Cancel</span></button>
+                <button class="btn btn-outline btn-medium"><span>Preview</span></button>
               </div>
               <div class="input-box">
-                <button class="btn btn-gradient btn-medium justify-content-center"><span>Create </span></button>
+                <button class="btn btn-gradient btn-medium justify-content-center"><span>Create Item</span></button>
               </div>
             </div>
           </div>
@@ -258,6 +269,12 @@
 
   <!-- main JS -->
   <script src="assets/js/main.js"></script>
+
+  <!-- partial -->
+  <!-- <script  src="./static/style/js/user_script.js"></script> -->
+  <script  src="./static/script/base_api.js"></script>
+  <!--<script  src="./static/script/user_api.js"></script> -->
+  <script src="./static/script/paint_create_api.js"></script>
 </body>
 
 </html>
