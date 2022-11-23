@@ -9,12 +9,20 @@ service();
 
 //회원가입
 async function Sign_Up() {
-
+    let input_check;
+    if (document.getElementById("input_check").checked){
+        input_check = document.getElementById("input_check").value
+        console.log(input_check)
+    } else{
+        input_check = document.getElementById("input_check_hidden").value
+        console.log(input_check)
+    }
     const signupData = {
         repassword: document.getElementById("repassword").value,
         password: document.getElementById("signup_password").value,
         nickname: document.getElementById("nickname").value,
         email: document.getElementById("email").value,
+        term_check : input_check,
     }
 
     const response = await fetch(`${backendBaseUrl}/users/`,{

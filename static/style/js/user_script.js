@@ -51,3 +51,7 @@ const hideAndShowPass = (lock_icon, password) => {
         password.setAttribute('type', 'password');
     }
 };
+
+if(document.getElementById("input_check").checked) {
+    document.getElementById("input_check_hidden").disabled = true;
+}

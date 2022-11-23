@@ -65,10 +65,15 @@
             <i class='bx bx-lock login__icon' id="lock_icon_re_signup"></i>
             <input type="password" placeholder="Confrim Password" class="login__input" id="repassword">
           </div>
-          
+
+          <div style="color:white; font-size:10px;">
+            <input type="checkbox" name="input_check" value=True id="input_check"/>
+            <input type="hidden" name="input_check" value=False id="input_check_hidden"/>이용약관 동의
+          </div>
           <p></p><p></p>
-          <a onclick="Sign_Up()" class="btn btn-gradient btn-small">Sign Up</a>
+          <a onclick="Sign_Up()" class="btn btn-gradient btn-small">Sign Up</a>  
           <p></p><p></p>
+
           <div class="alert alert-danger" style="border:solid 1px; font-size:10px" id="alert-danger"></div>
           <div>
             <span class="login__account login__account--account">이미 계정이 있으신가요?</span>
