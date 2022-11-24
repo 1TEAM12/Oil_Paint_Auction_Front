@@ -1,4 +1,3 @@
-console.log("메인페이지")
 // 경매 list GET
 async function AuctionAlllistView(){
 
