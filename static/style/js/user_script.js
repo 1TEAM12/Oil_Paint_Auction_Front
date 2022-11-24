@@ -19,7 +19,7 @@ signin.addEventListener("click", () => {
     loginup.classList.add("none");
 })
 
-// show & hide password
+//비밀번호 text or password type 변환
 var lock_icon_signup = document.getElementById('lock_icon_signup');
 var lock_icon_re_signup = document.getElementById('lock_icon_re_signup');
 var lock_icon_login = document.getElementById('lock_icon_login');
@@ -55,3 +55,19 @@ const hideAndShowPass = (lock_icon, password) => {
 if(document.getElementById("input_check").checked) {
     document.getElementById("input_check_hidden").disabled = true;
 }
+
+
+//비밀번호 찾기 모달창
+const openButton = document.getElementById("forgot_password");
+const modal = document.querySelector(".modal");
+const overlay = modal.querySelector(".modal__overlay")
+const closeBtn = modal.querySelector("button")
+const openModal = () =>{
+    modal.classList.remove("hidden");
+}
+const closeModal = () => {
+    modal.classList.add("hidden");
+}
+overlay.addEventListener("click", closeModal)
+closeBtn.addEventListener("click", closeModal)
+openButton.addEventListener("click", openModal)

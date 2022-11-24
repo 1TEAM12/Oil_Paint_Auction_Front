@@ -102,3 +102,28 @@ async function Login() {
         alert("이메일과 비밀번호를 확인해주세요.");
     }
 }
+
+//비밀번호 찾기
+async function Reset_Password() {
+    const email = document.getElementById("request_email").value;
+
+    const response = await fetch(
+        `${backendBaseUrl}/users/password-reset-email/`,
+        { 
+            headers: {
+                'content-type': 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify({"email": email})
+        }
+    )
+    const response_json = await response.json()
+    
+    if (response.status === 200) {
+        alert("비밀번호 재설정 이메일을 발송했습니다. 확인부탁드립니다. ");
+        location.reload()
+    } else {
+        console.log(response_json)
+        alert(response_json["email"]);
+    }
+}
