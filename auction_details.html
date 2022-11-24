@@ -5,7 +5,7 @@
   <!-- Basic metas
   ======================================== -->
   <meta charset="utf-8" />
-  <title>Author Profile || Banu - NFT Marketplace Template</title>
+  <title>Auction Detail || Banu - NFT Marketplace Template</title>
   <meta name="robots" content="noindex, follow" />
   <meta name="description" content="" />
 
@@ -116,7 +116,7 @@
   <section class="inner-page-banner bg-2 bg-image">
     <div class="container">
       <div class="inner text-center">
-        <h1 class="title">Profile Page</h1>
+        <h1 class="title">Auction Detail Page</h1>
         <nav class="mt-4">
         </nav>
       </div>
@@ -132,12 +132,11 @@
         <div class="col-xxl-6 mb-6">
           <div class="explore-style-one">
             <div class="thumb">
-              <img id="largeImage" class="zoom-img" src="./assets/images/explore/single.jpg"
-                data-zoom-image="./assets/images/explore/single.jpg" width="711" alt="prodcut">
+              <img id="painting_image" style="height:711px; vertical-align: middle;" alt="prodcut">
               <div class="countdown btn btn-gradient btn-small" data-date="2022-03-09">
               </div>
               <!-- End .count-down -->
-              <button class="reaction-btn"><i class="ri-heart-fill"></i><span>12</span></button>
+              <button class="reaction-btn"><i class="ri-heart-fill"></i><span id="auction_like_count"></span></button>
               <!-- End .reaction-count -->
             </div>
             <!-- End .thumb -->
@@ -150,7 +149,7 @@
           <div class="details-content">
 
             <!-- End .avatar-info-wrapper -->
-            <h2 class="main_title">Title</h2>
+            <h2 class="main_title" id="auction_title"></h2>
 
             <div class="row">
               <div class="col-lg-10 col-md-10">
@@ -162,21 +161,21 @@
                     <!-- End .thumb-wrapper -->
                     <div class="content">
                       <span class="owner">Owner</span>
-                      <h4 class="title  pb-1">Rosei Binchy</h4>
+                      <h4 class="title  pb-1" id="auction_owner"></h4>
                     </div>
                     <!-- End .content -->
                   </div>
                   <!-- End .d-flex-cente -->
 
                   <div class="d-flex-center avatar-info mb-4">
-                    <div class="thumb-wrapper">
+                    <!-- <div class="thumb-wrapper">
                         <img src="./assets/images/authors/avatar/11.png" alt="top sellter">
-                    </div>
+                    </div> -->
                     <!-- End .thumb-wrapper -->
-                    <div class="content">
+                    <!-- <div class="content">
                       <span class="owner">Creator</span>
                       <h4 class="title  pb-1">Santon Rican</h4>
-                    </div>
+                    </div> -->
                     <!-- End .content -->
                   </div>
                   <!-- End .d-flex-cente -->
@@ -189,21 +188,21 @@
               <div class="col-md-6">
                 <div class="biding-block">
                   <span>Highest Bid</span>
-                  <h3>9.2511 Point</h3>
+                  <h3 id="auction_now_bid"></h3>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="biding-block">
                   <span> Remaining Time</span>
-                  <h3 class="countdown" >2022-06-09</h3>
+                  <h3 class="countdown" id="auction_end_date"></h3>
                   <!-- End .count-down -->
                 </div>
               </div>
             </div>
             <!-- End .row -->
 
-            <h4 class="mb-1">Description</h4>
-            <p class="subtitle">Content</p>
+            <h4 class="mb-1">Explanation</h4>
+            <p class="subtitle" id ="auction_content"></p>
 
             <div class="d-flex-between mb-5">
               <ul class="nav custom-tabs">
@@ -431,6 +430,9 @@
 
   <!-- main JS -->
   <script src="assets/js/main.js"></script>
+
+  <script src="./static/script/base_api.js"></script>
+  <script src="./static/script/auction_detail_api.js"></script>
 </body>
 
 </html>
