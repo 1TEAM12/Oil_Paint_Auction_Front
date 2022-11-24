@@ -1,11 +1,17 @@
 
 
 window.onload = async function loadAuction(auctionId){
-    const response = await fetch('http://127.0.0.1:8000/auctions/1/10/', { method: 'GET'})
+
+    const response = await fetch('http://127.0.0.1:8000/auctions/1/11/', { method: 'GET'})
     response_json = await response.json()
 
     console.log(response_json)
-     
+    
+    if (response.status === 400) {
+        alert("경매가 마감되었습니다.")
+        location.replace('index.html')    
+    }else {
+
     const auction_title = document.getElementById("auction_title")
     const auction_owner = document.getElementById("auction_owner")
     const auction_content = document.getElementById("auction_content")
@@ -24,12 +30,13 @@ window.onload = async function loadAuction(auctionId){
     const painting_image = document.getElementById("painting_image")
     let image_url = response_json.painting.after_image
     painting_image.setAttribute("src", `${backendBaseUrl}${image_url}`)
+    }
 
 }
 
 // 경매 삭제
 async function AuctionDetailDelete(){
-    var delConfirm = confirm("정말 삭제를 하시겠습니까?")
+    var delConfirm = confirm("경매 취소하시겠습니까?")
     if (delConfirm) {const response = await fetch(`${backendBaseUrl}/auctions/1/10/`, {
         method: 'DELETE',
         headers: {
