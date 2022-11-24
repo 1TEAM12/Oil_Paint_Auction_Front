@@ -2,7 +2,7 @@ $(StyleSelectView)
 
 //Style select
 async function StyleSelectView(){
-    const response = await fetch(`${backendBaseUrl}/paintings/style`, {
+    const response = await fetch(`${backendBaseUrl}/paintings/style/`, {
         method: 'GET',
         headers: {
             "Content-type": "application/json",
@@ -32,5 +32,5 @@ async function StyleSelectView(){
 }
 
 function move_create_page(style_no){ 
-    window.location.href = `/paint_create.html?$id=${style_no}`
+    window.location.href = `/paint_create.html?$id=${style_no}/`
 }

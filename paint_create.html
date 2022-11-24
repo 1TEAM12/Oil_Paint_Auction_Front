@@ -171,11 +171,9 @@
                 <div id="drop-file" class="drag-file brows-file-wrapper">
                   <!-- actual upload which is hidden -->
                   <form method="post" enctype="multipart/form-data">
-                    <label for="file" title="No File Choosen" style="overflow:hidden;">
-                      <input class="file" id="upload_img" type="file" onchange="dropFile.handleFiles(this.files)"
-                        accept="image/png, image/jpeg, image/gif">
-                      <img src="./model_imgs/default_image(1).png" class="preview"
-                        style="width: 100%;top: 50%;left: 50%;">
+                    <label for="file" type="submit" style="overflow:hidden;">
+                      <input class="file" id="before_image" type="file" onchange="dropFile.handleFiles(this.files)" accept="image/png, image/jpeg, image/gif">
+                      <img src="./model_imgs/default_image(1).png" class="preview" style="width:100%; top: 50%;left: 50%;">
                     </label>
                   </form>
                 </div>
@@ -185,10 +183,9 @@
 
                 <div class="brows-file-wrapper">
                   <!-- our custom upload button -->
-                  <a href="#" onclick="uploadImg()" >
-                    <label title="Result">
-                      <img src="./model_imgs/default_image(2).png" class="preview"
-                        style="width: 100%;top: 50%;left: 50%;">
+                  <a href="#" onclick="uploadImg()">
+                    <label title="Result" for="file" style="overflow:hidden;">
+                      <img src="./model_imgs/default_image(2).png" class="preview" style="width:100%; top: 50%;left: 50%;">
                     </label>
                   </a>
                 </div>
@@ -208,10 +205,10 @@
           <div class="col-md-12">
             <div class="d-flex-between upload-btn-wrapper flex-wrap">
               <div class="d-flex-center ">
-                <button class="btn btn-outline btn-medium" href=""><span>Preview</span></button>
+                <button class="btn btn-outline btn-medium" href="#" onclick="move_select_page()"><span>Back</span></button>
               </div>
               <div class="input-box">
-                <button class="btn btn-gradient btn-medium justify-content-center"><span>Create Item</span></button>
+                <button class="btn btn-gradient btn-medium justify-content-center" href="#" onclick="savePainting()"><span>Create</span></button>
               </div>
             </div>
           </div>

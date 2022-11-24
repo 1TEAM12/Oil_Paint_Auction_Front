@@ -7,7 +7,7 @@ window.onload = () => {
 
 async function StyleLoadView(style_no) {
     
-    const response = await fetch(`${backendBaseUrl}/paintings/file`, {
+    const response = await fetch(`${backendBaseUrl}/paintings/img`, {
         method: 'GET',
         headers: {
             "Content-type": "application/json",
@@ -24,53 +24,63 @@ async function StyleLoadView(style_no) {
 
 }
 
-
 async function uploadImg() {
-    const upload_img = document.getElementById("upload_img").value
+    const style_no = location.href.split('=')[1]
+    const before_image = document.getElementById("before_image").files[0]
+    console.log(before_image)
 
-    const context = {
-        "before_img" : upload_img,
-    }
-    const response = await fetch(`${backendBaseUrl}/paintings/file`, {
+    const formData = new FormData()
+    formData.append("style", style_no)
+    formData.append("before_image", before_image)
+
+    // const context = {
+    //     // "style" : style_no,
+    //     "upload_img" : before_img
+    // }
+    const response = await fetch(`${backendBaseUrl}/paintings/img/`, {
         method: 'POST',
         headers: {
-            Accept: "application/json",
-            "Content-type": "application/json",
-            // 'Authorization': "Bearer " + localStorage.getItem("access")
+            'Authorization': "Bearer " + localStorage.getItem("access")
         },
-        body: JSON.stringify(context)
+        body: formData
     })
     const response_json = await response.json()
     console.log(response_json)
     console.log("전송 완료")
 
-    localStorage.setItem("pt_id", response_json.painting_id)
+    localStorage.setItem("pt_id", response_json.id)
+    // localStorage.setItem("after_image", response_json.after_image)
+    console.log(response_json.id)
 }
 
 
 async function savePainting() {
-    const upload_img = document.getElementById("upload_img").value
+    const painting_id = localStorage.getItem("pt_id")
+    // const after_image = localStorage.getItem("after_image")
+    console.log(painting_id)
     const title = document.getElementById("title").value
     const content = document.getElementById("content").value
-    const style_no = location.href.split('=')[1]
-    const painting_id = localStorage.getItem("pt_id")
 
-    const context = {
-        "title" : title,
-        "content" : content,
-        "before_img" : upload_img,
-        "style" : style_no
-    }
+    let storage = localStorage.getItem('payload');
+    const personObj = JSON.parse(storage);
+    user_id = personObj['user_id'];
+    console.log(user_id);
 
-    const response = await fetch(`${backendBaseUrl}/paintings/new/${painting_id}`, {
-        method: 'POST',
+    const formData = new FormData()
+    formData.append("painting_id", painting_id)
+    formData.append("title", title)
+    formData.append("content", content)
+    formData.append("user_id", user_id)
+
+
+    const response = await fetch(`${backendBaseUrl}/paintings/img/${painting_id}/`, {
+        method: 'PUT',
         headers: {
-            Accept: "application/json",
-            "Content-type": "application/json",
-            // 'Authorization': "Bearer " + localStorage.getItem("access")
+            'Authorization': "Bearer " + localStorage.getItem("access")
         },
-        body: JSON.stringify(context)
+        body: formData
     })
+    // move_index_page()
 }
 
 
@@ -143,3 +153,11 @@ function DropFile(dropAreaId, fileListId) {
 }
 
 const dropFile = new DropFile("drop-file", "files");
+
+function move_select_page(){ 
+    window.location.href = `/select_style.html`
+}
+
+function move_index_page(){
+    window.location.href = `/index.html`
+}
