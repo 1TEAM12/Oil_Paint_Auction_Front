@@ -18,6 +18,16 @@ async function AuctionCreate(){
     console.log( "Bearer " + localStorage.getItem("access"))
 
     const response_json = await response.json()
+    console.log(response.status)
 
+    if (response.status === 200) {
+        location.replace('profile.html')
+    }else if(response.status === 400) {
+        alert('이미 등록된 상품입니다.')
+        location.replace('profile.html')
+    }
 }
 
+const page_cancel=() => {
+    location.replace('profile.html')
+}
