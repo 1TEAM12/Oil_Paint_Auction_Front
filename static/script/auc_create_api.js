@@ -2,7 +2,7 @@
 
 async function AuctionCreate(){
     const start_bid = document.getElementById("start-price").value
-    const end_date = document.getElementById("DateLocal").value
+    const end_date = document.getElementById("Date").value
 
     const response = await fetch(`${backendBaseUrl}/auctions/16/`,{
         method: 'POST',
