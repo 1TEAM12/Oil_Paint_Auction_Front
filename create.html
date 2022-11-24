@@ -411,15 +411,6 @@
               <!-- file upload area -->
               <div class="upload-area">
 
-                <!-- <div class="upload-formate mb-6">
-                  <h5 class="title mb-1">
-                    Upload Item File
-                  </h5>
-                  <p class="formate">
-                    Drag or choose your file to upload
-                  </p>
-                </div> -->
-
                 <div class="brows-file-wrapper">
                   <input name="file" id="file" type="file" class="inputfile"
                     data-multiple-caption="{count} files selected" multiple />
@@ -429,12 +420,10 @@
                 </div>
               </div>
               <!-- end upoad file area -->
-
             </div>
 
             <div class="col-lg-8">
-
-              <div class="form-field-wrapper ">
+              <div class="form-field-wrapper" style="height:294px">
                 <div class="row">
                   <div class="col-md-12 mb-4">
                     <div class="field-box">
@@ -444,29 +433,16 @@
                     </div>
                   </div>
 
-                  <!-- <div class="col-md-12 mb-4">
-                    <div class="field-box">
-                      <label for="discription" class="form-label">Discription</label>
-                      <textarea id="discription" rows="3" placeholder="e. g. “Banu Design Gallery is...”"></textarea>
-                    </div>
-                  </div> -->
-
                   <div class="col-md-12 mb-4">
                     <div class="field-box">
-                      <label for="price" class="form-label">Price</label>
-                      <select id="price">
-                        <option selected>00.00 ETH</option>
-                        <option value="01.00 ETH">01.00 ETH</option>
-                        <option value="02.00 ETH">02.00 ETH</option>
-                        <option value="03.00 ETH">03.00 ETH</option>
-                      </select>
+                      <input id="start-price" type="number" placeholder="최소 경매가 10000 point" min="10000" required="True">
                     </div>
                   </div>
 
                   <div class="col-md-6 mb-4">
                     <div class="field-box">
                       <label for="royality" class="form-label">경매 종료</label>
-                      <input type="datetime-local" id="royality" value='2022-12-31T24:00' style="color:black; border-radius: 6px; height: 47px;" ">
+                      <input type="datetime-local" id="DateLocal" value='2022-12-31T24:00' required="True" style="color:black; border-radius: 6px; height: 47px;" ">
                     </div>
                   </div>
 
@@ -489,7 +465,7 @@
                 <button class="btn btn-outline btn-medium"><span>Preview</span></button>
               </div>
               <div class="input-box">
-                <button class="btn btn-gradient btn-medium justify-content-center"><span>Create Item</span></button>
+                <a onclick="AuctionCreate()" class="btn btn-gradient btn-medium justify-content-center"><span>Create Item</span></a>
               </div>
             </div>
           </div>
@@ -583,7 +559,14 @@
   <script src="./static/style/js/auc_create.js"></script>
   <script src="./static/script/auc_create_api.js"></script>
 
-
+  <script>
+    var now_utc = Date.now() // 지금 날짜를 밀리초로
+    // getTimezoneOffset()은 현재 시간과의 차이를 분 단위로 반환
+    var timeOff = new Date().getTimezoneOffset()*60000; // 분단위를 밀리초로 변환
+    // new Date(today-timeOff).toISOString()은 '2022-05-11T18:09:38.134Z'를 반환
+    var today = new Date(now_utc-timeOff).toISOString().substring(0, 16);
+    document.getElementById("DateLocal").setAttribute("min", today);
+  </script>
   
   <script src="assets/js/vendor/jquery.js"></script>
   <script src="assets/js/vendor/jquery.nice-select.min.js"></script>
