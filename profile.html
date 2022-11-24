@@ -32,6 +32,7 @@
 
   <!-- Style css -->
   <link rel="stylesheet" href="./assets/css/style.css" />
+  <link rel="stylesheet" href="./static/style/css/profile_style.css" />
 </head>
 
 <body>
@@ -135,20 +136,22 @@
           <div class="single-author profile">
             <!-- End .thumb -->
             <div class="content">
-              <a href="#" class="author-thumb">
-                <img src="./assets/images/authors/avatar/9.png" alt="author photo">
-              </a>
-              <h4 class="title">로그인 사용자 닉네임</h4>
-              <p>로그인 사용자 이메일</p>
-              <button class="btn btn-small btn-outline">
+                <img id="profile_image" class="author-thumb">
+              <h4 class="title" id="profile_nickname"></h4>
+              <p id="profile_email"></p>
+              <h5 id="profile_point"></h5>
+              <p></p>
+              <a onclick="ProfileEditNewTab()" class="btn btn-small btn-outline" id="profile_edit">
                 <span>회원정보 수정</span>
-              </button>
+              </a>
               <p></p>
-              <button class="btn btn-small btn-outline">
-                <span>비밀번호 수정</span>
-              </button>
+              <a onclick="ChangePasswordNewTab()"class="btn btn-small btn-outline">
+                <span>비밀번호 변경</span>
+              </a>
               <p></p>
-
+              <a onclick ="withdrawal()" class="btn btn-small btn-outline">
+                <span>계정 비활성화</span>
+              </a>
             </div>
           </div>
         </div>
@@ -306,7 +309,9 @@
   <!-- JS ============================================ -->
   <script src="./static/script/base_api.js"></script>
   <script src="./static/script/mypage_view_api.js"></script>
+  <script src="./static/script/profile_api.js"></script>
   <script src="./static/style/js/mypage_view.js"></script>
+  <script src="./static/style/js/profile_style.js"></script>
   <script>
     $(document).ready(function(){
         MypageView();
