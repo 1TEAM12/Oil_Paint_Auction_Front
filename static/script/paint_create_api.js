@@ -25,7 +25,7 @@ async function StyleLoadView(style_no) {
 }
 
 async function uploadImg() {
-    const style_no = location.href.split('=')[1]
+    const style_no = location.href.split('=')[1][0]
     const before_image = document.getElementById("before_image").files[0]
     console.log(before_image)
 
