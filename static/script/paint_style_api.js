@@ -16,7 +16,7 @@ async function StyleSelectView(){
         $('#style-box').append(
             `<div class="explore-style-one">
                 <div class="thumb">
-                    <a href="#" onclick="move_create_page(${item[0]})">
+                    <a href="#" onclick="move_create_page(${item[0]-1})">
                         <img src="./model_imgs/${item[1]}.png" alt="nft live auction thumbnail">
                     </a>
                 </div>

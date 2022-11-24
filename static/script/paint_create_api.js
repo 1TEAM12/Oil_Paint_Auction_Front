@@ -20,7 +20,7 @@ async function StyleLoadView(style_no) {
     const style_title = response_json[style_no][1]
 
     const style_name = document.getElementById("style_name")
-    style_name.innerHTML = `<p style="font-size:30px;font-weight: bold;"> 0${style_no}  ${style_title}</p>`
+    style_name.innerHTML = `<p style="font-size:30px;font-weight: bold;"> ${style_title}</p>`
 
 }
 
@@ -49,8 +49,9 @@ async function uploadImg() {
     console.log("전송 완료")
 
     localStorage.setItem("pt_id", response_json.id)
-    // localStorage.setItem("after_image", response_json.after_image)
+    localStorage.setItem("after_image", response_json.after_image)
     console.log(response_json.id)
+    savePainting()
 }
 
 
@@ -80,12 +81,8 @@ async function savePainting() {
         },
         body: formData
     })
-    move_index_page()
+    move_profile_page()
 }
-
-
-
-
 
 
 function DropFile(dropAreaId, fileListId) {
@@ -158,6 +155,6 @@ function move_select_page(){
     window.location.href = `/select_style.html`
 }
 
-function move_index_page(){
-    window.location.href = `/index.html`
+function move_profile_page(){
+    window.location.href = `/profile.html`
 }
