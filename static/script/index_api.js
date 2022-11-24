@@ -41,20 +41,12 @@ async function AuctionAlllistView(){
                             </div>
                             <!-- .header -->
                             <div class="product-share-wrapper">
-                                <div class="profile-share d-flex-center">
-                                    <a href="authors.html" class="avatar" data-bs-toggle="tooltip" data-bs-placement="top"
-                                        title="Banuri Bari"><img src="./assets/images/explore/avatar/1.png" alt="Nft_Profile"></a>
-                                    <a href="authors.html" class="avatar" data-bs-toggle="tooltip" data-bs-placement="top"
-                                        title="Mark Keni"><img src="./assets/images/explore/avatar/2.png" alt="Nft_Profile"></a>
-                                    <a href="authors.html" class="avatar" data-bs-toggle="tooltip" data-bs-placement="top"
-                                        title="Diago Smith"><img src="./assets/images/explore/avatar/3.png" alt="Nft_Profile"></a>
-                                    <a class="more-author-text" href="#" tabindex="0">20+ People Place Bit</a>
-                                </div>
+                            종료일&nbsp;&nbsp;&nbsp;<span style='color:red;'>${item.end_date}</span>
                             </div>
                             <!-- End product-share-wrapper -->
                             <div class="product-owner py-4 d-flex-between">
                                 <span class="bid-owner">Owned By <strong><a href="author-profile.html">${item.painting.owner}</a></strong></span>
-                                <span class="biding-price d-flex-center"><i class="ri-arrow-up-line"></i>76.4 ETH</span>
+                                
                             </div>
                             <!-- End .product-owner -->
                             <div class="action-wrapper d-flex-between pt-4">

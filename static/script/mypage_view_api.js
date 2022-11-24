@@ -19,7 +19,6 @@ async function MypageView(){
                 <div class="explore-style-one">
                     <div class="thumb">
                         <img src="${backendBaseUrl}${item.after_image}"alt="nft live auction thumbnail">
-                            <button class="reaction-btn"><i class="ri-heart-fill"></i><span>49</span></button>
                             <!-- End .reaction-count -->
                     </div>
                     <!-- End .thumb -->
@@ -68,30 +67,22 @@ async function AuctionList(){
                     <div class="thumb">
                     <a href="product-details.html"><img src="${backendBaseUrl}${item.painting.after_image}"
                         alt="nft live auction thumbnail"></a>
-                    <button class="reaction-btn"><i class="ri-heart-fill"></i><span>19</span></button>
+                    <button class="reaction-btn"><i class="ri-heart-fill"></i><span>${item.auction_like_count}</span></button>
                     <!-- End .reaction-count -->
                     </div>
                     <!-- End .thumb -->
                     <div class="content">
                     <div class="header d-flex-between pt-4 pb-3">
-                        <h3 class="title"><a href="product-details.html">SudsyPanda</a></h3>
+                        <h3 class="title"><a href="product-details.html">${item.painting.title}</a></h3>
                     </div>
                     <!-- .header -->
                     <div class="product-share-wrapper">
-                        <div class="profile-share d-flex-center">
-                        <a href="authors.html" class="avatar" data-bs-toggle="tooltip" data-bs-placement="top"
-                            title="Banuri Bari"><img src="./assets/images/explore/avatar/1.png" alt="Nft_Profile"></a>
-                        <a href="authors.html" class="avatar" data-bs-toggle="tooltip" data-bs-placement="top"
-                            title="Mark Keni"><img src="./assets/images/explore/avatar/2.png" alt="Nft_Profile"></a>
-                        <a href="authors.html" class="avatar" data-bs-toggle="tooltip" data-bs-placement="top"
-                            title="Diago Smith"><img src="./assets/images/explore/avatar/3.png" alt="Nft_Profile"></a>
-                        <a class="more-author-text" href="#" tabindex="0">20+ People Place Bit</a>
-                        </div>
+                    종료일&nbsp;&nbsp;&nbsp;<span style='color:red;'>${item.end_date}</span>
                     </div>
                     <!-- End product-share-wrapper -->
                     <div class="product-owner py-4 d-flex-between">
-                        <span class="bid-owner">Owned By <strong><a href="#">Jacson Rio</a></strong></span>
-                        <span class="biding-price d-flex-center"><i class="ri-arrow-up-line"></i>76.4 ETH</span>
+                        <span class="bid-owner">Owned By <strong><a href="#">${item.painting.owner}</a></strong></span>
+                        
                     </div>
                     <!-- End .product-owner -->
                     <div class="action-wrapper d-flex-between pt-4">
