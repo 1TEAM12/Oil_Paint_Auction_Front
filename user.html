@@ -32,13 +32,32 @@
           </div>
           <a href="index.html" class="login__forgot">비회원으로 보기</a>
           <p></p><p></p>
+          
           <a onclick="Login()" class="btn btn-gradient btn-small">Sign In</a>
           <p></p><p></p>
           <div>
             <span class="login__account login__account--account">계정을 잊으셨나요?</span>
             <span class="login__signin login__signin--signup" id="sign-up">회원가입</span>
           </div>
+          <p></p>
+          <div>
+            <span class="login__account login__account--account">비밀번호를 잊으셨나요?</span>
+            <a class="login__signin login__signin--signup" id="forgot_password">비밀번호 찾기</a>
+          </div>
         </form>
+        <div class="modal hidden">
+          <div class="modal__overlay"></div>
+          <div class="modal__content_1">
+              <h5 style="font-size:13px; color:#fff;">비밀번호를 찾기 위해 이메일을 입력해주세요</h5>
+              <div class="login__box">
+                <i class='bx bx-at login__icon'></i>
+                <input type="text" placeholder="Email" class="login__input" id="request_email" >
+              </div>
+              <p></p>
+              <a  class="btn btn-gradient btn-small" onclick="Reset_Password()">Send</a>
+              <button id="playlist_close" class="btn btn-gradient btn-small">Close</button>
+          </div>
+        </div>
         
 <!--         create account form -->
         <form action="" class="login__create none" id="login-up">

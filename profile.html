@@ -32,6 +32,7 @@
 
   <!-- Style css -->
   <link rel="stylesheet" href="./assets/css/style.css" />
+  <link rel="stylesheet" href="./static/style/css/profile_style.css" />
 </head>
 
 <body>
@@ -135,20 +136,22 @@
           <div class="single-author profile">
             <!-- End .thumb -->
             <div class="content">
-              <a href="#" class="author-thumb">
-                <img src="./assets/images/authors/avatar/9.png" alt="author photo">
-              </a>
-              <h4 class="title">로그인 사용자 닉네임</h4>
-              <p>로그인 사용자 이메일</p>
-              <button class="btn btn-small btn-outline">
+                <img id="profile_image" class="author-thumb">
+              <h4 class="title" id="profile_nickname"></h4>
+              <p id="profile_email"></p>
+              <h5 id="profile_point"></h5>
+              <p></p>
+              <a onclick="ProfileEditNewTab()" class="btn btn-small btn-outline" id="profile_edit">
                 <span>회원정보 수정</span>
-              </button>
+              </a>
               <p></p>
-              <button class="btn btn-small btn-outline">
-                <span>비밀번호 수정</span>
-              </button>
+              <a onclick="ChangePasswordNewTab()"class="btn btn-small btn-outline">
+                <span>비밀번호 변경</span>
+              </a>
               <p></p>
-
+              <a onclick ="withdrawal()" class="btn btn-small btn-outline">
+                <span>계정 비활성화</span>
+              </a>
             </div>
           </div>
         </div>
@@ -183,50 +186,9 @@
 
               <!-- ***** Start My Auction***** -->
               <div id="owned" class="tab-pane fade">
-                <div class="row">
-                  <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-6 mb-6">
-                    <div class="explore-style-one">
-                      <div class="thumb">
-                        <a href="product-details.html"><img src="./assets/images/explore/10.jpg"
-                            alt="nft live auction thumbnail"></a>
-                        <button class="reaction-btn"><i class="ri-heart-fill"></i><span>19</span></button>
-                        <!-- End .reaction-count -->
-                      </div>
-                      <!-- End .thumb -->
-                      <div class="content">
-                        <div class="header d-flex-between pt-4 pb-3">
-                          <h3 class="title"><a href="product-details.html">SudsyPanda</a></h3>
-                        </div>
-                        <!-- .header -->
-                        <div class="product-share-wrapper">
-                          <div class="profile-share d-flex-center">
-                            <a href="authors.html" class="avatar" data-bs-toggle="tooltip" data-bs-placement="top"
-                              title="Banuri Bari"><img src="./assets/images/explore/avatar/1.png" alt="Nft_Profile"></a>
-                            <a href="authors.html" class="avatar" data-bs-toggle="tooltip" data-bs-placement="top"
-                              title="Mark Keni"><img src="./assets/images/explore/avatar/2.png" alt="Nft_Profile"></a>
-                            <a href="authors.html" class="avatar" data-bs-toggle="tooltip" data-bs-placement="top"
-                              title="Diago Smith"><img src="./assets/images/explore/avatar/3.png" alt="Nft_Profile"></a>
-                            <a class="more-author-text" href="#" tabindex="0">20+ People Place Bit</a>
-                          </div>
-                        </div>
-                        <!-- End product-share-wrapper -->
-                        <div class="product-owner py-4 d-flex-between">
-                          <span class="bid-owner">Owned By <strong><a href="#">Jacson Rio</a></strong></span>
-                          <span class="biding-price d-flex-center"><i class="ri-arrow-up-line"></i>76.4 ETH</span>
-                        </div>
-                        <!-- End .product-owner -->
-                        <div class="action-wrapper d-flex-between pt-4">
-                          <a href="#" data-bs-toggle="modal" data-bs-target="#bid_history"
-                            class="history d-flex-center"><i class="ri-history-line"></i>View History</a>
-                          <a href="#" data-bs-toggle="modal" data-bs-target="#placeBit"
-                            class="btn  btn-outline btn-small"><span><i class="ri-shopping-bag-line"></i> Place
-                              Bid</span></a>
-                        </div>
-                        <!-- action-wrapper -->
-                      </div>
-                      <!-- End .content -->
-                    </div>
-                  </div>
+
+                <div class="row" id="action_list">
+                            
                   <!-- End .col -->
                 </div>
               </div>
@@ -306,7 +268,9 @@
   <!-- JS ============================================ -->
   <script src="./static/script/base_api.js"></script>
   <script src="./static/script/mypage_view_api.js"></script>
+  <script src="./static/script/profile_api.js"></script>
   <script src="./static/style/js/mypage_view.js"></script>
+  <script src="./static/style/js/profile_style.js"></script>
   <script>
     $(document).ready(function(){
         MypageView();
