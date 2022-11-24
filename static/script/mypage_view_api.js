@@ -1,6 +1,5 @@
 
-
-async function MypageVeiw(){
+async function MypageView(){
     const response = await fetch(`${backendBaseUrl}/auctions/mypage/`, {
         method: 'GET',
         headers: {

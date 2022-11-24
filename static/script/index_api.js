@@ -18,7 +18,7 @@ async function AuctionAlllistView(){
                 <div class="grid-item cat--4" >
                     <div class="explore-style-one">
                         <div class="thumb">
-                            <a href="auction_details.html"> <img src="./assets/images/explore/28.jpg" alt="nft live auction thumbnail"></a>
+                            <a href="auction_details.html"> <img src="${backendBaseUrl}${item.painting.after_image}" alt="nft live auction thumbnail"  style="width: 270px; height:270px;"></a>
                             <button class="reaction-btn"><i class="ri-heart-fill"></i><span>${item.auction_like_count}</span></button>
                             <!-- End .reaction-count -->
                         </div>
@@ -53,7 +53,7 @@ async function AuctionAlllistView(){
                             </div>
                             <!-- End product-share-wrapper -->
                             <div class="product-owner py-4 d-flex-between">
-                                <span class="bid-owner">Owned By <strong><a href="author-profile.html">Zuckerberg</a></strong></span>
+                                <span class="bid-owner">Owned By <strong><a href="author-profile.html">${item.painting.owner}</a></strong></span>
                                 <span class="biding-price d-flex-center"><i class="ri-arrow-up-line"></i>76.4 ETH</span>
                             </div>
                             <!-- End .product-owner -->
