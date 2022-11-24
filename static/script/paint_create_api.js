@@ -1,5 +1,5 @@
 window.onload = () => {
-    const style_no = location.href.split('=')[1]
+    const style_no = location.href.split('=')[1][0]
     console.log(style_no)
     StyleLoadView(style_no)
 }
@@ -7,7 +7,7 @@ window.onload = () => {
 
 async function StyleLoadView(style_no) {
     
-    const response = await fetch(`${backendBaseUrl}/paintings/img`, {
+    const response = await fetch(`${backendBaseUrl}/paintings/img/`, {
         method: 'GET',
         headers: {
             "Content-type": "application/json",
