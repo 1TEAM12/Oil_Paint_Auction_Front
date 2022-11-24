@@ -80,7 +80,7 @@ async function savePainting() {
         },
         body: formData
     })
-    // move_index_page()
+    move_index_page()
 }
 
 
