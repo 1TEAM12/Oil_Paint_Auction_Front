@@ -27,9 +27,10 @@
   <link rel="stylesheet" href="./assets/css/vendor/bootstrap.min.css" />
   <link rel="stylesheet" href="./assets/css/vendor/slick.css">
   <link rel="stylesheet" href="./assets/css/vendor/slick-theme.css">
-
+    
   <!-- Style css -->
   <link rel="stylesheet" href="./assets/css/style.css" />
+  <link rel="stylesheet" href="./static/style/css/auction_style.css">
 </head>
 
 <body>
@@ -379,29 +380,11 @@
       <!-- ENd .row -->
       <div class="comment-box-wrapper styler-1">
         <h2 class="mb-8">1 Comments</h2>
-        <ul class="comment-box-inner">
-          <li class="single-comment-box d-flex-between ">
-            <div class="inner d-flex-start">
-              <a href="#" class="avatar">
-                <img src="./assets/images/blog-details/avatar/1.png" alt="author">
-              </a>
-              <!-- End .avatar -->
-              <div class="content">
-                <h5 class="title">Nickname<span class="date-post">Feb 8,2022 &nbsp&nbsp</span> 
-                <i class="ri-more-fill" data-bs-toggle="dropdown"></i>
-                  <ul class="dropdown-menu dropdown-menu-dark">
-                    <li><a class="dropdown-item" href="#">Edit</a></li>
-                    <li><a class="dropdown-item" href="#">Delete</a></li>
-                  </ul>
-                </h5>
-                <p>Content</p>
-              
-              </div>
-            </div>
-          </li>
-          <!-- End .single-comment-box -->
-
-        </ul>
+        <div id="comment_container" class="single-item-history d-flex-center">
+          <div id="comment_box" style="display:inline-block;width:80%;"></div>
+          <div id="dropdown_box" style="display:inline-block;width:20%;"></div>
+        </div>
+        
       </div>
       <!-- End comment-box-wrapper -->
 
@@ -413,12 +396,11 @@
             <div class="row">
 
               <div class="col-lg-12 mb-4">
-                <textarea name="message" id="message" cols="20" rows="3" placeholder="Comment *"></textarea>
+                <textarea name="message" id="message" cols="20" rows="3" placeholder="Comment *" id="comment_contents"></textarea>
               </div>
               <!-- End .col -->
-
               <div class="col-lg-12">
-                <button class="btn btn-gradient btn btn-medium" type="submit"><span>Submit</span></button>
+                <button class="btn btn-gradient btn btn-medium" onclick="createComment()"><span>Submit</span></button>
               </div>
               <!-- End .col -->
 
