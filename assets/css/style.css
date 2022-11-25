@@ -1757,7 +1757,7 @@ input[type=number] {
 }
 
 .modal-dialog {
-  max-width: 450px;
+  width: 700px;
 }
 
 ::placeholder {

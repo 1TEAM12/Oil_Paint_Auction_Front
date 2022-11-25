@@ -7,12 +7,14 @@ $(document).ready(function(){
 
 async function loadAuction() {
 
+
     const response = await fetch(`${backendBaseUrl}/auctions/detail/${auction_id}/`, {
         method: 'GET',
         headers: {
             Accept: "application/json",
             "Content-type": "application/json",
         }})
+
 
     response_json = await response.json()
 
