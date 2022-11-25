@@ -4,19 +4,27 @@ let getLink_Name = getLink.split('=');
 let id = getLink_Name[1]
 
 
-window.onload = async function paintingLoad(id){
-    const response = await fetch(`${backendBaseUrl}/paintings/${id}`,{
+window.onload = async function paintingLoad(){
+    console.log(id)
+    const response = await fetch(`${backendBaseUrl}/paintings/${id}/`,{
         method: 'GET',
         headers:{
-            Accept: "application/json",
-            "Content-type":"application/json",
-            "Authorization":"Bearer" + localStorage.getItem("access")
+            "Accept": "application/json",
+            "Content-Type":"application/json",
+            "Authorization":"Bearer " + localStorage.getItem("access")
             }   
         }
     )
     response_json = await response.json()
     console.log(response_json)
-    
+
+
+    const image_after = document.getElementById("image_after")
+    const image_painting = response_json.after_image
+    image_after.setAttribute("src",`${backendBaseUrl}${image_painting}`)
+
+    const painting_title = document.getElementById("painting_title")
+    painting_title.innerText = response_json.title
 }
 
 
@@ -36,7 +44,7 @@ async function AuctionCreate(){
         body: JSON.stringify({"start_bid": start_bid, "end_date":end_date})
         
     })
-    
+
     const response_json = await response.json()
     console.log(response.status)
 

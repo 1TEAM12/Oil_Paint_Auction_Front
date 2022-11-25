@@ -226,5 +226,5 @@ AuctionList()
 
 function AuctionCreate(click_id){
   console.log(click_id.id)
-  window.location.href = `/create.html?id=${click_id.id}`;
+  window.location.href = `/auction_create.html?id=${click_id.id}`;
 }

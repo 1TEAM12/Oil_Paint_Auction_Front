@@ -126,6 +126,7 @@
   <!-- End banner area -->
 
   <!-- Start create item area -->
+  <!-- Start create item area -->
   <section class="pt-120 pb-90">
     <div class="container">
       <form action="#">
@@ -135,76 +136,42 @@
               <!-- file upload area -->
               <div class="upload-area">
 
-                <div class="upload-formate mb-6">
-                  <h5 class="title mb-1">
-                    Upload Item File
-                  </h5>
-                  <p class="formate">
-                    Drag or choose your file to upload
-                  </p>
-                </div>
-
                 <div class="brows-file-wrapper">
-                  <!-- actual upload which is hidden -->
                   <input name="file" id="file" type="file" class="inputfile"
                     data-multiple-caption="{count} files selected" multiple />
-                  <!-- our custom upload button -->
-                  <label for="file" title="No File Choosen">
-                    <i class="ri-upload-cloud-line"></i>
-                    <span class="text-center mb-2">Choose a File</span>
-                    <span class="file-type text-center mt--10">PNG, GIF, WEBP, MP4 or MP3. <br> Max 200Mb.</span>
-                  </label>
+                  <div style="height: 294px; width: 100%;">
+                    <img id="image_after" src="https://cdn.imweb.me/upload/S202008179a8a184fd9517/282d95f6221dd.jpg" style="width: 100%; height:100%; border-radius:10px; object-fit: cover">
+                  </div>
                 </div>
               </div>
               <!-- end upoad file area -->
-
-
             </div>
 
             <div class="col-lg-8">
-
-              <div class="form-field-wrapper ">
+              <div class="form-field-wrapper" style="height:294px">
                 <div class="row">
                   <div class="col-md-12 mb-4">
                     <div class="field-box">
                       <label for="name" class="form-label">Item Title</label>
-                      <input id="name" type="text" placeholder="e. g. `Banu Digital Art`">
+                      <!-- <input id="name" type="text" placeholder=""> -->
+                      <div id="painting_title">안녕하세요</div>
                     </div>
                   </div>
 
                   <div class="col-md-12 mb-4">
                     <div class="field-box">
-                      <label for="discription" class="form-label">Discription</label>
-                      <textarea id="discription" rows="3" placeholder="e. g. “Banu Design Gallery is...”"></textarea>
-                    </div>
-                  </div>
-
-                  <div class="col-md-12 mb-4">
-                    <div class="field-box">
-                      <label for="price" class="form-label">Price</label>
-                      <select id="price">
-                        <option selected>00.00 ETH</option>
-                        <option value="01.00 ETH">01.00 ETH</option>
-                        <option value="02.00 ETH">02.00 ETH</option>
-                        <option value="03.00 ETH">03.00 ETH</option>
-                      </select>
-                    </div>
-
-                  </div>
-
-                  <div class="col-md-6 mb-4">
-                    <div class="field-box">
-                      <label for="royality" class="form-label">Royality</label>
-                      <input type="text" id="royality" placeholder="e. g. `10%`">
+                      <input id="start-price" type="number" placeholder="최소 경매가 10000 point" min="10000" required="True">
                     </div>
                   </div>
 
                   <div class="col-md-6 mb-4">
                     <div class="field-box">
-                      <label for="sizes" class="form-label">Size</label>
-                      <input type="text" id="sizes" placeholder="e. g. `Size`">
+                      <label for="royality" class="form-label">경매 종료</label>
+                      <input type="datetime-local" id="Date" value='2022-12-31T24:00' required="True" min style="color:black; border-radius: 6px; height: 47px;" ">
                     </div>
                   </div>
+
+                  
                 </div>
                 <!-- End .row -->
               </div>
@@ -219,10 +186,11 @@
           <div class="col-md-12">
             <div class="d-flex-between upload-btn-wrapper flex-wrap">
               <div class="d-flex-center ">
-                <button class="btn btn-gradient btn-medium mr-3"><span>Cancel</span></button>
+                <a onclick="page_cancel()" class="btn btn-gradient btn-medium mr-3"><span>Cancel</span></a>
+                
               </div>
               <div class="input-box">
-                <button class="btn btn-gradient btn-medium justify-content-center"><span>Create </span></button>
+                <button onclick="AuctionCreate()" class="btn btn-gradient btn-medium justify-content-center"><span>Create Item</span></button>
               </div>
             </div>
           </div>
@@ -243,6 +211,24 @@
 
 
   <!-- JS ============================================ -->
+  <script src="./static/script/base_api.js"></script>
+  <script src="./static/style/js/auc_create.js"></script>
+  <script src="./static/script/auc_create_api.js"></script>
+
+  <script>
+var now_utc = Date.now() // 지금 날짜를 밀리초로
+// getTimezoneOffset()은 현재 시간과의 차이를 분 단위로 반환
+var timeOff = new Date().getTimezoneOffset()*60000; // 분단위를 밀리초로 변환
+// new Date(today-timeOff).toISOString()은 '2022-05-11T18:09:38.134Z'를 반환
+var today = new Date(now_utc-timeOff).toISOString().substring(0, 16);
+
+document.getElementById("Date").setAttribute("min", today);
+
+  </script>
+
+
+
+
   <script src="assets/js/vendor/jquery.js"></script>
   <script src="assets/js/vendor/jquery.nice-select.min.js"></script>
   <script src="assets/js/vendor/modernizer.min.js"></script>
