@@ -1,12 +1,7 @@
 
 
 window.onload = async function loadAuction(auctionId){
-    const response = await fetch('http://127.0.0.1:8000/auctions/detail/3/', { method: 'GET'})
-
-<<<<<<< HEAD
-    const response = await fetch('http://127.0.0.1:8000/auctions/1/2/', { method: 'GET'})
-=======
->>>>>>> c7b0a8f9d20673d68d0e9bc31af028a18be014b6
+    const response = await fetch('http://127.0.0.1:8000/auctions/detail/1/', { method: 'GET'})
     response_json = await response.json()
 
     console.log(response_json)
@@ -38,17 +33,10 @@ window.onload = async function loadAuction(auctionId){
     const painting_image = document.getElementById("painting_image")
     let image_url = response_json.painting.after_image
     painting_image.setAttribute("src", `${backendBaseUrl}${image_url}`)
-<<<<<<< HEAD
-
-
-    // 시간 formating
-    const remaining_time = response_json.end_date
-=======
 
     // 시간 formating
     const remaining_time = response_json.end_date
 
->>>>>>> c7b0a8f9d20673d68d0e9bc31af028a18be014b6
     // 경매 마감 남은 시간
     const remainTime = document.querySelector("#remain-time");
     

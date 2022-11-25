@@ -141,21 +141,22 @@ function Close_Show_Modal(id){
   var modal = document.getElementById(`${id.id}modal`);
   var close = document.getElementById(`${id.id}close`);
 
+  modal.style.position = "fixed";
+
+  modal.style.top =  "0";
+  modal.style.left =  "0";
+
+  modal.style.width =  "100%";
+  modal.style.height =  "100%";
+  
+  modal.style.outline =  "0";
   modal.style.display = "block";
 
 
 
   const closeModal = () => {
     modal.style.display = "none";
-    modal.style.position = "fixed";
-    modal.style.top =  "0";
-    modal.style.left =  "0";
-    // modal.style.z-index = "9999"; 
-    modal.style.width =  "100%";
-    modal.style.height =  "100%";
-    // modal.style.overflow-x =  "hidden";
-    // modal.style.overflow-y =  "auto";
-    modal.style.outline =  "0";
+    
 
 }
 

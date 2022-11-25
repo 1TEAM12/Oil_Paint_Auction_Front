@@ -1,13 +1,23 @@
 
-// let getLink = window.location.search;
-// let getLink_Name = getLink.split('=');
-// let id = getLink_Name[1]
+let getLink = window.location.search;
+let getLink_Name = getLink.split('=');
+let id = getLink_Name[1]
 
 
-// window.onload = async function paintingLoad(){
-//     const response = await fetch(`${backendBaseUrl}/paintings/${id}`)
-
-// }
+window.onload = async function paintingLoad(id){
+    const response = await fetch(`${backendBaseUrl}/paintings/${id}`,{
+        method: 'GET',
+        headers:{
+            Accept: "application/json",
+            "Content-type":"application/json",
+            "Authorization":"Bearer" + localStorage.getItem("access")
+            }   
+        }
+    )
+    response_json = await response.json()
+    console.log(response_json)
+    
+}
 
 
 
@@ -26,7 +36,7 @@ async function AuctionCreate(){
         body: JSON.stringify({"start_bid": start_bid, "end_date":end_date})
         
     })
-
+    
     const response_json = await response.json()
     console.log(response.status)
 
