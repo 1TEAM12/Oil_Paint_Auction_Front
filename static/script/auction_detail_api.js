@@ -1,7 +1,18 @@
+const auction_id = location.href.split('=')[1]
 
+$(document).ready(function(){
+    loadAuction();
+    loadComment();
+});
 
-window.onload = async function loadAuction(auctionId){
-    const response = await fetch('http://127.0.0.1:8000/auctions/detail/3/', { method: 'GET'})
+async function loadAuction() {
+
+    const response = await fetch(`${backendBaseUrl}/auctions/detail/${auction_id}/`, {
+        method: 'GET',
+        headers: {
+            Accept: "application/json",
+            "Content-type": "application/json",
+        }})
 
     response_json = await response.json()
 
@@ -116,18 +127,26 @@ async function AuctionDetailDelete() {
     }
 }
 
-
-$(document).ready(function(){
-    auction_id = localStorage.getItem("auction_id")
-    loadComment(auction_id);
-});
-
-
-
-
+function time2str(date) {
+    let today = new Date()
+    let before = new Date(date)
+    let time = (today - before) / 1000 / 60  // 분
+    if (time < 60) {
+        return parseInt(time) + "분 전"
+    }
+    time = time / 60  // 시간
+    if (time < 24) {
+        return parseInt(time) + "시간 전"
+    }
+    time = time / 24
+    if (time < 7) {
+        return parseInt(time) + "일 전"
+    }
+    return `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`
+};
 
 // 댓글 불러오기
-async function loadComment(auction_id) {
+async function loadComment() {
     const response2 = await fetch(`${backendBaseUrl}/auctions/${auction_id}/comments/`, {
         method: 'GET',
         headers: {
@@ -137,53 +156,36 @@ async function loadComment(auction_id) {
         }
     })
     response_json2 = await response2.json()
-    console.log("-댓글 로드-")
-    console.log(response_json2)
+    var counts = Object.keys(response_json2).length
+    count_comments.innerText = counts
 
-    // function displayTime(timeValue) {
-    //     var today = new Date();
-    //     var gap = today.getTime() - timeValue;
-    //     var dateObj = newDate(timeValue);
-    //     var str = "";
+    // user nickname 가져오기
+    payload_data = localStorage.getItem("payload")
+    payload_data = JSON.parse(payload_data)
+    user = payload_data.nickname
 
-    //     //24시간이 지나지 않은 댓글
-    //     if (gap < (1000 * 60 * 60 * 24)) {
-    //         var hh = dateObj.getHour();
-    //         var mi = dateObj.getMinutes();
-    //         var ss = dateObj.getSeconds();
-    //         return [(hh > 9? '': '0') + hh, ':', (mi > 9 ? '' : '0') + mi, (ss > 9 ? '' : '0') + ss].join('');
-    //     } else {
-    //     // 24시간이 지난 댓글
-    //         var yy = dateObj.getFullYear();
-    //         var mm = dateObj.getMonth()+1;
-    //         var dd = dateObj.getDate();
-    //         return [yy, '/', (mm > 9 ? '' : '0') + mm, '/', (dd > 9 ? '' : '0') + dd].join('');
-    //     }
-    //     }
     
-
     $('#comment_box').empty()
     response_json2.forEach(item => {
-        
-        // $('#comment_container').append(
+
+        let time_before = time2str((item['updated_at']))
+        if (user == item['user']) {
             $('#comment_box').append(
                 `<ul class="comment-box-inner" style="height:70px;">
                     <li class="single-comment-box d-flex-between ">
                         <div class="inner d-flex-start">
-                            <a href="#" class="avatar">
-                                <img src="${backendBaseUrl}/${item['profile_image']}" alt="author">
-                            </a>
+                                <img class="avatar" src="${backendBaseUrl}/${item['profile_image']}" alt="author">
                             <!-- End .avatar -->
                             <div class="content">
-                                <h5 class="title">${item['user']}<span class="date-post"> ${item['updated_at']}&nbsp&nbsp</span> 
+                                <h5 class="title">${item['user']}<span class="date-post"> ${time_before} &nbsp&nbsp</span> 
                                 <div class="more-dropdown details-dropdown"><i class="ri-more-fill" data-bs-toggle="dropdown"></i>
-                                <ul class="dropdown-menu dropdown-menu-dark">
-                                <li><a class="dropdown-item" onclick="#">수정</a></li>
+                                    <ul class="dropdown-menu dropdown-menu-dark">
+                                    <li><a class="dropdown-item" onclick="#">수정</a></li>
                                 <li><a class="dropdown-item" onclick="deleteComment(${item['id']})">삭제</a></li>
-                                </ul>
-                            </div>
+                                    </ul>
+                                </div>
                                 </h5>
-                                <p id="comment_content">${item['comment']}</p>
+                                <p id="comment_content">${item['content']}</p>
                             </div>
                         </div>
                     </li>
@@ -191,35 +193,57 @@ async function loadComment(auction_id) {
                 </ul></div>
                 <hr>
                 `
-            ),
-            $('#dropdown_box').append(
-                ``)
-        // )
+            )} else{
+                $('#comment_box').append(
+                    `<ul class="comment-box-inner" style="height:70px;">
+                        <li class="single-comment-box d-flex-between ">
+                            <div class="inner d-flex-start">
+                                    <img class="avatar" src="${backendBaseUrl}/${item['profile_image']}" alt="author">
+                                <!-- End .avatar -->
+                                <div class="content">
+                                    <h5 class="title">${item['user']}<span class="date-post">${time_before}&nbsp&nbsp</span> 
+                                    </h5>
+                                    <p id="comment_content">${item['content']}</p>
+                                </div>
+                            </div>
+                        </li>
+                    <!-- End .single-comment-box -->
+                    </ul></div>
+                    <hr>
+                    `)
+            }
+
         });
         
 }
 
+
 // 댓글 생성
-async function createComment(){
-    const comment = document.getElementById("comment_contents").value
-    console.log(comment)
-
-    const formData = new FormData()
-    formData.append("comment", comment)
-
-    const response = await fetch(`${backendBaseUrl}/auctions/${auction_id}/comments/`, {
-        method: 'POST',
+async function Create_Auction_Comment(){
+    const content = document.getElementById("auction_comment_content").value
+    
+    const comment_data = {
+        "content": content
+    }
+    const response3 = await fetch(`${backendBaseUrl}/auctions/${auction_id}/comments/`, {
+        method : 'POST',
         headers: {
             Accept: "application/json",
             "Content-type": "application/json",
             "Authorization": "Bearer " + localStorage.getItem("access")
         },
-        body : formData
+        body : JSON.stringify(comment_data)
     })
-    response_json = await response.json()
-    console.log("-댓글 저장-")
-    console.log(response_json)
-}
+    response_json3 = await response3.json()
+    if (response3.status == 201) {
+        alert("댓글이 등록되었습니다.")
+        window.location.reload()
+      } else if (response3.status == 400) {
+        alert(response_json3["message"])
+      } else {
+        alert("로그인한 사용자만 이용할 수 있습니다")
+      }
+    }
 
 
 
