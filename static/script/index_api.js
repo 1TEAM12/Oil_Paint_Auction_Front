@@ -11,20 +11,21 @@ async function AuctionAlllistView(){
     )
     response_json = await response.json()
     console.log(response_json)
+
         response_json.forEach(item => {
             $('#auctionlist').append(
                 `
                 <div class="grid-item cat--4" >
                     <div class="explore-style-one">
                         <div class="thumb">
-                            <a href="auction_details.html"> <img src="${backendBaseUrl}${item.painting.after_image}" alt="nft live auction thumbnail"  style="width: 270px; height:270px;"></a>
+                            <a onclick="move_auction_detail_page(${item.id})"> <img src="${backendBaseUrl}${item.painting.after_image}" alt="nft live auction thumbnail"  style="width: 270px; height:270px;"></a>
                             <button class="reaction-btn"><i class="ri-heart-fill"></i><span>${item.auction_like_count}</span></button>
                             <!-- End .reaction-count -->
                         </div>
                         <!-- End .thumb -->
                         <div class="content">
                             <div class="header d-flex-between pt-4 pb-3">
-                                <h3 class="title"><a href="product-details.html">${item.painting.title}</a></h3>
+                                <h3 class="title"><a href="auction_details.html">${item.painting.title}</a></h3>
                                 <div class="more-dropdown "><i class="ri-more-fill" data-bs-toggle="dropdown"></i>
                                     <ul class="dropdown-menu dropdown-menu-dark">
                                         <li><a class="dropdown-item" href="#">New bid</a></li>
@@ -66,3 +67,7 @@ async function AuctionAlllistView(){
         })
 }
 AuctionAlllistView()
+
+function move_auction_detail_page(auction_id){
+    window.location.href = `/auction_details.html?$id=${auction_id}/`
+    }
