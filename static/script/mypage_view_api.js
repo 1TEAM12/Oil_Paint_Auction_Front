@@ -1,6 +1,6 @@
 
 async function MypageView(){
-    const response = await fetch(`${backendBaseUrl}/auctions/mypage/`, {
+    const response = await fetch(`${backendBaseUrl}/paintings/`, {
         method: 'GET',
         headers: {
             Accept: "application/json",
