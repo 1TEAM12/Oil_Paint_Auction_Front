@@ -1,4 +1,5 @@
-const auction_id = location.href.split('=')[1]
+const auction_id = location.href.split('=')[1][0]
+console.log(auction_id)
 
 $(document).ready(function(){
     loadAuction();
@@ -8,7 +9,7 @@ $(document).ready(function(){
 async function loadAuction() {
 
 
-    const response = await fetch(`${backendBaseUrl}/auctions/detail/${auction_id}/`, {
+    const response = await fetch(`${backendBaseUrl}/auctions/detail/${auction_id}`, {
         method: 'GET',
         headers: {
             Accept: "application/json",
@@ -18,7 +19,8 @@ async function loadAuction() {
 
     response_json = await response.json()
 
-    console.log(response_json)
+    console.log(response_json.id)
+
 
     if (response.status === 400) {
         alert("경매가 마감되었습니다.")
@@ -31,7 +33,7 @@ async function loadAuction() {
     const auction_content = document.getElementById("auction_content")
     const auction_like_count = document.getElementById("auction_like_count")
     const auction_now_bid = document.getElementById("auction_now_bid")
-    const auction_now_bidder = document.getElementById("auction_now_bidder")
+
 
 
 
@@ -40,7 +42,7 @@ async function loadAuction() {
     auction_content.innerText = response_json.painting.content
     auction_like_count.innerText = response_json.auction_like_count
     auction_now_bid.innerText = response_json.now_bid
-    auction_now_bidder.innerText = response_json.bidder
+
 
     
     // 상세페이지 이미지
@@ -80,7 +82,7 @@ async function BidUpdate(){
         "now_bid": document.getElementById("now_bid").value,
     }   
 
-    const response = await fetch(`${backendBaseUrl}/auctions/detail/3/`, {
+    const response = await fetch(`${backendBaseUrl}/auctions/detail/${auction_id}/`, {
         method: 'PUT',
         headers: {
             Accept: "application/json",
@@ -109,7 +111,7 @@ async function BidUpdate(){
 async function AuctionDetailDelete() {
     var delConfirm = confirm("경매 취소하시겠습니까?")
     if (delConfirm) {
-        const response = await fetch(`${backendBaseUrl}/auctions/1/10/`, {
+        const response = await fetch(`${backendBaseUrl}/auctions/detail/${auction_id}/`, {
             method: 'DELETE',
             headers: {
                 Accept: "application/json",

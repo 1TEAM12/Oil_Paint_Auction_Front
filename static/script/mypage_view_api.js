@@ -184,7 +184,7 @@ async function AuctionList(){
             <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-6 mb-6">
                 <div class="explore-style-one">
                     <div class="thumb">
-                    <a href="product-details.html"><img src="${backendBaseUrl}${item.painting.after_image}"
+                    <a href="auction_details.html"><img src="${backendBaseUrl}${item.painting.after_image}"
                         alt="nft live auction thumbnail"></a>
                     <button class="reaction-btn"><i class="ri-heart-fill"></i><span>${item.auction_like_count}</span></button>
                     <!-- End .reaction-count -->
@@ -192,7 +192,7 @@ async function AuctionList(){
                     <!-- End .thumb -->
                     <div class="content">
                     <div class="header d-flex-between pt-4 pb-3">
-                        <h3 class="title"><a href="product-details.html">${item.painting.title}</a></h3>
+                        <h3 class="title"><a href="auction_details.html">${item.painting.title}</a></h3>
                     </div>
                     <!-- .header -->
                     <div class="product-share-wrapper">
