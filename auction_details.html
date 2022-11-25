@@ -186,9 +186,23 @@
 
             <div class="row">
               <div class="col-md-6">
-                <div class="biding-block">
-                  <span>Highest Bid</span>
-                  <h3 id="auction_now_bid"></h3>
+                <div class="biding-block" >
+                  <span>Highest Bid & Bidder</span>
+                  <div style="display: flex;">
+                    <div>
+                      <h3 id="auction_now_bid"></h3>
+                     
+                    </div>
+                   &nbsp&nbsp
+                    <div >
+                      <h3 id="auction_now_bidder"></h3>
+                    </div>
+                  </div>
+                  
+                  
+                  
+                  
+                  
                 </div>
               </div>
               <div class="col-md-6">
@@ -201,16 +215,16 @@
             </div>
             <!-- End .row -->
             <div class="row">
-              <div class="col-md-6">
-                <div class="input-wrapper" >
-                  <input type="text" name="name" id="name" placeholder="가격을 입력해주세요.">
+              <form>
+                <div class="col-md-6">
+                  <div class="input-wrapper" >
+                    <input type="number" id="now_bid" placeholder="입찰가 입력(100point 단위)" min="5000" step="100" required>
+                  </div>
                 </div>
-              </div>
-              <div class="col-md-6">
-                
-                <button class="btn btn-gradient btn btn-medium" type="submit"><span>Submit</span></button>
-                
-              </div>
+                <div class="col-md-6" style="float: right;">
+                  <button class="btn btn-gradient btn btn-medium" type="button" onclick="BidUpdate()"><span>입찰하기</span></button>
+                </div>
+              </form>
             </div>
 
             <br>
