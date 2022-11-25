@@ -1,10 +1,32 @@
 
+let getLink = window.location.search;
+let getLink_Name = getLink.split('=');
+let id = getLink_Name[1]
+
+
+window.onload = async function paintingLoad(id){
+    const response = await fetch(`${backendBaseUrl}/paintings/${id}`,{
+        method: 'GET',
+        headers:{
+            Accept: "application/json",
+            "Content-type":"application/json",
+            "Authorization":"Bearer" + localStorage.getItem("access")
+            }   
+        }
+    )
+    response_json = await response.json()
+    console.log(response_json)
+    
+}
+
+
 
 async function AuctionCreate(){
-    const start_bid = document.getElementById("start-price").value
-    const end_date = document.getElementById("DateLocal").value
 
-    const response = await fetch(`${backendBaseUrl}/auctions/16/`,{
+    const start_bid = document.getElementById("start-price").value
+    const end_date = document.getElementById("Date").value
+
+    const response = await fetch(`${backendBaseUrl}/auctions/2/`,{
         method: 'POST',
         headers: {
             "Accept": "application/json",
@@ -14,9 +36,7 @@ async function AuctionCreate(){
         body: JSON.stringify({"start_bid": start_bid, "end_date":end_date})
         
     })
-    console.log(JSON.stringify({"start_bid": start_bid, "end_date":end_date}))
-    console.log( "Bearer " + localStorage.getItem("access"))
-
+    
     const response_json = await response.json()
     console.log(response.status)
 
