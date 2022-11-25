@@ -204,7 +204,7 @@ async function loadComment() {
                         <div class="close-area"style="display:inline-block;">X</div>
                         <div class="content">
                         <textarea name="message" cols="20" rows="3" id="auction_comment_content"style="width:80%;display:inline-block;">${item['content']}</textarea>
-                        <div style="display:inline-block;vertical-align:middle;margin-bottom:50px;margin-left:50px;"><a class="btn btn-gradient btn btn-medium" onclick="updatecomment()"><span>수정</span></a></div>
+                        <div style="display:inline-block;vertical-align:middle;margin-bottom:50px;margin-left:50px;"><a class="btn btn-gradient btn btn-medium" onclick="updatecomment(${item['id']})"><span>수정</span></a></div>
                         </div>
                     </div>
                 </div>
@@ -346,18 +346,19 @@ async function getComment(){
 
 
 // 댓글 수정 POST
-async function updatecomment(id, comment_id, comment){
-    const formData = new FormData()
-    formData.append("comment", comment)
-
+async function updatecomment(comment_id){
+    const content = document.getElementById("auction_comment_content").value
+    const comment_data = {
+        "content": content
+    }
     const response = await fetch(`${backendBaseUrl}/auctions/${auction_id}/comments/${comment_id}/`, {
         method: 'PUT',
         headers: {
             Accept: "application/json",
             "Content-type": "application/json",
             "Authorization": "Bearer " + localStorage.getItem("access")
-            },
-        body: formData
+        },
+        body : JSON.stringify(comment_data)
     })
     response_json = await response.json()
     
