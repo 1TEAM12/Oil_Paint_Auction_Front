@@ -1,7 +1,19 @@
+const auction_id = location.href.split('=')[1]
 
+$(document).ready(function(){
+    loadAuction();
+    loadComment();
+});
 
-window.onload = async function loadAuction(auctionId) {
-    const response = await fetch('http://127.0.0.1:8000/auctions/detail/1/', { method: 'GET' })
+async function loadAuction() {
+
+    const response = await fetch(`${backendBaseUrl}/auctions/detail/${auction_id}/`, {
+        method: 'GET',
+        headers: {
+            Accept: "application/json",
+            "Content-type": "application/json",
+        }})
+
     response_json = await response.json()
 
     console.log(response_json)
@@ -86,18 +98,26 @@ async function AuctionDetailDelete() {
     }
 }
 
-
-$(document).ready(function(){
-    auction_id = localStorage.getItem("auction_id")
-    loadComment(auction_id);
-});
-
-
-
-
+function time2str(date) {
+    let today = new Date()
+    let before = new Date(date)
+    let time = (today - before) / 1000 / 60  // 분
+    if (time < 60) {
+        return parseInt(time) + "분 전"
+    }
+    time = time / 60  // 시간
+    if (time < 24) {
+        return parseInt(time) + "시간 전"
+    }
+    time = time / 24
+    if (time < 7) {
+        return parseInt(time) + "일 전"
+    }
+    return `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`
+};
 
 // 댓글 불러오기
-async function loadComment(auction_id) {
+async function loadComment() {
     const response2 = await fetch(`${backendBaseUrl}/auctions/${auction_id}/comments/`, {
         method: 'GET',
         headers: {
@@ -109,27 +129,26 @@ async function loadComment(auction_id) {
     response_json2 = await response2.json()
     var counts = Object.keys(response_json2).length
     count_comments.innerText = counts
-    
+
     // user nickname 가져오기
     payload_data = localStorage.getItem("payload")
     payload_data = JSON.parse(payload_data)
     user = payload_data.nickname
 
-
+    
     $('#comment_box').empty()
     response_json2.forEach(item => {
+
+        let time_before = time2str((item['updated_at']))
         if (user == item['user']) {
-        // $('#comment_container').append(
             $('#comment_box').append(
                 `<ul class="comment-box-inner" style="height:70px;">
                     <li class="single-comment-box d-flex-between ">
                         <div class="inner d-flex-start">
-                            <a href="#" class="avatar">
-                                <img src="${backendBaseUrl}/${item['profile_image']}" alt="author">
-                            </a>
+                                <img class="avatar" src="${backendBaseUrl}/${item['profile_image']}" alt="author">
                             <!-- End .avatar -->
                             <div class="content">
-                                <h5 class="title">${item['user']}<span class="date-post"> ${item['updated_at']}&nbsp&nbsp</span> 
+                                <h5 class="title">${item['user']}<span class="date-post"> ${time_before} &nbsp&nbsp</span> 
                                 <div class="more-dropdown details-dropdown"><i class="ri-more-fill" data-bs-toggle="dropdown"></i>
                                     <ul class="dropdown-menu dropdown-menu-dark">
                                     <li><a class="dropdown-item" onclick="#">수정</a></li>
@@ -150,12 +169,10 @@ async function loadComment(auction_id) {
                     `<ul class="comment-box-inner" style="height:70px;">
                         <li class="single-comment-box d-flex-between ">
                             <div class="inner d-flex-start">
-                                <a href="#" class="avatar">
-                                    <img src="${backendBaseUrl}/${item['profile_image']}" alt="author">
-                                </a>
+                                    <img class="avatar" src="${backendBaseUrl}/${item['profile_image']}" alt="author">
                                 <!-- End .avatar -->
                                 <div class="content">
-                                    <h5 class="title">${item['user']}<span class="date-post"> ${item['updated_at']}&nbsp&nbsp</span> 
+                                    <h5 class="title">${item['user']}<span class="date-post">${time_before}&nbsp&nbsp</span> 
                                     </h5>
                                     <p id="comment_content">${item['content']}</p>
                                 </div>
@@ -167,17 +184,16 @@ async function loadComment(auction_id) {
                     `)
             }
 
-        // )
         });
         
 }
 
 
 // 댓글 생성
-async function createComment(){
-    const content = document.getElementById("comment_contents").value
-    const auction_id = localStorage.getItem("auction_id")
-    const comment_content = {
+async function Create_Auction_Comment(){
+    const content = document.getElementById("auction_comment_content").value
+    
+    const comment_data = {
         "content": content
     }
     const response3 = await fetch(`${backendBaseUrl}/auctions/${auction_id}/comments/`, {
@@ -187,7 +203,7 @@ async function createComment(){
             "Content-type": "application/json",
             "Authorization": "Bearer " + localStorage.getItem("access")
         },
-        body : JSON.stringify(comment_content)
+        body : JSON.stringify(comment_data)
     })
     response_json3 = await response3.json()
     if (response3.status == 201) {
