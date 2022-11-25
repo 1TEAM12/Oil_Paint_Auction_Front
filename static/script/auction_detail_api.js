@@ -134,7 +134,8 @@ async function loadComment(auction_id) {
 
     $('#comment_box').empty()
     response_json2.forEach(item => {
-        $('#comment_container').append(
+        
+        // $('#comment_container').append(
             $('#comment_box').append(
                 `<ul class="comment-box-inner" style="height:70px;">
                     <li class="single-comment-box d-flex-between ">
@@ -145,7 +146,12 @@ async function loadComment(auction_id) {
                             <!-- End .avatar -->
                             <div class="content">
                                 <h5 class="title">${item['user']}<span class="date-post"> ${item['updated_at']}&nbsp&nbsp</span> 
-
+                                <div class="more-dropdown details-dropdown"><i class="ri-more-fill" data-bs-toggle="dropdown"></i>
+                                <ul class="dropdown-menu dropdown-menu-dark">
+                                <li><a class="dropdown-item" onclick="#">수정</a></li>
+                                <li><a class="dropdown-item" onclick="deleteComment(${item['id']})">삭제</a></li>
+                                </ul>
+                            </div>
                                 </h5>
                                 <p id="comment_content">${item['comment']}</p>
                             </div>
@@ -156,16 +162,9 @@ async function loadComment(auction_id) {
                 <hr>
                 `
             ),
-            // if(${item['user']} == user_id['nickname'] ) {
             $('#dropdown_box').append(
-                `<div><button class="btn btn-medium btn-gradient justify-content-center mt-5" href="#">수정</button>
-                <button class="btn btn-medium btn-gradient justify-content-center mt-5" onclick="deleteComment(${item['id']})" href="#">삭제</button>
-                </div>`)
-            // } else {
-            // $('#dropdown_box').append(
-            //     `<div style="line-height:80px;vertical-align:middle;"></div>`)
-            // }
-        )
+                ``)
+        // )
         });
         
 }
@@ -218,7 +217,7 @@ async function deleteComment(comment_id){
 
 
 // 댓글 수정
-async function updatecommentView(id, comment_id, comment){
+async function updatecomment(id, comment_id, comment){
     const formData = new FormData()
     formData.append("comment", comment)
 
