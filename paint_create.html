@@ -131,20 +131,33 @@
       <form action="#">
         <div class="create-item-wrapper">
           <h5 class="title mb-1" style="font-size: 30px;">원하는 작품을 만들어보세요</h5>
+          <hr style="height: 3px;margin-top: 20px;">
           <div class="row">
+            <div class="col-lg-4">
+              <div style="margin-top:20px;">
+                <span style="display:inline-block;font-size:30px; font-weight: bold;" for="style">STYLE : </span>
+                <span style="display:inline-block;" id="style_name"></span>
+              </div>
+              <!-- file upload area -->
+              <div class="upload-area" style="margin-top: 30px;">
 
+                <div id="drop-file" class="drag-file brows-file-wrapper">
+                  <!-- actual upload which is hidden -->
+                  <form method="post" enctype="multipart/form-data">
+                    <label for="file" type="submit" style="overflow:hidden;">
+                      <input class="file" id="before_image" type="file" onchange="dropFile.handleFiles(this.files)" accept="image/png, image/jpeg, image/gif">
+                      <img src="./model_imgs/default_image(1).png" class="preview" style="width:100%; top: 50%;left: 50%;">
+                    </label>
+                  </form>
+                </div>
+              </div>
+              <!-- end upoad file area -->
+            </div>
 
             <div class="col-lg-8">
 
               <div class="form-field-wrapper" style="margin-top:30px;">
                 <div class="row">
-                  <div class="col-md-12 mb-4">
-                    <div class="field-box">
-                      <label for="style" class="form-label">Style : </label>
-                      <p id="style_name"></p>
-                    </div>
-                  </div>
-
                   <div class="col-md-12 mb-4">
                     <div class="field-box">
                       <label for="title" class="form-label">Title</label>
@@ -164,37 +177,7 @@
               <!--  -->
             </div>
 
-            <div class="col-lg-4">
-              <!-- file upload area -->
-              <div class="upload-area" style="margin-top: 30px;">
-
-                <div id="drop-file" class="drag-file brows-file-wrapper">
-                  <!-- actual upload which is hidden -->
-                  <form method="post" enctype="multipart/form-data">
-                    <label for="file" type="submit" style="overflow:hidden;">
-                      <input class="file" id="before_image" type="file" onchange="dropFile.handleFiles(this.files)" accept="image/png, image/jpeg, image/gif">
-                      <img src="./model_imgs/default_image(1).png" class="preview" style="width:100%; top: 50%;left: 50%;">
-                    </label>
-                  </form>
-                </div>
-              </div>
-
-              <div class="upload-area">
-
-                <div class="brows-file-wrapper">
-                  <!-- our custom upload button -->
-                  <a href="#" onclick="uploadImg()">
-                    <label title="Result" for="file" style="overflow:hidden;">
-                      <img src="./model_imgs/default_image(2).png" class="preview" style="width:100%; top: 50%;left: 50%;">
-                    </label>
-                  </a>
-                </div>
-              </div>
-              <!-- end upoad file area -->
-
-
-
-            </div>
+            
 
           </div>
           <!-- End .row -->
@@ -208,7 +191,7 @@
                 <button class="btn btn-outline btn-medium" href="#" onclick="move_select_page()"><span>Back</span></button>
               </div>
               <div class="input-box">
-                <button class="btn btn-gradient btn-medium justify-content-center" href="#" onclick="savePainting()"><span>Create</span></button>
+                <button class="btn btn-gradient btn-medium justify-content-center" href="#" onclick="uploadImg()"><span>Create</span></button>
               </div>
             </div>
           </div>
