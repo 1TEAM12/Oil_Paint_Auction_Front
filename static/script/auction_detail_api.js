@@ -1,5 +1,4 @@
 const auction_id = location.href.split('=')[1][0]
-console.log(auction_id)
 
 $(document).ready(function(){
     loadAuction();
@@ -7,9 +6,7 @@ $(document).ready(function(){
 });
 
 async function loadAuction() {
-
-
-    const response = await fetch(`${backendBaseUrl}/auctions/detail/${auction_id}`, {
+    const response = await fetch(`${backendBaseUrl}/auctions/detail/${auction_id}/`, {
         method: 'GET',
         headers: {
             Accept: "application/json",
@@ -184,11 +181,15 @@ async function loadComment() {
                                 <h5 class="title">${item['user']}<span class="date-post"> ${time_before} &nbsp&nbsp</span> 
                                 <div class="more-dropdown details-dropdown"><i class="ri-more-fill" data-bs-toggle="dropdown"></i>
                                     <ul class="dropdown-menu dropdown-menu-dark">
-                                    <li><a class="dropdown-item" onclick="#">수정</a></li>
-                                <li><a class="dropdown-item" onclick="deleteComment(${item['id']})">삭제</a></li>
+                                    <div id="container">
+                                        <button class="dropdown-item" id="btn-modal">수정</button>
+                                    </div>
+                                        
+                                    <li><a class="dropdown-item" onclick="deleteComment(${item['id']})">삭제</a></li>
                                     </ul>
                                 </div>
                                 </h5>
+                                
                                 <p id="comment_content">${item['content']}</p>
                             </div>
                         </div>
@@ -196,6 +197,17 @@ async function loadComment() {
                 <!-- End .single-comment-box -->
                 </ul></div>
                 <hr>
+                <!--모달-->
+                <div id="modal" class="modal-overlay" style="position:relative;height:200px;">
+                    <div class="modal-window"style="height:200px;width:100%;">
+                        <div class="title" style="display:inline-block;">댓글 수정</div>
+                        <div class="close-area"style="display:inline-block;">X</div>
+                        <div class="content">
+                        <textarea name="message" cols="20" rows="3" id="auction_comment_content"style="width:80%;display:inline-block;">${item['content']}</textarea>
+                        <div style="display:inline-block;vertical-align:middle;margin-bottom:50px;margin-left:50px;"><a class="btn btn-gradient btn btn-medium" onclick="updatecomment(${item['id']})"><span>수정</span></a></div>
+                        </div>
+                    </div>
+                </div>
                 `
             )} else{
                 $('#comment_box').append(
@@ -218,8 +230,45 @@ async function loadComment() {
             }
 
         });
-        
+        // 버튼 클릭 위치 출력하기(절대값)
+        const div = document.getElementById('btn-modal');
+
+        div.addEventListener('click', (e) => {
+            const result_x = e.pageX
+            const result_y = e.pageY
+            console.log(result_x, result_y)
+        })
+        const modal = document.getElementById("modal")
+        function modalOn() {
+            modal.style.display = "flex"
+        }
+        function isModalOn() {
+            return modal.style.display === "flex"
+        }
+        function modalOff() {
+            modal.style.display = "none"
+        }
+        const btnModal = document.getElementById("btn-modal")
+        btnModal.addEventListener("click", e => {
+            modalOn()
+        })
+        const closeBtn = modal.querySelector(".close-area")
+        closeBtn.addEventListener("click", e => {
+            modalOff()
+        })
+        modal.addEventListener("click", e => {
+            const evTarget = e.target
+            if(evTarget.classList.contains("modal-overlay")) {
+                modalOff()
+            }
+        })
+        window.addEventListener("keyup", e => {
+            if(isModalOn() && e.key === "Escape") {
+                modalOff()
+            }
+        })
 }
+
 
 
 // 댓글 생성
@@ -273,20 +322,43 @@ async function deleteComment(comment_id){
         }
 }
 
+// 댓글 수정 GET(특정 댓글 가져오기)
+async function getComment(){
+    const response = await fetch(`${backendBaseUrl}/auctions/${auction_id}/comments/${comment_id}/`, {
+        method: 'GET',
+        headers: {
+            Accept: "application/json",
+            "Content-type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem("access")
+            }
+    }
+    )
+    response_json = await response.json()
 
-// 댓글 수정
-async function updatecomment(id, comment_id, comment){
-    const formData = new FormData()
-    formData.append("comment", comment)
+    if (response.status == 200) {
+        let CommentDetailInfo = response_json
+        return CommentDetailInfo
 
+    }else {
+        alert(response_json["error"])
+    }
+}
+
+
+// 댓글 수정 POST
+async function updatecomment(comment_id){
+    const content = document.getElementById("auction_comment_content").value
+    const comment_data = {
+        "content": content
+    }
     const response = await fetch(`${backendBaseUrl}/auctions/${auction_id}/comments/${comment_id}/`, {
         method: 'PUT',
         headers: {
             Accept: "application/json",
             "Content-type": "application/json",
             "Authorization": "Bearer " + localStorage.getItem("access")
-            },
-        body: formData
+        },
+        body : JSON.stringify(comment_data)
     })
     response_json = await response.json()
     
