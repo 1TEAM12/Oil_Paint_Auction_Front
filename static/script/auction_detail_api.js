@@ -1,7 +1,7 @@
 
 
 window.onload = async function loadAuction(auctionId) {
-    const response = await fetch('http://127.0.0.1:8000/auctions/detail/2/', { method: 'GET' })
+    const response = await fetch('http://127.0.0.1:8000/auctions/detail/1/', { method: 'GET' })
     response_json = await response.json()
 
     console.log(response_json)
@@ -107,8 +107,13 @@ async function loadComment(auction_id) {
         }
     })
     response_json2 = await response2.json()
-    console.log("-댓글 로드-")
-    console.log(response_json2)
+
+    // user nickname 가져오기
+    payload_data = localStorage.getItem("payload")
+    payload_data = JSON.parse(payload_data)
+    user = payload_data.nickname
+    
+    
 
     // function displayTime(timeValue) {
     //     var today = new Date();
@@ -134,7 +139,7 @@ async function loadComment(auction_id) {
 
     $('#comment_box').empty()
     response_json2.forEach(item => {
-        
+        if (user == item['user']) {
         // $('#comment_container').append(
             $('#comment_box').append(
                 `<ul class="comment-box-inner" style="height:70px;">
@@ -147,13 +152,13 @@ async function loadComment(auction_id) {
                             <div class="content">
                                 <h5 class="title">${item['user']}<span class="date-post"> ${item['updated_at']}&nbsp&nbsp</span> 
                                 <div class="more-dropdown details-dropdown"><i class="ri-more-fill" data-bs-toggle="dropdown"></i>
-                                <ul class="dropdown-menu dropdown-menu-dark">
-                                <li><a class="dropdown-item" onclick="#">수정</a></li>
+                                    <ul class="dropdown-menu dropdown-menu-dark">
+                                    <li><a class="dropdown-item" onclick="#">수정</a></li>
                                 <li><a class="dropdown-item" onclick="deleteComment(${item['id']})">삭제</a></li>
-                                </ul>
-                            </div>
+                                    </ul>
+                                </div>
                                 </h5>
-                                <p id="comment_content">${item['comment']}</p>
+                                <p id="comment_content">${item['content']}</p>
                             </div>
                         </div>
                     </li>
@@ -161,35 +166,61 @@ async function loadComment(auction_id) {
                 </ul></div>
                 <hr>
                 `
-            ),
-            $('#dropdown_box').append(
-                ``)
+            )} else{
+                $('#comment_box').append(
+                    `<ul class="comment-box-inner" style="height:70px;">
+                        <li class="single-comment-box d-flex-between ">
+                            <div class="inner d-flex-start">
+                                <a href="#" class="avatar">
+                                    <img src="${backendBaseUrl}/${item['profile_image']}" alt="author">
+                                </a>
+                                <!-- End .avatar -->
+                                <div class="content">
+                                    <h5 class="title">${item['user']}<span class="date-post"> ${item['updated_at']}&nbsp&nbsp</span> 
+                                    </h5>
+                                    <p id="comment_content">${item['content']}</p>
+                                </div>
+                            </div>
+                        </li>
+                    <!-- End .single-comment-box -->
+                    </ul></div>
+                    <hr>
+                    `)
+            }
+
         // )
         });
         
 }
 
+
 // 댓글 생성
 async function createComment(){
-    const comment = document.getElementById("comment_contents").value
-    console.log(comment)
+    const content = document.getElementById("comment_contents").value
+    const auction_id = localStorage.getItem("auction_id")
+    const comment_content = {
+        "content": content
+    }
 
-    const formData = new FormData()
-    formData.append("comment", comment)
-
-    const response = await fetch(`${backendBaseUrl}/auctions/${auction_id}/comments/`, {
+    const response3 = await fetch(`${backendBaseUrl}/auctions/${auction_id}/comments/`, {
         method: 'POST',
         headers: {
             Accept: "application/json",
             "Content-type": "application/json",
             "Authorization": "Bearer " + localStorage.getItem("access")
         },
-        body : formData
+        body : JSON.stringify(comment_content)
     })
-    response_json = await response.json()
-    console.log("-댓글 저장-")
-    console.log(response_json)
-}
+    response_json3 = await response3.json()
+    if (response3.status == 201) {
+        alert("댓글이 등록되었습니다.")
+        window.location.reload()
+      } else if (response3.status == 400) {
+        alert(response_json3["message"])
+      } else {
+        alert("로그인한 사용자만 이용할 수 있습니다")
+      }
+    }
 
 
 
