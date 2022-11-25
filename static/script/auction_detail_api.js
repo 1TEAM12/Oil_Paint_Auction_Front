@@ -181,9 +181,8 @@ async function loadComment() {
                                 <h5 class="title">${item['user']}<span class="date-post"> ${time_before} &nbsp&nbsp</span> 
                                 <div class="more-dropdown details-dropdown"><i class="ri-more-fill" data-bs-toggle="dropdown"></i>
                                     <ul class="dropdown-menu dropdown-menu-dark">
-                                    <li><a class="dropdown-item">수정</a></li>
                                     <div id="container">
-                                        <button id="btn-modal" onclick="getComment()">모달 창 열기 버튼</button>
+                                        <button class="dropdown-item" id="btn-modal">수정</button>
                                     </div>
                                         
                                     <li><a class="dropdown-item" onclick="deleteComment(${item['id']})">삭제</a></li>
@@ -204,7 +203,7 @@ async function loadComment() {
                         <div class="title" style="display:inline-block;">댓글 수정</div>
                         <div class="close-area"style="display:inline-block;">X</div>
                         <div class="content">
-                        <textarea name="message" cols="20" rows="3" placeholder="**" id="auction_comment_content"style="width:80%;display:inline-block;"></textarea>
+                        <textarea name="message" cols="20" rows="3" id="auction_comment_content"style="width:80%;display:inline-block;">${item['content']}</textarea>
                         <div style="display:inline-block;vertical-align:middle;margin-bottom:50px;margin-left:50px;"><a class="btn btn-gradient btn btn-medium" onclick="updatecomment()"><span>수정</span></a></div>
                         </div>
                     </div>
