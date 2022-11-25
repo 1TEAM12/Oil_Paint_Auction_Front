@@ -38,7 +38,7 @@ async function ChangePassword() {
 
     const result = await response.json()
 
-    if (response.status === 201) {
+    if (response.status === 200) {
         alert("비밀번호 변경 완료")
         localStorage.removeItem("payload")
         localStorage.removeItem("access")

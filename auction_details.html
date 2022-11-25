@@ -27,9 +27,10 @@
   <link rel="stylesheet" href="./assets/css/vendor/bootstrap.min.css" />
   <link rel="stylesheet" href="./assets/css/vendor/slick.css">
   <link rel="stylesheet" href="./assets/css/vendor/slick-theme.css">
-
+    
   <!-- Style css -->
   <link rel="stylesheet" href="./assets/css/style.css" />
+  <link rel="stylesheet" href="./static/style/css/auction_style.css">
 </head>
 
 <body>
@@ -186,9 +187,23 @@
 
             <div class="row">
               <div class="col-md-6">
-                <div class="biding-block">
-                  <span>Highest Bid</span>
-                  <h3 id="auction_now_bid"></h3>
+                <div class="biding-block" >
+                  <span>Highest Bid & Bidder</span>
+                  <div style="display: flex;">
+                    <div>
+                      <h3 id="auction_now_bid"></h3>
+                     
+                    </div>
+                   &nbsp&nbsp
+                    <div >
+                      <h3 id="auction_now_bidder"></h3>
+                    </div>
+                  </div>
+                  
+                  
+                  
+                  
+                  
                 </div>
               </div>
               <div class="col-md-6">
@@ -201,16 +216,16 @@
             </div>
             <!-- End .row -->
             <div class="row">
-              <div class="col-md-6">
-                <div class="input-wrapper" >
-                  <input type="text" name="name" id="name" placeholder="가격을 입력해주세요.">
+              <form>
+                <div class="col-md-6">
+                  <div class="input-wrapper" >
+                    <input type="number" id="now_bid" placeholder="입찰가 입력(100point 단위)" min="5000" step="100" required>
+                  </div>
                 </div>
-              </div>
-              <div class="col-md-6">
-                
-                <button class="btn btn-gradient btn btn-medium" type="submit"><span>Submit</span></button>
-                
-              </div>
+                <div class="col-md-6" style="float: right;">
+                  <button class="btn btn-gradient btn btn-medium" type="button" onclick="BidUpdate()"><span>입찰하기</span></button>
+                </div>
+              </form>
             </div>
 
             <br>
@@ -365,29 +380,11 @@
       <!-- ENd .row -->
       <div class="comment-box-wrapper styler-1">
         <h2 class="mb-8">1 Comments</h2>
-        <ul class="comment-box-inner">
-          <li class="single-comment-box d-flex-between ">
-            <div class="inner d-flex-start">
-              <a href="#" class="avatar">
-                <img src="./assets/images/blog-details/avatar/1.png" alt="author">
-              </a>
-              <!-- End .avatar -->
-              <div class="content">
-                <h5 class="title">Nickname<span class="date-post">Feb 8,2022 &nbsp&nbsp</span> 
-                <i class="ri-more-fill" data-bs-toggle="dropdown"></i>
-                  <ul class="dropdown-menu dropdown-menu-dark">
-                    <li><a class="dropdown-item" href="#">Edit</a></li>
-                    <li><a class="dropdown-item" href="#">Delete</a></li>
-                  </ul>
-                </h5>
-                <p>Content</p>
-              
-              </div>
-            </div>
-          </li>
-          <!-- End .single-comment-box -->
-
-        </ul>
+        <div id="comment_container" class="single-item-history d-flex-center">
+          <div id="comment_box" style="display:inline-block;width:80%;"></div>
+          <div id="dropdown_box" style="display:inline-block;width:20%;"></div>
+        </div>
+        
       </div>
       <!-- End comment-box-wrapper -->
 
@@ -399,12 +396,11 @@
             <div class="row">
 
               <div class="col-lg-12 mb-4">
-                <textarea name="message" id="message" cols="20" rows="3" placeholder="Comment *"></textarea>
+                <textarea name="message" id="message" cols="20" rows="3" placeholder="Comment *" id="comment_contents"></textarea>
               </div>
               <!-- End .col -->
-
               <div class="col-lg-12">
-                <button class="btn btn-gradient btn btn-medium" type="submit"><span>Submit</span></button>
+                <button class="btn btn-gradient btn btn-medium" onclick="createComment()"><span>Submit</span></button>
               </div>
               <!-- End .col -->
 
