@@ -1,4 +1,4 @@
-const auction_id = location.href.split('=')[1][0]
+const auction_id = location.href.split('=')[1].split('/')[0]
 
 $(document).ready(function(){
     loadAuction();
