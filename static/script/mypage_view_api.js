@@ -1,3 +1,7 @@
+function time1str(date) {
+  let before = new Date(date)
+  return `${before.getFullYear()}년 ${before.getMonth() + 1}월 ${before.getDate()}일 `
+};
 
 async function MypageView(){
     const response = await fetch(`${backendBaseUrl}/paintings/`, {
@@ -10,10 +14,12 @@ async function MypageView(){
         }
     )
     response_json = await response.json()
-
+    
     console.log(response_json);
     response_json.forEach(item => {
+      let time_str = time1str((item["created_at"]))
         $('#mypage').append(
+          
             `
             <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-6 mb-6">
                 <div class="explore-style-one">
@@ -28,7 +34,7 @@ async function MypageView(){
                         <div class="more-dropdown "><i class="ri-more-fill" data-bs-toggle="dropdown"></i>
                             <ul class="dropdown-menu dropdown-menu-dark">
                             <li><a class="dropdown-item" href="#">Edit</a></li>
-                            <li><a class="dropdown-item" href="#">Delete</a></li>
+                            <li><a id="${item.id}" class="dropdown-item" onclick="deletePainting(this)">Delete</a></li>
                             </ul>
                         </div>
                         </div>
@@ -59,9 +65,7 @@ async function MypageView(){
                     <div class="upload-area">
       
                       <div class="brows-file-wrapper">
-                        <input name="file" id="file" type="file" class="inputfile"
-                          data-multiple-caption="{count} files selected" multiple />
-                        <div style="height: 294px; width: 100%;">
+                        <div style=" height: 294px; width: 100%;">      
                           <img src="${backendBaseUrl}${item.after_image}" style="width: 100%; height:100%; border-radius:10px; object-fit: cover">
                         </div>
                       </div>
@@ -74,30 +78,28 @@ async function MypageView(){
                       <div class="row">
                         <div class="col-md-12 mb-4">
                           <div class="field-box" style="display:flex; justify-content: space-between;">
-                            <div class="form-label"><strong>Artist :</strong></div>
-                            <!-- <input id="name" type="text" placeholder=""> -->
-                            <div>${item.author}</div>
+                            <div class="form-label"><strong>Artist :</strong> ${item.author}</div>
                           </div>
                         </div>
                         <div class="col-md-12 mb-4">
                           <div class="field-box" style="display:flex; justify-content: space-between;">
-                            <div class="form-label"><strong>Create :</strong></div>
-                            <!-- <input id="name" type="text" placeholder=""> -->
-                            <div>${item.created_at}</div>
+                            <div class="form-label"><strong>Owner :</strong> ${item.owner}</div>
+                          </div>
+                        </div>
+                        <div class="col-md-12 mb-4">
+                          <div class="field-box" style="display:flex; justify-content: space-between;">
+                            <div class="form-label"><strong>Create :</strong> ${time_str}</div>
                           </div>
                         </div>
                         <div class="col-md-12 mb-4">
                           <div class="field-box">
-                            <div class="form-label"><strong>Title</strong></div>
-                            <!-- <input id="name" type="text" placeholder=""> -->
-                            <div>${item.title}</div>
+                            <div class="form-label"><strong>Title :</strong> ${item.title}</div>
                           </div>
                         </div>
   
                         <div class="col-md-6 mb-4" style="width:100%">
                           <div class="field-box">
-                            <div class="form-label"><strong>Content :</strong></div>
-                            <div>${item.content}</div>
+                            <div class="form-label"><strong>Content :</strong> ${item.content}</div>
                           </div>
                         </div>       
                       </div>
@@ -169,7 +171,7 @@ function Show_Modal(id){
 
 
 async function AuctionList(){
-    const response = await fetch(`${backendBaseUrl}/auctions/`, {
+    const response = await fetch(`${backendBaseUrl}/auctions/mylist/`, {
         method: 'GET',
         headers: {
             Accept: "application/json",
@@ -231,3 +233,24 @@ function AuctionCreate(click_id){
   console.log(click_id.id)
   window.location.href = `/auction_create.html?id=${click_id.id}`;
 }
+
+//유화 삭제
+async function deletePainting(paintings){
+  console.log(paintings)
+  var delConfirm = confirm("정말 유화를 삭제하시겠습니까?")
+  if (delConfirm) {
+  const response = await fetch(`${backendBaseUrl}/paintings/${paintings.id}/`, {
+      method: 'DELETE',
+      headers: {
+          Accept: "application/json",
+          "Content-type": "application/json",
+          "Authorization": "Bearer " + localStorage.getItem("access")
+      },
+  })
+  response_json = await response.json
+      if (response.status === 200) {
+          alert("유화가 삭제되었습니다..")
+          window.location.reload()
+          return response_json
+      }
+}}
