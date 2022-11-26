@@ -72,7 +72,7 @@ window.onload = async function AuctionAlllistView(){
             let _BTN = document.createElement('div');
             
             
-            _BTN.innerHTML = `<div style="text-align: center;"><a class="btn btn-gradient btn-medium" id="read_more">read more</a></div>`
+            _BTN.innerHTML = `<div style="text-align: center;"><a class="btn btn-gradient btn-medium" id="read_more">more</a></div>`
             return length > max && _WRAP.appendChild(_BTN)
         }
         
