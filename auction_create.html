@@ -30,6 +30,11 @@
 
   <!-- Style css -->
   <link rel="stylesheet" href="./assets/css/style.css" />
+
+
+
+
+
 </head>
 
 <body>
@@ -167,7 +172,7 @@
                   <div class="col-md-6 mb-4">
                     <div class="field-box">
                       <label for="royality" class="form-label">경매 종료</label>
-                      <input type="datetime-local" id="Date" value='2022-12-31T24:00' required="True" min style="color:black; border-radius: 6px; height: 47px;" ">
+                      <input type="datetime-local"  class='datetimepicker' id="Date" value='2022-12-31T24:00' required="True" min style="color:black; border-radius: 6px; height: 47px;" ">
                     </div>
                   </div>
 
@@ -190,7 +195,7 @@
                 
               </div>
               <div class="input-box">
-                <button onclick="AuctionCreate()" class="btn btn-gradient btn-medium justify-content-center"><span>Create Item</span></button>
+                <a onclick="AuctionCreate()" class="btn btn-gradient btn-medium justify-content-center"><span>Create Item</span></a>
               </div>
             </div>
           </div>
@@ -216,10 +221,10 @@
   <script src="./static/script/auc_create_api.js"></script>
 
   <script>
-var now_utc = Date.now() // 지금 날짜를 밀리초로
-// getTimezoneOffset()은 현재 시간과의 차이를 분 단위로 반환
-var timeOff = new Date().getTimezoneOffset()*60000; // 분단위를 밀리초로 변환
-// new Date(today-timeOff).toISOString()은 '2022-05-11T18:09:38.134Z'를 반환
+var now_utc = Date.now() 
+
+var timeOff = new Date().getTimezoneOffset()*60000;
+
 var today = new Date(now_utc-timeOff).toISOString().substring(0, 16);
 
 document.getElementById("Date").setAttribute("min", today);

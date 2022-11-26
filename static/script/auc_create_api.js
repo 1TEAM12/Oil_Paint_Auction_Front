@@ -34,7 +34,7 @@ async function AuctionCreate(){
     const start_bid = document.getElementById("start-price").value
     const end_date = document.getElementById("Date").value
 
-    const response = await fetch(`${backendBaseUrl}/auctions/2/`,{
+    const response = await fetch(`${backendBaseUrl}/auctions/${id}/`,{
         method: 'POST',
         headers: {
             "Accept": "application/json",
@@ -49,6 +49,7 @@ async function AuctionCreate(){
     console.log(response.status)
 
     if (response.status === 200) {
+        alert('등록완료!')
         location.replace('profile.html')
     }else if(response.status === 400) {
         alert('이미 등록된 상품입니다.')
@@ -59,3 +60,7 @@ async function AuctionCreate(){
 const page_cancel=() => {
     location.replace('profile.html')
 }
+
+
+
+    
