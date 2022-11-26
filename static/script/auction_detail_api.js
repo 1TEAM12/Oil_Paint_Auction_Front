@@ -1,4 +1,4 @@
-const auction_id = location.href.split('=')[1][0]
+const auction_id = location.href.split('=')[1].split('/')[0]
 
 $(document).ready(function(){
     loadAuction();
@@ -41,7 +41,6 @@ async function loadAuction() {
     auction_now_bid.innerText = response_json.now_bid
 
 
-    
     // 상세페이지 이미지
     const painting_image = document.getElementById("painting_image")
     let image_url = response_json.painting.after_image
@@ -371,3 +370,8 @@ async function updatecomment(comment_id){
         alert(response_json["error"])
     }
 }
+
+// 네비바 profile 연결
+function move_auction_profile_page(){
+    window.location.href = `/profile.html`
+    }
