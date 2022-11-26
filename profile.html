@@ -32,7 +32,6 @@
 
   <!-- Style css -->
   <link rel="stylesheet" href="./assets/css/style.css" />
-  <link rel="stylesheet" href="./static/style/css/profile_style.css" />
 </head>
 
 <body>
@@ -175,7 +174,7 @@
                 <a class="btn btn-small btn-outline" data-bs-toggle="tab" href="#owned">My Autcion</a>
               </li>
               <li>
-                <a class="btn btn-small btn-outline" data-bs-toggle="tab" href="#created">Bid</a>
+                <a class="btn btn-small btn-outline" data-bs-toggle="tab" href="#created">Like Auction</a>
               </li>
 
             </ul>
@@ -184,8 +183,7 @@
             <!-- ***** Start My Painting ***** -->
             <div class="tab-content author-tabs-content">
               <div id="on-sale" class="tab-pane fade show active">
-                <div class="row" id="mypage">
-                  
+                <div class="row" id="mypage">              
                   <!-- End .col -->
                 </div>
                 <!-- End .row -->
@@ -206,23 +204,7 @@
 
               <!-- ***** Start Bid ***** -->
               <div id="created" class="tab-pane fade">
-                <div class="row">
-                  <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-6 mb-6">
-                    <div class="explore-style-one">
-                      <div class="thumb">
-                        <a href="#"> <img src="./assets/images/explore/7.jpg" alt="nft live auction thumbnail"></a>
-                        <button class="reaction-btn"><i class="ri-heart-fill"></i><span>49</span></button>
-                        <!-- End .reaction-count -->
-                      </div>
-                      <!-- .header -->
-                      <!-- End .product-owner -->
-                      <div class="action-wrapper d-flex-between pt-4">
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#placeBit"
-                          class="btn  btn-outline btn-small"><span><i class="ri-shopping-bag-line"></i> Place
-                            Bid</span></a>
-                      </div>
-                      <!-- action-wrapper -->
-                    </div>
+                <div class="row" id="action_like_list">
                     <!-- End .content -->
                   </div>
                 </div>
@@ -233,7 +215,7 @@
               <!-- ***** Start My Auction***** --
           </div>
         </div>
-        <!-- End .col -->
+        <-- End .col -->
       </div>
     </div>
   </section>
@@ -257,7 +239,6 @@
   <script src="./static/script/mypage_view_api.js"></script>
   <script src="./static/script/profile_api.js"></script>
   <script src="./static/style/js/mypage_view.js"></script>
-  <script src="./static/style/js/profile_style.js"></script>
   <script src="./static/script/nav_api.js"></script>
 
   <script>
