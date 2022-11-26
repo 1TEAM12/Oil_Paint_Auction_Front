@@ -34,7 +34,7 @@ async function MypageView(){
                         </div>
                         <!-- .header -->
                         <div class="action-wrapper d-flex-between pt-4">
-                        <a href="#" id="${item.id}" onclick="Close_Show_Modal(this)" data-bs-toggle="modal" class="btn  btn-outline btn-small"><span><i class="ri-add-fill"></i>More</span></a>
+                        <a href="#" id="${item.id}" onclick="Show_Modal(this)" data-bs-toggle="modal" class="madal_btn btn  btn-outline btn-small"><span><i class="ri-add-fill"></i>More</span></a>
                         </div>
                         <!-- action-wrapper -->
                     </div>
@@ -42,8 +42,9 @@ async function MypageView(){
                 </div>
             </div>
 
+
     
-    <div id="${item.id}modal" style="display:none; z-index:9999;" >
+    <div id="${item.id}modal" style="display:none; z-index:9999; background-color:rgba(0, 0, 0, 0.6); transition:opacity .35s;" >
     <div class="modal-dialog modal-dialog-centered" style="width:800px;">
       <div class="modal-content" style="height: 420px;">
 
@@ -69,20 +70,20 @@ async function MypageView(){
                   </div>
       
                   <div class="col-lg-8" style='width:365px;'>
-                    <div class="form-field-wrapper" style="height:294px; overflow: auto;">
+                    <div class="form-field-wrapper container"style="word-break:break-all; height:294px; overflow-y:scroll">
                       <div class="row">
                         <div class="col-md-12 mb-4">
                           <div class="field-box" style="display:flex; justify-content: space-between;">
                             <div class="form-label"><strong>Artist :</strong></div>
                             <!-- <input id="name" type="text" placeholder=""> -->
-                            <div>새싹이</div>
+                            <div>${item.author}</div>
                           </div>
                         </div>
                         <div class="col-md-12 mb-4">
                           <div class="field-box" style="display:flex; justify-content: space-between;">
                             <div class="form-label"><strong>Create :</strong></div>
                             <!-- <input id="name" type="text" placeholder=""> -->
-                            <div>여기는 생성시간 넣기</div>
+                            <div>${item.created_at}</div>
                           </div>
                         </div>
                         <div class="col-md-12 mb-4">
@@ -93,10 +94,10 @@ async function MypageView(){
                           </div>
                         </div>
   
-                        <div class="col-md-6 mb-4">
+                        <div class="col-md-6 mb-4" style="width:100%">
                           <div class="field-box">
                             <div class="form-label"><strong>Content :</strong></div>
-                            <div>여기는 내용</div>
+                            <div>${item.content}</div>
                           </div>
                         </div>       
                       </div>
@@ -137,9 +138,10 @@ async function MypageView(){
 
 
 
-function Close_Show_Modal(id){
+function Show_Modal(id){
   var modal = document.getElementById(`${id.id}modal`);
   var close = document.getElementById(`${id.id}close`);
+  document.body.style.overflow = "hidden";
 
   modal.style.position = "fixed";
 
@@ -152,11 +154,12 @@ function Close_Show_Modal(id){
   modal.style.outline =  "0";
   modal.style.display = "block";
 
+  
 
 
   const closeModal = () => {
     modal.style.display = "none";
-    
+    document.body.style.overflow = "unset";
 
 }
 
@@ -226,5 +229,5 @@ AuctionList()
 
 function AuctionCreate(click_id){
   console.log(click_id.id)
-  window.location.href = `/create.html?id=${click_id.id}`;
+  window.location.href = `/auction_create.html?id=${click_id.id}`;
 }
