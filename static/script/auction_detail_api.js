@@ -436,7 +436,4 @@ async function updatecomment(comment_id){
     }
 }
 
-// 네비바 profile 연결
-function move_auction_profile_page(){
-    window.location.href = `/profile.html`
-    }
+
