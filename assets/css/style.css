@@ -4333,6 +4333,10 @@ span.rn-badge-card::before {
   color: #fff;
 }
 
+#auctionlist{
+  height: auto !important;
+}
+
 .grid-filter-wrapper {
   margin-left: -15px;
   margin-right: -15px;
@@ -5968,6 +5972,7 @@ span.rn-badge-card::before {
     padding: 25px 15px;
   }
 }
+
 
 .rounded {
   border-radius: 10px !important;
