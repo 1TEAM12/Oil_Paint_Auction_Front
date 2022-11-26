@@ -54,6 +54,17 @@
           <a href="index.html" class="logo logo-light"><img src="./assets/images/logo-white.png" alt="brand"> </a>
           <a href="index.html" class="logo logo-dark"><img src="./assets/images/logo-dark.png" alt="brand"> </a>
         </div>
+        <div class="mainmenu-wrapper">
+          <nav id="sideNav" class="mainmenu-nav d-none d-xl-block">
+            <!-- Start Mainmanu Nav -->
+            <ul class="mainmenu">
+              <li><a id="nav_user_email"></a></li>
+              <li><a id="nav_user_nickname"></a></li>
+              <li><a id="nav_user_point"></a></li>
+            </ul>
+            <!-- End Mainmanu Nav -->
+          </nav>
+        </div>
         <!-- End .logo-wrapper -->
       </div>
       <!-- End .header-left -->
@@ -85,9 +96,8 @@
             </button>
           </li>
           <!-- End .mobile-menu-bar -->
-          <li>
-            
-            <img id="profile_image"  alt="프로필 사진">
+          <li class="avatar-info"> <a href="product-details.html"><img id="nav_profile_image"
+                alt="user avatar"></a>
             <ul class="submenu">
               <li><a onclick="move_auction_profile_page()"><i class="ri-user-line"></i> Profile</a></li>
               <li><a href="#"><i class="ri-edit-line"></i> Create Item</a></li>
@@ -139,7 +149,7 @@
               <div class="countdown btn btn-gradient btn-small" data-date="2022-03-09">
               </div>
               <!-- End .count-down -->
-              <button class="reaction-btn"><i class="ri-heart-fill"></i><span id="auction_like_count"></span></button>
+              <a class="reaction-btn" onclick="AuctionLike()"><i class="ri-heart-fill"></i><span id="auction_like_count"></span></a>
               <!-- End .reaction-count -->
             </div>
             <!-- End .thumb -->
@@ -159,8 +169,8 @@
                 <div class="avatar-info-wrapper d-flex-between ">
                   <div class="d-flex-center avatar-info mb-4">
                     <div class="thumb-wrapper">
-                        <img id="owner_image" alt="top sellter">
-                    </div>
+                        <img class="avatar" id="auction_owner_profile_image" alt="top sellter">
+                      </div>
                     <!-- End .thumb-wrapper -->
                     <div class="content">
                       <span class="owner">Owner</span>
@@ -171,14 +181,14 @@
                   <!-- End .d-flex-cente -->
 
                   <div class="d-flex-center avatar-info mb-4">
-                    <!-- <div class="thumb-wrapper">
-                        <img src="./assets/images/authors/avatar/11.png" alt="top sellter">
-                    </div> -->
+                    <div class="thumb-wrapper">
+                        <img id="auction_author_profile_image"  alt="top sellter">
+                    </div> 
                     <!-- End .thumb-wrapper -->
-                    <!-- <div class="content">
-                      <span class="owner">Creator</span>
-                      <h4 class="title  pb-1">Santon Rican</h4>
-                    </div> -->
+                    <div class="content">
+                      <span class="owner">Author</span>
+                      <h4 class="title  pb-1" id="auction_author"></h4>
+                    </div>
                     <!-- End .content -->
                   </div>
                   <!-- End .d-flex-cente -->
@@ -203,21 +213,8 @@
               </div>
             </div>
             <!-- End .row -->
-            <div class="row">
-              <form>
-                <div class="col-md-6">
-                  <div class="input-wrapper" >
-                    <input type="number" id="now_bid" placeholder="입찰가 입력(100point 단위)" min="5000" step="100" required>
-                  </div>
-                </div>
-                <div class="col-md-6" style="float: right;">
-                  <button class="btn btn-gradient btn btn-medium" type="button" onclick="BidUpdate()"><span>입찰하기</span></button>
-                </div>
-              </form>
-            </div>
-
             <br>
-            <h4 class="mb-1">Explanation</h4>
+            <h4 class="mb-1">Description </h4>
             <p class="subtitle" id ="auction_content"></p>
 
             
@@ -226,82 +223,20 @@
             <div class="d-flex-between mb-5">
               <ul class="nav custom-tabs">
                 <li>
-                  <a class=" active" data-bs-toggle="tab" href="#info">Bids Info</a>
-                </li>
-                <li>
-                  <a data-bs-toggle="tab" href="#history">History</a>
+                  <a class=" active" data-bs-toggle="tab" >History</a>
                 </li>
               </ul>
               <div class="more-dropdown details-dropdown"><i class="ri-more-fill" data-bs-toggle="dropdown"></i>
                 <ul class="dropdown-menu dropdown-menu-dark">
-                  <!-- <li><a class="dropdown-item" href="#">Edit</a></li> -->
                   <li><a class="dropdown-item" onclick="AuctionDetailDelete()">Delete</a></li>
                 </ul>
               </div>
             </div>
 
             <!-- Tab panes -->
-            <div class="tab-content custom-tab-content">
+            <div class="tab-content custom-tab-content" >
               <div class="tab-pane fade show container active" id="info">
-                <div class="custom-history">
-                  <div class="single-item-history d-flex-center">
-                    <div class="avatar">
-                      <img src="assets/images/authors/avatar/1.png"  alt="history">
-                    </div>
-                    <!-- end avatar -->
-                    <div class="content">
-                      <p>Place a bid <br> by @Obaniya</p>
-                    </div>
-                    <div class="price-history">16.23 Point</div>
-                  </div>
-                  <!-- End .single-item-history -->
-
-                  <div class="single-item-history d-flex-center">
-                    <div class="avatar">
-                      <img src="assets/images/authors/avatar/1.png"  alt="history">
-                    </div>
-                    <!-- end avatar -->
-                    <div class="content">
-                      <p>Place a bid <br> by @Deshihan</p>
-                    </div>
-                    <div class="price-history">21.23 Point</div>
-                  </div>
-                  <!-- End .single-item-history -->
-
-                  <div class="single-item-history d-flex-center">
-                    <div class="avatar">
-                      <img src="assets/images/authors/avatar/1.png"  alt="history">
-                    </div>
-                    <!-- end avatar -->
-                    <div class="content">
-                      <p>Place a bid <br> by @Harsh</p>
-                    </div>
-                    <div class="price-history">34.12 Point </div>
-                  </div>
-                  <!-- End .single-item-history -->
-
-                  <div class="single-item-history d-flex-center">
-                    <div class="avatar">
-                      <img src="assets/images/authors/avatar/1.png"  alt="history">
-                    </div>
-                    <!-- end avatar -->
-                    <div class="content">
-                      <p>Place a bit <br> by @Kiron</p>
-                    </div>
-                    <div class="price-history">19.12 Point </div>
-                  </div>
-                  <!-- End .single-item-history -->
-
-                  <div class="single-item-history d-flex-center">
-                    <div class="avatar">
-                      <img src="assets/images/authors/avatar/1.png" alt="history">
-                    </div>
-                    <!-- end avatar -->
-                    <div class="content">
-                      <p>Place a bit <br> by @Jakson</p>
-                    </div>
-                    <div class="price-history">13.09 Point</div>
-                  </div>
+                <div class="custom-history" id="auction_history_view">
                   <!-- End .single-item-history -->
 
                 </div>
@@ -324,43 +259,13 @@
                   </div>
                   <!-- End .single-item-history -->
 
-                  <div class="single-item-history d-flex-center">
-                    <div href="#" class="avatar">
-                      <img src="assets/images/popular/small/1.png" alt="history">
-                      <i class="ri-check-line"></i>
-                    </div>
-                    <!-- end avatar -->
-                    <div class="content">
-                      <p>Bid accepted <span class="color-primary fw-500">15
-                          Point</span> by Smith</p>
-                      <span class="date">02/01/2022, 10:55</span>
-                    </div>
-                  </div>
-                  <!-- End .single-item-history -->
-
-                  <div class="single-item-history d-flex-center">
-                    <div href="#" class="avatar">
-                      <img src="assets/images/popular/small/1.png" alt="history">
-                      <i class="ri-check-line"></i>
-                    </div>
-                    <!-- end avatar -->
-                    <div class="content">
-                      <p>Bid accepted <span class="color-primary fw-500">13
-                          Point</span> by <a class="text-white" href="author-profile.html">Rion</a></p>
-                      <span class="date">05/01/2022, 10:34</span>
-                    </div>
-                  </div>
-                  <!-- End .single-item-history -->
                 </div>
               </div>
               <!-- End bids history -->
             </div>
-
-            <a data-bs-toggle="modal" data-bs-target="#placeBit" href="#"
-              class="btn btn-medium btn-gradient w-100 justify-content-center mt-5"><span><i
-                  class="ri-shopping-bag-line"></i>
-                Place
-                Bid</span></a>
+            <p></p>
+            <input type="number" id="now_bid" placeholder="입찰가 입력(100point 단위)" min="5000" step="100" required>
+            <a onclick="BidUpdate()" class="btn btn-medium btn-gradient w-100 justify-content-center mt-5"><span><i class="ri-shopping-bag-line"></i> 입찰하기</span></a>
           </div>
         </div>
         <!-- End col -->
@@ -433,6 +338,7 @@
   <script src="./static/script/base_api.js"></script>
   <script src="./static/script/profile_api.js"></script>
   <script src="./static/script/auction_detail_api.js"></script>
+  <script src="./static/script/nav_api.js"></script>
 </body>
 
 </html>
