@@ -1,4 +1,4 @@
-const auction_id = location.href.split('=')[1][0]
+const auction_id = location.href.split('=')[1].split('/')[0]
 
 $(document).ready(function(){
     loadAuction();
@@ -68,7 +68,6 @@ async function loadAuction() {
     document.getElementById("auction_author_profile_image").src = `${backendBaseUrl}${response_json.painting.author_profile_image}`
 
 
-    
     // 상세페이지 이미지
     const painting_image = document.getElementById("painting_image")
     let image_url = response_json.painting.after_image
@@ -436,3 +435,5 @@ async function updatecomment(comment_id){
         alert(response_json["error"])
     }
 }
+
+

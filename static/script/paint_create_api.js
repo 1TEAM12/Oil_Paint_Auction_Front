@@ -26,7 +26,11 @@ async function StyleLoadView(style_no) {
 }
 
 async function uploadImg() {
-    const style_no = location.href.split('=')[1][0]
+    let style_no = location.href.split('=')[1][0]
+    console.log(style_no)
+    console.log(typeof(style_no))
+    style_no = Number(style_no)+1
+    console.log(style_no)
     const before_image = document.getElementById("before_image").files[0]
     console.log(before_image)
 
@@ -82,7 +86,7 @@ async function savePainting() {
         },
         body: formData
     })
-    move_profile_page()
+    // move_profile_page()
 }
 
 
