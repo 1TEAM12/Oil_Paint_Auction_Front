@@ -32,6 +32,7 @@ window.onload = async function paintingLoad(){
 async function AuctionCreate(){
 
     const start_bid = document.getElementById("start-price").value
+    const now_bid = document.getElementById("start-price").value
     const end_date = document.getElementById("Date").value
 
     const response = await fetch(`${backendBaseUrl}/auctions/${id}/`,{
@@ -41,7 +42,7 @@ async function AuctionCreate(){
             "Content-Type": "application/json",
             "Authorization": "Bearer " + localStorage.getItem("access")
         },
-        body: JSON.stringify({"start_bid": start_bid, "end_date":end_date})
+        body: JSON.stringify({"start_bid": start_bid, "now_bid":now_bid, "end_date":end_date})
         
     })
 

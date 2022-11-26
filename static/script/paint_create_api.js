@@ -86,7 +86,7 @@ async function savePainting() {
         },
         body: formData
     })
-    // move_profile_page()
+    move_profile_page()
 }
 
 

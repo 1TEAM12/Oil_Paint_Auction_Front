@@ -91,7 +91,7 @@ window.onload = async function AuctionAlllistView(){
         let cnt = 1;
         more(response_json.length, max).addEventListener('click', function(e){
             cnt++;     
-            if(response_json.length < max * cnt){ // 2번 상황
+            if(response_json.length < max * cnt){ 
                 for(let i= max * (cnt - 1); i< response_json.length; i++){
                     _UL.appendChild(listView(response_json[i]));
                 }
