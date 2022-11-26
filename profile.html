@@ -55,6 +55,17 @@
           <a href="index.html" class="logo logo-light"><img src="./assets/images/logo-white.png" alt="brand"> </a>
           <a href="index.html" class="logo logo-dark"><img src="./assets/images/logo-dark.png" alt="brand"> </a>
         </div>
+        <div class="mainmenu-wrapper">
+          <nav id="sideNav" class="mainmenu-nav d-none d-xl-block">
+            <!-- Start Mainmanu Nav -->
+            <ul class="mainmenu">
+              <li><a id="nav_user_email"></a></li>
+              <li><a id="nav_user_nickname"></a></li>
+              <li><a id="nav_user_point"></a></li>
+            </ul>
+            <!-- End Mainmanu Nav -->
+          </nav>
+        </div>
         <!-- End .logo-wrapper -->
       </div>
       <!-- End .header-left -->
@@ -86,8 +97,7 @@
             </button>
           </li>
           <!-- End .mobile-menu-bar -->
-          <li class="avatar-info"> <a href="auction_details.html"><img src="./assets/images/avatar/user.png"
-                alt="user avatar"></a>
+          <li class="avatar-info"> <a href="product-details.html"><img id="nav_profile_image" alt="user avatar"></a>
             <ul class="submenu">
               <li><a href="#"><i class="ri-user-line"></i> Profile</a></li>
               <li><a href="#"><i class="ri-edit-line"></i> Create Item</a></li>
@@ -249,6 +259,8 @@
   <script src="./static/script/profile_api.js"></script>
   <script src="./static/style/js/mypage_view.js"></script>
   <script src="./static/style/js/profile_style.js"></script>
+  <script src="./static/script/nav_api.js"></script>
+
   <script>
     $(document).ready(function(){
         MypageView();
