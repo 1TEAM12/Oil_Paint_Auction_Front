@@ -68,7 +68,6 @@ async function loadAuction() {
     document.getElementById("auction_author_profile_image").src = `${backendBaseUrl}${response_json.painting.author_profile_image}`
 
 
-    
     // 상세페이지 이미지
     const painting_image = document.getElementById("painting_image")
     let image_url = response_json.painting.after_image
@@ -367,8 +366,8 @@ async function Create_Auction_Comment(){
 
 // 댓글 삭제
 async function deleteComment(comment_id){
-    var delConfirm = confirm("정말 파일을 삭제하시겠습니까?")
-    if (delConfirm) {}
+    var delConfirm = confirm("정말 댓글을 삭제하시겠습니까?")
+    if (delConfirm) {
     const response = await fetch(`${backendBaseUrl}/auctions/${auction_id}/comments/${comment_id}/`, {
         method: 'DELETE',
         headers: {
@@ -382,10 +381,8 @@ async function deleteComment(comment_id){
             alert("댓글이 삭제되었습니다.")
             window.location.reload()
             return response_json
-        }else {
-            alert(response_json["error"])
         }
-}
+}}
 
 // 댓글 수정 GET(특정 댓글 가져오기)
 async function getComment(){
@@ -436,3 +433,5 @@ async function updatecomment(comment_id){
         alert(response_json["error"])
     }
 }
+
+
