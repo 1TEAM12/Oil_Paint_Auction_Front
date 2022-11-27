@@ -55,7 +55,12 @@ async function loadAuction() {
 
 
 
+    nickname = JSON.parse(localStorage.getItem(["payload"])).nickname
 
+    if (nickname === response_json.seller) {
+        const auction_delete__view = document.getElementById("auction_delete__view")
+        auction_delete__view.setAttribute("style", "display:block;")
+    }
     auction_title.innerText = response_json.painting.title   
     auction_owner.innerText = response_json.painting.owner
     auction_author.innerText = response_json.painting.author
@@ -303,40 +308,6 @@ async function loadComment() {
             }
 
         });
-
-
-        
-
-        let modal = document.getElementById("modal"+item['id'])
-
-        function modalOn() {
-            modal.style.display = "flex"
-        }
-        function isModalOn() {
-            return modal.style.display === "flex"
-        }
-        function modalOff() {
-            modal.style.display = "none"
-        }
-        let btnModal = document.getElementById("btn-modal"+item['id'])
-        btnModal.addEventListener("click", e => {
-            modalOn()
-        })
-        const closeBtn = modal.querySelector(".close-area")
-        closeBtn.addEventListener("click", e => {
-            modalOff()
-        })
-        modal.addEventListener("click", e => {
-            const evTarget = e.target
-            if(evTarget.classList.contains("modal-overlay")) {
-                modalOff()
-            }
-        })
-        window.addEventListener("keyup", e => {
-            if(isModalOn() && e.key === "Escape") {
-                modalOff()
-            }
-        })
 }
 
 
