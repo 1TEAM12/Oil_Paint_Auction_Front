@@ -262,7 +262,7 @@ async function loadComment() {
                         <div class="title" style="display:inline-block;">댓글 수정</div>
                         <div class="close-area"style="display:inline-block;">X</div>
                         <div class="content">
-                        <textarea name="message" cols="20" rows="3" id="auction_comment_content"style="width:80%;display:inline-block;">${item['content']}</textarea>
+                        <textarea name="message" cols="20" rows="3" id="auction_comment_content_update"style="width:80%;display:inline-block;">${item['content']}</textarea>
                         <div style="display:inline-block;vertical-align:middle;margin-bottom:50px;margin-left:50px;"><a class="btn btn-gradient btn btn-medium" onclick="updatecomment(${item['id']})"><span>수정</span></a></div>
                         </div>
                     </div>
@@ -407,7 +407,7 @@ async function getComment(){
 
 // 댓글 수정 POST
 async function updatecomment(comment_id){
-    const content = document.getElementById("auction_comment_content").value
+    const content = document.getElementById("auction_comment_content_update").value
     const comment_data = {
         "content": content
     }
