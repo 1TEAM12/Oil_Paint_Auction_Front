@@ -32,8 +32,10 @@ async function MypageView(){
                         <h3 class="title" style="text-align:center;">${item.title}</h3>
                         <div class="more-dropdown "><i class="ri-more-fill" data-bs-toggle="dropdown"></i>
                             <ul class="dropdown-menu dropdown-menu-dark">
-                            <li><a class="dropdown-item" href="#">Edit</a></li>
+
+                            <li><a id=${item.id} onclick="PaintUpdate(this)" class="dropdown-item" href="#">Edit</a></li>                        
                             <li><a id="${item.id}" class="dropdown-item" onclick="deletePainting(this)">Delete</a></li>
+
                             </ul>
                         </div>
                         </div>
@@ -231,6 +233,11 @@ function AuctionCreate(click_id){
   window.location.href = `/auction_create.html?id=${click_id.id}`;
 }
 
+
+function PaintUpdate(click_id){
+  window.location.href = `/PaintUpdate.html?id=${click_id.id}`;
+}
+
 //유화 삭제
 async function deletePainting(paintings){
   var delConfirm = confirm("정말 유화를 삭제하시겠습니까?")
@@ -280,3 +287,4 @@ async function confirm__auction(auction){
         alert("접근 권한이 없습니다.")
       }
 }}
+

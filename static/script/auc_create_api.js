@@ -5,7 +5,7 @@ let id = getLink_Name[1]
 
 
 window.onload = async function paintingLoad(){
-    console.log(id)
+
     const response = await fetch(`${backendBaseUrl}/paintings/${id}/`,{
         method: 'GET',
         headers:{
