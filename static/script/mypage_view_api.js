@@ -13,6 +13,8 @@ async function MypageView(){
             }
         }
     )
+    const width = document.querySelector('.explore-style-one');
+    console.log(width.getBoundingClientRect());
     response_json = await response.json()
     
     response_json.forEach(item => {
@@ -22,8 +24,8 @@ async function MypageView(){
             `
             <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-6 mb-6">
                 <div class="explore-style-one">
-                    <div class="thumb">
-                        <img src="${backendBaseUrl}${item.after_image}"alt="nft live auction thumbnail">
+                    <div class="thumb" style="padding-bottom:100%; width:100%; position:relative;">
+                        <img style="position:absolute;  width:100%; height:100%; object-fit:fill;" src="${backendBaseUrl}${item.after_image}"alt="nft live auction thumbnail">
                             <!-- End .reaction-count -->
                     </div>
                     <!-- End .thumb -->
@@ -67,7 +69,7 @@ async function MypageView(){
       
                       <div class="brows-file-wrapper">
                         <div style=" height: 294px; width: 100%;">      
-                          <img src="${backendBaseUrl}${item.after_image}" style="width: 100%; height:100%; border-radius:10px; object-fit: cover">
+                          <img src="${backendBaseUrl}${item.after_image}" style="width: 100%; height:100%; border-radius:10px; object-fit: fill;">
                         </div>
                       </div>
                     </div>

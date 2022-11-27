@@ -21,7 +21,7 @@ window.onload = async function AuctionAlllistView(){
         `
         <div class="explore-style-one">
                     <div class="thumb">
-                        <a onclick="move_auction_detail_page(${item.id})"> <img src="${backendBaseUrl}${item.painting.after_image}" alt="nft live auction thumbnail"  style="width: 270px; height:270px;"></a>
+                        <a onclick="move_auction_detail_page(${item.id})"> <img src="${backendBaseUrl}${item.painting.after_image}" alt="nft live auction thumbnail"  style="width: 270px; height:270px; object-fit:fill;"></a>
                         <button class="reaction-btn"><i class="ri-heart-fill"></i><span>${item.auction_like_count}</span></button>
                         <!-- End .reaction-count -->
                     </div>
@@ -68,16 +68,18 @@ window.onload = async function AuctionAlllistView(){
     }
 
 
-        function more(length,max){
+        function more(){
             let _BTN = document.createElement('div');
             
             
             _BTN.innerHTML = `<div style="text-align: center;"><a class="btn btn-gradient btn-medium" id="read_more">read more</a></div>`
-            return length > max && _WRAP.appendChild(_BTN)
+            return _WRAP.appendChild(_BTN)
         }
         
         const max = 4;
         let start = 0;
+        let cnt = 1;
+
         if(response_json.length < max){
             for(let i=start; i < response_json.length; i++){
                 _UL.appendChild(listView(response_json[i]))
@@ -88,17 +90,17 @@ window.onload = async function AuctionAlllistView(){
             }
         }
         
-        let cnt = 1;
         more(response_json.length, max).addEventListener('click', function(e){
             cnt++;     
-            if(response_json.length < max * cnt){ // 2번 상황
+
+            if(response_json.length < max * cnt){ 
                 for(let i= max * (cnt - 1); i< response_json.length; i++){
                     _UL.appendChild(listView(response_json[i]));
                 }
                 const _BTN = document.getElementById("read_more");
                 _BTN.style.display = 'none';
             }else{
-                for(let i=max * (cnt - 1); i< max * cnt - 1; i++){
+                for(let i=max * (cnt - 1); i< max * cnt; i++){
                     _UL.appendChild(listView(response_json[i]));
                 }
                 console.log("in2");

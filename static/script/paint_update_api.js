@@ -69,7 +69,10 @@ async function painting_Update(){
     const response_json = await response.json()
     console.log(response_json)
 
-    // move_profile_page()
+    if(response.status === 200){
+        move_profile_page()
+    }
+    
 
 }
 

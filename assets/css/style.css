@@ -3578,13 +3578,15 @@ span.rn-badge-card::before {
   overflow: hidden;
   display: block;
   border-radius: 10px;
+  padding-bottom: 100%;
 }
 .explore-style-one .thumb img {
   display: block;
+  height: 100%;
   width: 100%;
-  height: auto;
-  object-fit: cover;
+  object-fit: fill;
   transition: 0.5s;
+  position: absolute;
 }
 .explore-style-one .content .title {
   font-size: 20px;
@@ -4983,13 +4985,17 @@ span.rn-badge-card::before {
   width: 100%;
 }
 .avatar-info .content {
-  margin-left: 10px;
+  margin-left: 25px;
 }
 .avatar-info .content .title a {
   color: #fff;
 }
 .avatar-info .content .title {
   font-weight: 400;
+}
+
+#auction_comment_content{
+  resize: none;
 }
 
 .details-dropdown .ri-more-fill {

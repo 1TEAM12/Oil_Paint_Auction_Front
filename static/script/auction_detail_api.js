@@ -238,7 +238,7 @@ async function loadComment() {
                 <ul class="comment-box-inner" style="height:70px;">
                     <li class="single-comment-box d-flex-between ">
                         <div class="inner d-flex-start">
-                                <img class="avatar" src="${backendBaseUrl}${item['profile_image']}" alt="author">
+                                <img class="avatar" src="${backendBaseUrl}${item['profile_image']}" alt="author" style="padding-right:0px;">
                             <!-- End .avatar -->
                             <div class="content">
                                 <h5 class="title">${item['user']}<span class="date-post"> ${time_before} &nbsp&nbsp</span> 
@@ -387,6 +387,8 @@ async function deleteComment(comment_id){
 
 // 댓글 수정 GET(특정 댓글 가져오기)
 async function getComment(){
+    console.log(auction_id)
+    console.log(comment_id)
     const response = await fetch(`${backendBaseUrl}/auctions/${auction_id}/comments/${comment_id}/`, {
         method: 'GET',
         headers: {
