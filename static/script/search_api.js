@@ -24,7 +24,7 @@ async function searchParam(){
 
         if(response_json.length){
                 const articles = document.getElementById("articles")
-
+                console.log(response_json)
                 response_json.forEach(item => {
                     console.log(item)
                     $('#auction_search_view').append(
@@ -32,7 +32,7 @@ async function searchParam(){
                         <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-6 mb-6">
                             <div class="explore-style-one">
                                 <div class="thumb">
-                                <a href="auction_details.html?$id=${item.paintings.id}/"><img src="${backendBaseUrl}${item.after_image}"
+                                <a href="auction_details.html?$id=${item.paintings.id}/"><img src="${backendBaseUrl}${item.paintings.painting.after_image}"
                                     alt="nft live auction thumbnail"></a>
                                 <button class="reaction-btn"><i class="ri-heart-fill"></i><span>${item.paintings.auction_like_count}</span></button>
                                 <!-- End .reaction-count -->
@@ -40,7 +40,7 @@ async function searchParam(){
                                 <!-- End .thumb -->
                                 <div class="content">
                                 <div class="header d-flex-between pt-4 pb-3">
-                                    <h3 class="title"><a href="auction_details.html">${item.title}</a></h3>
+                                    <h3 class="title"><a href="auction_details.html">${item.paintings.painting.title}</a></h3>
                                 </div>
                                 <!-- .header -->
                                 <div class="product-share-wrapper">
