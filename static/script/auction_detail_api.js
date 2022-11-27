@@ -76,7 +76,7 @@ async function loadAuction() {
     const remaining_time = response_json.end_date
 
     // 경매 마감 남은 시간
-    const remainTime = document.querySelector("#remain-time");
+    const remainTime = document.querySelector("#rremain-time");
     
     function diffDay() {
         const masTime = new Date(remaining_time);
@@ -241,10 +241,11 @@ async function loadComment() {
                                 <div class="more-dropdown details-dropdown"><i class="ri-more-fill" data-bs-toggle="dropdown"></i>
                                     <ul class="dropdown-menu dropdown-menu-dark">
                                     <div id="container">
-                                        <button class="dropdown-item" id="btn-modal">수정</button>
+                                        <button class="dropdown-item" id="btn-modal">Edit</button>
+                                        <p></p>
+                                        <a class="dropdown-item" onclick="deleteComment(${item['id']})">Delete</a>
                                     </div>
                                         
-                                    <li><a class="dropdown-item" onclick="deleteComment(${item['id']})">삭제</a></li>
                                     </ul>
                                 </div>
                                 </h5>

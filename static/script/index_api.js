@@ -13,7 +13,27 @@ window.onload = async function AuctionAlllistView(){
 
     const _WRAP = document.querySelector('.wrap');
     const _UL = document.querySelector('.listWrap');
+
     function listView(item){
+
+    // 경매 마감 남은 시간
+    
+    
+    function diffDay(data) {
+        const masTime = new Date(data);
+        const todayTime = new Date();
+        
+        const diff = masTime - todayTime;
+        
+        const diffDay = Math.floor(diff / (1000*60*60*24));
+        const diffHour = Math.floor((diff / (1000*60*60)) % 24);
+        const diffMin = Math.floor((diff / (1000*60)) % 60);
+        
+        return `${diffDay}일 ${diffHour}시간 ${diffMin}분 `;
+    }
+
+    let remain_end_time = diffDay(item.end_date)
+
         let _LI = document.createElement('div');
         _LI.className = "grid-item cat--4 js-load";
         _LI.innerHTML = 
@@ -31,7 +51,7 @@ window.onload = async function AuctionAlllistView(){
                         </div>
                         <!-- .header -->
                         <div class="product-share-wrapper">
-                        종료일&nbsp;&nbsp;&nbsp;<span style='color:red;'>${item.end_date}</span>
+                        종료일&nbsp;&nbsp;&nbsp;<span style='color:red;'>약  ${remain_end_time}</span>
                         </div>
                         <!-- End product-share-wrapper -->
                         <div class="product-owner py-4 d-flex-between">
