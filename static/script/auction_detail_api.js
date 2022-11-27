@@ -202,6 +202,21 @@ async function AuctionLike() {
 
 }
 
+
+
+function doDisplay(id){ 	
+    var con = document.getElementById("comment_content_2"+id); 	
+    var con2 = document.getElementById("comment_content"+id);
+    if(con.style.display=='none'){ 		
+        con.style.display = 'block'; 
+        con2.style.display = 'none';	
+    }else{ 		
+        con.style.display = 'none'; 	
+        con2.style.display = 'block';
+    } 
+}
+
+
 // 댓글 불러오기
 async function loadComment() {
     const response2 = await fetch(`${backendBaseUrl}/auctions/${auction_id}/comments/`, {
@@ -222,58 +237,54 @@ async function loadComment() {
     user = payload_data.nickname
 
     
+    
     $('#comment_box').empty()
     response_json2.forEach(item => {
 
+        
+        
+        
         let time_before = time2str((item['updated_at']))
         if (user == item['user']) {
             $('#comment_box').append(
-                
-                `
-                <p></p>
-                <ul class="comment-box-inner" style="height:70px;">
+
+                `<ul class="comment-box-inner" style="height:100px;">
                     <li class="single-comment-box d-flex-between ">
-                        <div class="inner d-flex-start">
-                                <img class="avatar" src="${backendBaseUrl}${item['profile_image']}" alt="author" style="padding-right:0px;">
+                        <div class="inner d-flex-start" style="position:relative;">
+                                <img class="avatar" src="${backendBaseUrl}/${item['profile_image']}" alt="author">
                             <!-- End .avatar -->
                             <div class="content">
                                 <h5 class="title">${item['user']}<span class="date-post"> ${time_before} &nbsp&nbsp</span> 
                                 <div class="more-dropdown details-dropdown"><i class="ri-more-fill" data-bs-toggle="dropdown"></i>
                                     <ul class="dropdown-menu dropdown-menu-dark">
                                     <div id="container">
-                                        <button class="dropdown-item" id="btn-modal">Edit</button>
+
+                                        <button class="dropdown-item");" id="btn-modal${item['id']}" onclick=doDisplay(${item['id']})>Edit</button>
                                         <p></p>
                                         <a class="dropdown-item" onclick="deleteComment(${item['id']})">Delete</a>
-                                    </div>
-                                        
+                                        </div>
+
                                     </ul>
                                 </div>
                                 </h5>
-                                
-                                <p id="comment_content">${item['content']}</p>
+                                <p id="comment_content${item['id']}">${item['content']}</p>
+                                <div id="comment_content_2${item['id']}"class="content" style="display:none;width:1000px;">
+                                    <textarea name="message" cols="20" rows="1" id="auction_comment_content_update${item['id']}"style="width:50%;display:inline-block;">${item['content']}</textarea>
+                                    <div style="display:inline-block;vertical-align:middle;margin-bottom:50px;margin-left:50px;"><a class="btn btn-gradient btn btn-medium" onclick="updatecomment(${item['id']})"><span>수정</span></a></div>
+                                </div>
                             </div>
                         </div>
                     </li>
                 <!-- End .single-comment-box -->
                 </ul></div>
                 <hr>
-                <!--모달-->
-                <div id="modal" class="modal-overlay" style="position:relative;height:200px;">
-                    <div class="modal-window"style="height:200px;width:100%;">
-                        <div class="title" style="display:inline-block;">댓글 수정</div>
-                        <div class="close-area"style="display:inline-block;">X</div>
-                        <div class="content">
-                        <textarea name="message" cols="20" rows="3" id="auction_comment_content_update"style="width:80%;display:inline-block;">${item['content']}</textarea>
-                        <div style="display:inline-block;vertical-align:middle;margin-bottom:50px;margin-left:50px;"><a class="btn btn-gradient btn btn-medium" onclick="updatecomment(${item['id']})"><span>수정</span></a></div>
-                        </div>
-                    </div>
-                </div>
+
                 `
             )} else{
                 $('#comment_box').append(
-                    `
-                    <p></p>
-                    <ul class="comment-box-inner" style="height:70px;">
+
+                    `<ul class="comment-box-inner" style="height:100px;">
+
                         <li class="single-comment-box d-flex-between ">
                             <div class="inner d-flex-start">
                                     <img class="avatar" src="${backendBaseUrl}${item['profile_image']}" alt="author">
@@ -292,14 +303,12 @@ async function loadComment() {
             }
 
         });
-        // 버튼 클릭 위치 출력하기(절대값)
-        const div = document.getElementById('btn-modal');
 
-        div.addEventListener('click', (e) => {
-            const result_x = e.pageX
-            const result_y = e.pageY
-        })
-        const modal = document.getElementById("modal")
+
+        
+
+        let modal = document.getElementById("modal"+item['id'])
+
         function modalOn() {
             modal.style.display = "flex"
         }
@@ -309,7 +318,7 @@ async function loadComment() {
         function modalOff() {
             modal.style.display = "none"
         }
-        const btnModal = document.getElementById("btn-modal")
+        let btnModal = document.getElementById("btn-modal"+item['id'])
         btnModal.addEventListener("click", e => {
             modalOn()
         })
@@ -408,7 +417,7 @@ async function getComment(){
 
 // 댓글 수정 POST
 async function updatecomment(comment_id){
-    const content = document.getElementById("auction_comment_content_update").value
+    const content = document.getElementById('auction_comment_content_update'+comment_id).value
     const comment_data = {
         "content": content
     }
