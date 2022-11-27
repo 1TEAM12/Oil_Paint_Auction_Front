@@ -11,47 +11,10 @@ window.onload = async function AuctionAlllistView(){
     )
     response_json = await response.json()
 
-
-    // response_json.forEach(item => {
-        
-    //     $('#auction_history_view').append(
-    //         `
-    //         <div class="explore-style-one">
-    //                     <div class="thumb">
-    //                         <a onclick="move_auction_detail_page(${item.id})"> <img src="${backendBaseUrl}${item.painting.after_image}" alt="nft live auction thumbnail"  style="width: 270px; height:270px; object-fit:fill;"></a>
-    //                         <button class="reaction-btn"><i class="ri-heart-fill"></i><span>${item.auction_like_count}</span></button>
-    //                         <!-- End .reaction-count -->
-    //                     </div>
-    //                     <!-- End .thumb -->
-    //                     <div class="content">
-    //                         <div class="header d-flex-between pt-4 pb-3">
-    //                             <h3 class="title"><a onclick="move_auction_detail_page(${item.id})">${item.painting.title}</a></h3>
-    //                         </div>
-    //                         <!-- .header -->
-    //                         <div class="product-share-wrapper">
-    //                         종료일&nbsp;&nbsp;&nbsp;<span style='color:red;'>약  ${remain_end_time}</span>
-    //                         </div>
-    //                         <!-- End product-share-wrapper -->
-    //                         <div class="product-owner py-4 d-flex-between">
-    //                             <span class="bid-owner">Owned By <strong>${item.painting.owner}</a></strong></span>
-                                
-    //                         </div>
-    //                         <!-- End .product-owner -->
-                            
-    //                         <!-- action-wrapper -->
-    //                     </div>
-    //                     <!-- End .content -->
-    //                 </div>
-    //         `;
-    //     )
-    // })
-
-
     const _WRAP = document.querySelector('.wrap');
     const _UL = document.querySelector('.listWrap');
 
     function listView(item){
-
     // 경매 마감 남은 시간
     
     
@@ -110,7 +73,7 @@ window.onload = async function AuctionAlllistView(){
             
             
             _BTN.innerHTML = `<div style="text-align: center;"><a class="btn btn-gradient btn-medium" id="read_more">read more</a></div>`
-            return  max < response_json.length &&_WRAP.appendChild(_BTN)
+            return _WRAP.appendChild(_BTN)
 
         }
         
@@ -149,37 +112,3 @@ window.onload = async function AuctionAlllistView(){
 function move_auction_detail_page(auction_id){
     window.location.href = `/auction_details.html?$id=${auction_id}/`
     }
-
-// 경매 거래내역 불러오기
-async function Auction_History_View(){
-
-    const response = await fetch(`${backendBaseUrl}/auctions/${auction_id}/history/`, {
-        method: 'GET',
-        headers: {
-            Accept: "application/json",
-            "Content-type": "application/json",
-            }
-    }
-    )
-    response_json = await response.json()
-        response_json.forEach(item => {
-            let time_before = time2str((item['created_at']))
-            
-            $('#auction_history_view').append(
-                `
-                <div class="single-item-history d-flex-center">
-                    <div class="avatar">
-                        <img src="${backendBaseUrl}${item['bidder_profile_image']}" alt="history">
-                    <i class="ri-check-line"></i>
-                    </div>
-                    <!-- end avatar -->
-                    <div class="content">
-                    <p>Bid accepted <span class="color-primary fw-500">${item['now_bid']}
-                    Point</span> by <h5 style="font-size:16px;"class="text-white" >${item['bidder']}</h5></p>
-                    <span class="date">${time_before}</span>
-                    </div>
-                </div>
-                `
-            )
-        })
-}
