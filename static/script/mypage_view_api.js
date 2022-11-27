@@ -198,7 +198,7 @@ async function AuctionList(){
                     <!-- End .thumb -->
                     <div class="content">
                     <div class="header d-flex-between pt-4 pb-3">
-                        <h3 class="title"><a href="auction_details.html">${item.painting.title}</a></h3>
+                        <h3 class="title"><a href="auction_details.html?$id=${item.id}/">${item.painting.title}</a></h3>
                     </div>
                     <!-- .header -->
                     <div class="product-share-wrapper">
