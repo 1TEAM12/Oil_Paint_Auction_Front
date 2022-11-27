@@ -1,3 +1,14 @@
+//로그인 토큰 확인
+function user_edit_service(){
+    const storge = localStorage.getItem("payload");
+    if (storge){
+    }else {
+        alert("로그인이 필요합니다.")
+        location.replace(history.back())
+    }}
+user_edit_service()
+
+
 //비밀번호 변경을 위한 인증
 async function ConfirmPassword() {
 

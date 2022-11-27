@@ -1,10 +1,33 @@
-const auction_id = location.href.split('=')[1][0]
+const auction_id = location.href.split('=')[1].split('/')[0]
 
 $(document).ready(function(){
     loadAuction();
     loadComment();
+    Auction_History_View();
+    Nav_Profile();
 });
 
+//시간 포맷팅
+function time2str(date) {
+    let today = new Date()
+    let before = new Date(date)
+    let time = (today - before) / 1000 / 60  // 분
+    if (time < 60) {
+        return parseInt(time) + "분 전"
+    }
+    time = time / 60  // 시간
+    if (time < 24) {
+        return parseInt(time) + "시간 전"
+    }
+    time = time / 24
+    if (time < 7) {
+        return parseInt(time) + "일 전"
+    }
+    return `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`
+};
+
+
+//경매 상세페이지
 async function loadAuction() {
     const response = await fetch(`${backendBaseUrl}/auctions/detail/${auction_id}/`, {
         method: 'GET',
@@ -16,8 +39,6 @@ async function loadAuction() {
 
     response_json = await response.json()
 
-    console.log(response_json.id)
-
 
     if (response.status === 400) {
         alert("경매가 마감되었습니다.")
@@ -27,6 +48,7 @@ async function loadAuction() {
 
     const auction_title = document.getElementById("auction_title")
     const auction_owner = document.getElementById("auction_owner")
+    const auction_author = document.getElementById("auction_author")
     const auction_content = document.getElementById("auction_content")
     const auction_like_count = document.getElementById("auction_like_count")
     const auction_now_bid = document.getElementById("auction_now_bid")
@@ -36,9 +58,12 @@ async function loadAuction() {
 
     auction_title.innerText = response_json.painting.title   
     auction_owner.innerText = response_json.painting.owner
+    auction_author.innerText = response_json.painting.author
     auction_content.innerText = response_json.painting.content
     auction_like_count.innerText = response_json.auction_like_count
     auction_now_bid.innerText = response_json.now_bid
+    document.getElementById("auction_owner_profile_image").src = `${backendBaseUrl}${response_json.painting.owner_profile_image}`
+    document.getElementById("auction_author_profile_image").src = `${backendBaseUrl}${response_json.painting.author_profile_image}`
 
 
     
@@ -51,7 +76,7 @@ async function loadAuction() {
     const remaining_time = response_json.end_date
 
     // 경매 마감 남은 시간
-    const remainTime = document.querySelector("#remain-time");
+    const remainTime = document.querySelector("#rremain-time");
     
     function diffDay() {
         const masTime = new Date(remaining_time);
@@ -74,7 +99,7 @@ async function loadAuction() {
 
 // 낙찰가 Update
 async function BidUpdate(){
- 
+
     const bidData = {
         "now_bid": document.getElementById("now_bid").value,
     }   
@@ -89,7 +114,6 @@ async function BidUpdate(){
         body: JSON.stringify(bidData)
     }
     )
-    console.log(response)
 
     const response_json = await response.json()
 
@@ -103,7 +127,39 @@ async function BidUpdate(){
     }
 }
 
+// 경매 거래내역 불러오기
+async function Auction_History_View(){
 
+    const response = await fetch(`${backendBaseUrl}/auctions/${auction_id}/history/`, {
+        method: 'GET',
+        headers: {
+            Accept: "application/json",
+            "Content-type": "application/json",
+            }
+    }
+    )
+    response_json = await response.json()
+        response_json.forEach(item => {
+            let time_before = time2str((item['created_at']))
+            
+            $('#auction_history_view').append(
+                `
+                <div class="single-item-history d-flex-center">
+                    <div class="avatar">
+                        <img src="${backendBaseUrl}${item['bidder_profile_image']}" alt="history">
+                    <i class="ri-check-line"></i>
+                    </div>
+                    <!-- end avatar -->
+                    <div class="content">
+                    <p>Bid accepted <span class="color-primary fw-500">${item['now_bid']}
+                    Point</span> by <h5 style="font-size:16px;"class="text-white" >${item['bidder']}</h5></p>
+                    <span class="date">${time_before}</span>
+                    </div>
+                </div>
+                `
+            )
+        })
+}
 // 경매 삭제
 async function AuctionDetailDelete() {
     var delConfirm = confirm("경매 취소하시겠습니까?")
@@ -127,24 +183,24 @@ async function AuctionDetailDelete() {
         }
     }
 }
+//좋아요 POST
+async function AuctionLike() {
+    const response = await fetch(`${backendBaseUrl}/auctions/${auction_id}/likes/`, {
 
-function time2str(date) {
-    let today = new Date()
-    let before = new Date(date)
-    let time = (today - before) / 1000 / 60  // 분
-    if (time < 60) {
-        return parseInt(time) + "분 전"
+        method: 'POST',
+        headers: {
+            Accept:"application/json",
+            'Content-Type': 'application/json',
+            'Authorization': "Bearer " + localStorage.getItem("access")
+        },
     }
-    time = time / 60  // 시간
-    if (time < 24) {
-        return parseInt(time) + "시간 전"
-    }
-    time = time / 24
-    if (time < 7) {
-        return parseInt(time) + "일 전"
-    }
-    return `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`
-};
+    )
+
+    response_json = await response.json
+    window.location.reload()
+    
+
+}
 
 
 
@@ -191,6 +247,7 @@ async function loadComment() {
         let time_before = time2str((item['updated_at']))
         if (user == item['user']) {
             $('#comment_box').append(
+
                 `<ul class="comment-box-inner" style="height:100px;">
                     <li class="single-comment-box d-flex-between ">
                         <div class="inner d-flex-start" style="position:relative;">
@@ -201,10 +258,12 @@ async function loadComment() {
                                 <div class="more-dropdown details-dropdown"><i class="ri-more-fill" data-bs-toggle="dropdown"></i>
                                     <ul class="dropdown-menu dropdown-menu-dark">
                                     <div id="container">
+
                                         <button class="dropdown-item");" id="btn-modal${item['id']}" onclick=doDisplay(${item['id']})>Edit</button>
                                         <p></p>
                                         <a class="dropdown-item" onclick="deleteComment(${item['id']})">Delete</a>
                                         </div>
+
                                     </ul>
                                 </div>
                                 </h5>
@@ -223,10 +282,12 @@ async function loadComment() {
                 `
             )} else{
                 $('#comment_box').append(
+
                     `<ul class="comment-box-inner" style="height:100px;">
+
                         <li class="single-comment-box d-flex-between ">
                             <div class="inner d-flex-start">
-                                    <img class="avatar" src="${backendBaseUrl}/${item['profile_image']}" alt="author">
+                                    <img class="avatar" src="${backendBaseUrl}${item['profile_image']}" alt="author">
                                 <!-- End .avatar -->
                                 <div class="content">
                                     <h5 class="title">${item['user']}<span class="date-post">${time_before}&nbsp&nbsp</span> 
@@ -243,9 +304,11 @@ async function loadComment() {
 
         });
 
+
         
 
         let modal = document.getElementById("modal"+item['id'])
+
         function modalOn() {
             modal.style.display = "flex"
         }
@@ -298,19 +361,19 @@ async function Create_Auction_Comment(){
     if (response3.status == 201) {
         alert("댓글이 등록되었습니다.")
         window.location.reload()
-      } else if (response3.status == 400) {
+    } else if (response3.status == 400) {
         alert(response_json3["message"])
-      } else {
+    } else {
         alert("로그인한 사용자만 이용할 수 있습니다")
-      }
+    }
     }
 
 
 
 // 댓글 삭제
 async function deleteComment(comment_id){
-    var delConfirm = confirm("정말 파일을 삭제하시겠습니까?")
-    if (delConfirm) {}
+    var delConfirm = confirm("정말 댓글을 삭제하시겠습니까?")
+    if (delConfirm) {
     const response = await fetch(`${backendBaseUrl}/auctions/${auction_id}/comments/${comment_id}/`, {
         method: 'DELETE',
         headers: {
@@ -324,13 +387,13 @@ async function deleteComment(comment_id){
             alert("댓글이 삭제되었습니다.")
             window.location.reload()
             return response_json
-        }else {
-            alert(response_json["error"])
         }
-}
+}}
 
 // 댓글 수정 GET(특정 댓글 가져오기)
 async function getComment(){
+    console.log(auction_id)
+    console.log(comment_id)
     const response = await fetch(`${backendBaseUrl}/auctions/${auction_id}/comments/${comment_id}/`, {
         method: 'GET',
         headers: {

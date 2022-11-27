@@ -1,3 +1,14 @@
+//로그인 토큰 확인
+function set_password_service(){
+    const storge = localStorage.getItem("payload");
+    if (storge){
+    }else {
+        alert("로그인이 필요합니다.")
+        location.replace(history.back())
+    }}
+set_password_service()
+
+
 const token = location.href.split('/')[5]
 const uidb64 = location.href.split('/')[4]
 
@@ -14,7 +25,6 @@ async function Check_Password() {
     })
 
     const result = await response.json()
-    console.log(result)
     if (response.status === 401) {
         alert(result["message"])
         location.replace('index.html')
@@ -26,7 +36,6 @@ async function Set_Password() {
 
     const password = document.getElementById("password").value;
     const repassword = document.getElementById("repassword").value;
-    console.log(uidb64)
     const response = await fetch(`${backendBaseUrl}/users/password-reset-complete/`,{
         headers:{
             'Content-type':'application/json',
@@ -36,7 +45,6 @@ async function Set_Password() {
     })
 
     const result = await response.json()
-    console.log(result)
     if (response.status === 200) {
         alert(result["message"])
         location.replace('user.html')

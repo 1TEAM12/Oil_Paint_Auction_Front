@@ -7,7 +7,7 @@
   <!-- Basic metas
   ======================================== -->
   <meta charset="utf-8" />
-  <title>Author Paintlist || Banu - NFT Marketplace Template</title>
+  <title>Profile || Ocowan</title>
   <meta name="robots" content="noindex, follow" />
   <meta name="description" content="" />
 
@@ -32,7 +32,6 @@
 
   <!-- Style css -->
   <link rel="stylesheet" href="./assets/css/style.css" />
-  <link rel="stylesheet" href="./static/style/css/profile_style.css" />
 </head>
 
 <body>
@@ -55,6 +54,17 @@
           <a href="index.html" class="logo logo-light"><img src="./assets/images/logo-white.png" alt="brand"> </a>
           <a href="index.html" class="logo logo-dark"><img src="./assets/images/logo-dark.png" alt="brand"> </a>
         </div>
+        <div class="mainmenu-wrapper">
+          <nav id="sideNav" class="mainmenu-nav d-none d-xl-block">
+            <!-- Start Mainmanu Nav -->
+            <ul class="mainmenu">
+              <li><a id="nav_user_email"></a></li>
+              <li><a id="nav_user_nickname"></a></li>
+              <li><a id="nav_user_point"></a></li>
+            </ul>
+            <!-- End Mainmanu Nav -->
+          </nav>
+        </div>
         <!-- End .logo-wrapper -->
       </div>
       <!-- End .header-left -->
@@ -63,8 +73,9 @@
         <ul class="header-right-inner">
           <li class=" d-none d-lg-block">
             <form action="#" class="search-bar">
-              <input type="text" name="search" placeholder="Search" id="search">
-              <button class="search-btn" type="submit"> <i class="ri-search-line"></i></button>
+              <input type="text" style="display:none;"/>
+              <input type="text" name="search" placeholder="Search" id="search" onkeypress="enterkey()">
+              <div class="search-btn"> <i class="ri-search-line"></i></div>
             </form>
           </li>
           <!-- End .search-bar -->
@@ -86,13 +97,12 @@
             </button>
           </li>
           <!-- End .mobile-menu-bar -->
-          <li class="avatar-info"> <a href="auction_details.html"><img src="./assets/images/avatar/user.png"
-                alt="user avatar"></a>
+          <li class="avatar-info"> <a><img id="nav_profile_image" alt="user avatar"></a>
             <ul class="submenu">
-              <li><a href="#"><i class="ri-user-line"></i> Profile</a></li>
-              <li><a href="#"><i class="ri-edit-line"></i> Create Item</a></li>
-              <li><a href="#"><i class="ri-layout-grid-line"></i>Authors</a></li>
-              <li><a href="#"><i class="ri-logout-box-r-line"></i>Sign Out</a></li>
+              <li id="profile_view"><a href="profile.html"><i class="ri-user-line"></i> Profile</a></li>
+              <li id="create_painting"><a href="select_style.html"><i class="ri-edit-line"></i> Create Painting</a></li>
+              <li id="login_view"><a href="user.html"><i class="ri-logout-box-r-line"></i>Sign in</a></li>
+              <li id="logout_view"><a onclick="logout_user()"><i class="ri-logout-box-r-line"></i>Logout</a></li>
             </ul>
           </li>
           <!-- End .avatar-info -->
@@ -163,10 +173,10 @@
                 <a class="btn btn-small btn-outline" data-bs-toggle="tab" href="#on-sale">My Painting</a>
               </li>
               <li>
-                <a class="btn btn-small btn-outline" data-bs-toggle="tab" href="#owned">My Autcion</a>
+                <a class="btn btn-small btn-outline" data-bs-toggle="tab" href="#owned">My Auction</a>
               </li>
               <li>
-                <a class="btn btn-small btn-outline" data-bs-toggle="tab" href="#created">Bid</a>
+                <a class="btn btn-small btn-outline" data-bs-toggle="tab" href="#created">Like Auction</a>
               </li>
 
             </ul>
@@ -175,8 +185,7 @@
             <!-- ***** Start My Painting ***** -->
             <div class="tab-content author-tabs-content">
               <div id="on-sale" class="tab-pane fade show active">
-                <div class="row" id="mypage">
-                  
+                <div class="row" id="mypage">              
                   <!-- End .col -->
                 </div>
                 <!-- End .row -->
@@ -197,23 +206,7 @@
 
               <!-- ***** Start Bid ***** -->
               <div id="created" class="tab-pane fade">
-                <div class="row">
-                  <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-6 mb-6">
-                    <div class="explore-style-one">
-                      <div class="thumb">
-                        <a href="#"> <img src="./assets/images/explore/7.jpg" alt="nft live auction thumbnail"></a>
-                        <button class="reaction-btn"><i class="ri-heart-fill"></i><span>49</span></button>
-                        <!-- End .reaction-count -->
-                      </div>
-                      <!-- .header -->
-                      <!-- End .product-owner -->
-                      <div class="action-wrapper d-flex-between pt-4">
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#placeBit"
-                          class="btn  btn-outline btn-small"><span><i class="ri-shopping-bag-line"></i> Place
-                            Bid</span></a>
-                      </div>
-                      <!-- action-wrapper -->
-                    </div>
+                <div class="row" id="action_like_list">
                     <!-- End .content -->
                   </div>
                 </div>
@@ -224,7 +217,7 @@
               <!-- ***** Start My Auction***** --
           </div>
         </div>
-        <!-- End .col -->
+        <-- End .col -->
       </div>
     </div>
   </section>
@@ -235,6 +228,7 @@
           Reserved.</p>
       </div>
     </div>
+
   <!-- End Footer -->
 
 <!-- ***** Modal ***** -->
@@ -248,7 +242,8 @@
   <script src="./static/script/mypage_view_api.js"></script>
   <script src="./static/script/profile_api.js"></script>
   <script src="./static/style/js/mypage_view.js"></script>
-  <script src="./static/style/js/profile_style.js"></script>
+  <script src="./static/script/nav_api.js"></script>
+
   <script>
     $(document).ready(function(){
         MypageView();

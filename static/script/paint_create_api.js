@@ -1,3 +1,13 @@
+//로그인 토큰 확인
+function painting_create_service(){
+    const storge = localStorage.getItem("payload");
+    if (storge){
+    }else {
+        alert("로그인이 필요합니다.")
+        location.replace(history.back())
+    }}
+painting_create_service()
+
 window.onload = () => {
     const style_no = location.href.split('=')[1][0]
     console.log(style_no)
@@ -26,7 +36,11 @@ async function StyleLoadView(style_no) {
 }
 
 async function uploadImg() {
-    const style_no = location.href.split('=')[1][0]
+    let style_no = location.href.split('=')[1][0]
+    console.log(style_no)
+    console.log(typeof(style_no))
+    style_no = Number(style_no)+1
+    console.log(style_no)
     const before_image = document.getElementById("before_image").files[0]
     console.log(before_image)
 
