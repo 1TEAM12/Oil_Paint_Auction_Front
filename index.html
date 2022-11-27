@@ -76,8 +76,9 @@
         <ul class="header-right-inner">
           <li class=" d-none d-lg-block">
             <form action="#" class="search-bar">
-              <input type="text" name="search" placeholder="Search" id="search">
-              <button class="search-btn" type="submit"> <i class="ri-search-line"></i></button>
+              <input type="text" style="display:none;"/>
+              <input type="text" name="search" placeholder="Search" id="search" onkeypress="enterkey()">
+              <div class="search-btn"> <i class="ri-search-line"></i></div>
             </form>
           </li>
           <!-- End .search-bar -->
@@ -213,8 +214,8 @@
 
 
   <!-- JS ============================================ -->
-  <script  src="./static/script/base_api.js"></script>
   <script  src="./static/script/index_api.js"></script>
+  <script src="./static/script/search_api.js"></script>
   <!-- <script>
     $(document).ready(function(){
       AuctionAlllistView();
@@ -235,6 +236,7 @@
   <script src="assets/js/vendor/imageloaded.js"></script>
   <script src="assets/js/vendor/aos.js"></script>
   <script src="assets/js/vendor/jquery.custom-file-input.js"></script>
+  
 
   <!-- main JS -->
   <script src="assets/js/main.js"></script>
