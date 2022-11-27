@@ -2,7 +2,7 @@
 ## [notion](https://bolder-starburst-a73.notion.site/347c2ac124ad442fa5f2f8028a783d1a)
 <hr>
 
-## [Back-end Page](https://github.com/1TEAM12/Oil_Paint_Auction_Back)
+## [Front-end Page](https://github.com/1TEAM12/Oil_Paint_Auction_Front)
 <hr>
 
 ## ****📌 프로젝트 핵심 목적****
@@ -75,10 +75,21 @@
 <hr>
 
 ## 🕸 ****와이어 프레임****
-<hr>
+![ex_screenshot](./img/WIRE_FRAME.PNG)
 
 ## 🎯 ****데이터베이스****
-<hr>
+![ex_screenshot](./img/ERD.PNG)
 
 ## 🎨 ****API 설계****
-<hr>
+![ex_screenshot](./img/API1.PNG)
+![ex_screenshot](./img/API2.PNG)
+![ex_screenshot](./img/API3.PNG)
+![ex_screenshot](./img/API4.PNG)
+![ex_screenshot](./img/API5.PNG)
+![ex_screenshot](./img/API6.PNG)
+![ex_screenshot](./img/API7.PNG)
+![ex_screenshot](./img/API8.PNG)
+![ex_screenshot](./img/API9.PNG)
+![ex_screenshot](./img/API10.PNG)
+![ex_screenshot](./img/API11.PNG)
+
