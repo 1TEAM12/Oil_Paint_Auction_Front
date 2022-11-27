@@ -8,10 +8,17 @@ function logout_view(){
     const logout_view = document.getElementById("logout_view")
     const profile_view = document.getElementById("profile_view")
     const create_painting = document.getElementById("create_painting")
+    const a_nav_user_email = document.getElementById("nav_user_email")
+    const a_nav_user_nickname = document.getElementById("nav_user_nickname")
+    const a_nav_user_point = document.getElementById("nav_user_point")
 
     if (storge){
         login_view.setAttribute("style", "display:none;")
     } else{
+        a_nav_user_email.setAttribute("style", "display:none;")
+        a_nav_user_nickname.setAttribute("style", "display:none;")
+        a_nav_user_point.setAttribute("style", "display:none;")
+
         logout_view.setAttribute("style", "display:none;")
         profile_view.setAttribute("style", "display:none;")
         create_painting.setAttribute("style", "display:none;")
