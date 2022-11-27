@@ -64,6 +64,7 @@ async function painting_Update(){
         body: JSON.stringify({"title": painting_title_update, "content":painting_content_update})
     })
 
+
     response_json = await response.json()
     if (response.status === 200) {
         alert('수정되었습니다!')
