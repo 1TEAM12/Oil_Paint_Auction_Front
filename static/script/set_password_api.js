@@ -1,3 +1,14 @@
+//로그인 토큰 확인
+function set_password_service(){
+    const storge = localStorage.getItem("payload");
+    if (storge){
+    }else {
+        alert("로그인이 필요합니다.")
+        location.replace(history.back())
+    }}
+set_password_service()
+
+
 const token = location.href.split('/')[5]
 const uidb64 = location.href.split('/')[4]
 

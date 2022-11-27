@@ -1,3 +1,13 @@
+//로그인 토큰 확인
+function painting_update_service(){
+    const storge = localStorage.getItem("payload");
+    if (storge){
+    }else {
+        alert("로그인이 필요합니다.")
+        location.replace(history.back())
+    }}
+    painting_update_service()
+
 let getPaint = window.location.search;
 let getPaint_Name = getPaint.split('=');
 let id_Paint = getPaint_Name[1]

@@ -1,3 +1,13 @@
+//로그인 토큰 확인
+function profile_service(){
+    const storge = localStorage.getItem("payload");
+    if (storge){
+    }else {
+        alert("로그인이 필요합니다.")
+        location.replace(history.back())
+    }}
+profile_service()
+
 async function Profile(){
     
     const response = await fetch(`${backendBaseUrl}/users/`, {
