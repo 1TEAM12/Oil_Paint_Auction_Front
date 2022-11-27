@@ -10,6 +10,9 @@ body {
   font-size: 0.938rem;
   color: #23004d;
   background-color:#212529;
+  background-image: url(/assets/images/bg/peakpx.jpg);
+  background-size: cover;
+  
 }
 
 h1 {

@@ -14,7 +14,7 @@ async function MypageView(){
         }
     )
     const width = document.querySelector('.explore-style-one');
-    console.log(width.getBoundingClientRect());
+
     response_json = await response.json()
     
     response_json.forEach(item => {
