@@ -12,10 +12,8 @@ async function Sign_Up() {
     let input_check;
     if (document.getElementById("input_check").checked){
         input_check = document.getElementById("input_check").value
-        console.log(input_check)
     } else{
         input_check = document.getElementById("input_check_hidden").value
-        console.log(input_check)
     }
     const signupData = {
         repassword: document.getElementById("repassword").value,
@@ -123,7 +121,6 @@ async function Reset_Password() {
         alert("비밀번호 재설정 이메일을 발송했습니다. 확인부탁드립니다. ");
         location.reload()
     } else {
-        console.log(response_json)
         alert(response_json["email"]);
     }
 }

@@ -10,7 +10,6 @@ window.onload = async function AuctionAlllistView(){
     }
     )
     response_json = await response.json()
-    console.log(response_json)
 
     const _WRAP = document.querySelector('.wrap');
     const _UL = document.querySelector('.listWrap');
@@ -28,19 +27,7 @@ window.onload = async function AuctionAlllistView(){
                     <!-- End .thumb -->
                     <div class="content">
                         <div class="header d-flex-between pt-4 pb-3">
-                            <h3 class="title"><a href="auction_details.html">${item.painting.title}</a></h3>
-                            <div class="more-dropdown "><i class="ri-more-fill" data-bs-toggle="dropdown"></i>
-                                <ul class="dropdown-menu dropdown-menu-dark">
-                                    <li><a class="dropdown-item" href="#">New bid</a></li>
-                                    <li>
-                                    <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="#">Refresh Metadata</a></li>
-                                    <li><a class="dropdown-item" href="#">Share</a></li>
-                                    <li><a class="dropdown-item" href="#">Report</a></li>
-
-                                </ul>
-                            </div>
+                            <h3 class="title"><a onclick="move_auction_detail_page(${item.id})">${item.painting.title}</a></h3>
                         </div>
                         <!-- .header -->
                         <div class="product-share-wrapper">
@@ -48,17 +35,11 @@ window.onload = async function AuctionAlllistView(){
                         </div>
                         <!-- End product-share-wrapper -->
                         <div class="product-owner py-4 d-flex-between">
-                            <span class="bid-owner">Owned By <strong><a href="author-profile.html">${item.painting.owner}</a></strong></span>
+                            <span class="bid-owner">Owned By <strong>${item.painting.owner}</a></strong></span>
                             
                         </div>
                         <!-- End .product-owner -->
-                        <div class="action-wrapper d-flex-between pt-4">
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#bid_history" class="history d-flex-center"><i
-                                class="ri-history-line"></i>View History</a>
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#placeBit"
-                            class="btn btn-outline btn-small "><span><i class="ri-shopping-bag-line"></i> Place
-                                Bid</span></a>
-                        </div>
+                        
                         <!-- action-wrapper -->
                     </div>
                     <!-- End .content -->
@@ -72,7 +53,7 @@ window.onload = async function AuctionAlllistView(){
             let _BTN = document.createElement('div');
             
             
-            _BTN.innerHTML = `<div style="text-align: center;"><a class="btn btn-gradient btn-medium" id="read_more">read more</a></div>`
+            _BTN.innerHTML = `<div style="text-align: center;"><a class="btn btn-gradient btn-medium" id="read_more">more</a></div>`
             return length > max && _WRAP.appendChild(_BTN)
         }
         
@@ -91,7 +72,7 @@ window.onload = async function AuctionAlllistView(){
         let cnt = 1;
         more(response_json.length, max).addEventListener('click', function(e){
             cnt++;     
-            if(response_json.length < max * cnt){ // 2번 상황
+            if(response_json.length < max * cnt){ 
                 for(let i= max * (cnt - 1); i< response_json.length; i++){
                     _UL.appendChild(listView(response_json[i]));
                 }
@@ -101,7 +82,6 @@ window.onload = async function AuctionAlllistView(){
                 for(let i=max * (cnt - 1); i< max * cnt - 1; i++){
                     _UL.appendChild(listView(response_json[i]));
                 }
-                console.log("in2");
             }
         })
 }

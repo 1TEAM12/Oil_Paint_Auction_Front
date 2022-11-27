@@ -11,8 +11,6 @@ async function Nav_Profile(){
         }
     )
     const response_json = await response.json()
-    // console.log(response_json)
-
 
     const a_nav_user_email = document.getElementById("nav_user_email")
     const a_nav_user_nickname = document.getElementById("nav_user_nickname")
