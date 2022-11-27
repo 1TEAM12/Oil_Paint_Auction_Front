@@ -39,8 +39,6 @@ async function loadAuction() {
 
     response_json = await response.json()
 
-    console.log(response_json.id)
-
 
     if (response.status === 400) {
         alert("경매가 마감되었습니다.")
@@ -116,7 +114,6 @@ async function BidUpdate(){
         body: JSON.stringify(bidData)
     }
     )
-    console.log(response)
 
     const response_json = await response.json()
 
@@ -142,7 +139,6 @@ async function Auction_History_View(){
     }
     )
     response_json = await response.json()
-    console.log(response_json)
         response_json.forEach(item => {
             let time_before = time2str((item['created_at']))
             
@@ -301,7 +297,6 @@ async function loadComment() {
         div.addEventListener('click', (e) => {
             const result_x = e.pageX
             const result_y = e.pageY
-            console.log(result_x, result_y)
         })
         const modal = document.getElementById("modal")
         function modalOn() {

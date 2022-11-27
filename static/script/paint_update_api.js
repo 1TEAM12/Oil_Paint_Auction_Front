@@ -53,8 +53,6 @@ async function painting_Update(){
 
     const painting_title_update = document.getElementById("painting_title").value;
     const painting_content_update = document.getElementById("painting_content").value;
-    console.log(painting_title_update)
-    console.log(painting_content_update)
 
     const response = await fetch(`${backendBaseUrl}/paintings/${id_Paint}/`,{
         method: "PUT",
@@ -66,13 +64,15 @@ async function painting_Update(){
         body: JSON.stringify({"title": painting_title_update, "content":painting_content_update})
     })
 
-    const response_json = await response.json()
-    console.log(response_json)
 
-    if(response.status === 200){
-        move_profile_page()
+    response_json = await response.json()
+    if (response.status === 200) {
+        alert('수정되었습니다!')
+    } else if (response.status === 400 ) {
+        alert("접근 권한이 없습니다.")
+        history.back();
     }
-    
+    move_profile_page()
 
 }
 

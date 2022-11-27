@@ -184,7 +184,6 @@ async function AuctionList(){
         }
     )
     response_json = await response.json()
-    console.log(response_json)
     response_json.forEach(item => {
         $('#action_list').append(
             `
