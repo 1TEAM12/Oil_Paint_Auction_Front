@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!--제이쿼리문-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<head>
+  <!-- Basic metas
+  ======================================== -->
+  <meta charset="utf-8" />
+  <title>Author Paintlist || Banu - NFT Marketplace Template</title>
+  <meta name="robots" content="noindex, follow" />
+  <meta name="description" content="" />
+
+  <!-- Mobile specific metas
+    ======================================== -->
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  <!-- Icon fonts
+	======================================== -->
+  <link rel="stylesheet" href="./assets/fonts/remixicon.css" />
+
+  <!-- links for favicon
+    ======================================== -->
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon/favicon.ico" />
+
+  <!-- CSS
+	======================================== -->
+  <link rel="stylesheet" href="./assets/css/vendor/bootstrap.min.css" />
+  <link rel="stylesheet" href="./assets/css/vendor/slick.css">
+  <link rel="stylesheet" href="./assets/css/vendor/slick-theme.css">
+
+  <!-- Style css -->
+  <link rel="stylesheet" href="./assets/css/style.css" />
+</head>
+
+<body>
+  <!-- Start Preloader -->
+  <div id="preloader">
+    <div id="ctn-preloader" class="ctn-preloader">
+      <div class="animation-preloader">
+        <div class="icon"><img src="./assets/images/logo-preloader.png" alt="logo" class="m-auto d-block"> <span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Preloader -->
+
+  <!-- start header area -->
+  <header class="ib-header header-default header-fixed header--sticky fluid-header">
+    <div class="header-inner d-flex align-items-center justify-content-between">
+      <div class="header-left d-flex align-items-center">
+        <div class="logo-wrapper">
+          <a href="index.html" class="logo logo-light"><img src="./assets/images/logo-white.png" alt="brand"> </a>
+          <a href="index.html" class="logo logo-dark"><img src="./assets/images/logo-dark.png" alt="brand"> </a>
+        </div>
+        <div class="mainmenu-wrapper">
+          <nav id="sideNav" class="mainmenu-nav d-none d-xl-block">
+            <!-- Start Mainmanu Nav -->
+            <ul class="mainmenu">
+              <li><a id="nav_user_email"></a></li>
+              <li><a id="nav_user_nickname"></a></li>
+              <li><a id="nav_user_point"></a></li>
+            </ul>
+            <!-- End Mainmanu Nav -->
+          </nav>
+        </div>
+        <!-- End .logo-wrapper -->
+      </div>
+      <!-- End .header-left -->
+
+      <div class="header-right d-flex align-items-center">
+        <ul class="header-right-inner">
+          <li class=" d-none d-lg-block">
+            <form action="#" class="search-bar">
+              <input type="text" name="search" placeholder="Search" id="search">
+              <button class="search-btn" type="submit"> <i class="ri-search-line"></i></button>
+            </form>
+          </li>
+          <!-- End .search-bar -->
+
+          <li class="setting-option d-block  d-lg-none ">
+            <div class="icon-box search-mobile-icon">
+              <button><i class="ri-search-line"></i></button>
+            </div>
+            <form id="header-search-1" action="#" method="GET" class="large-mobile-blog-search search-bar">
+              <input type="text" name="search" placeholder="Search" id="search_2">
+              <button class="search-btn" type="submit"> <i class="ri-search-line"></i></button>
+            </form>
+          </li>
+          <!-- End .search-mobile-icon -->
+
+          <li class="setting-option mobile-menu-bar d-block d-xl-none">
+            <button class="hamberger-button">
+              <i class="ri-menu-2-fill"></i>
+            </button>
+          </li>
+          <!-- End .mobile-menu-bar -->
+          <li class="avatar-info"> <a><img id="nav_profile_image" alt="user avatar"></a>
+            <ul class="submenu">
+              <li id="profile_view"><a href="profile.html"><i class="ri-user-line"></i> Profile</a></li>
+              <li id="create_painting"><a href="select_style.html"><i class="ri-edit-line"></i> Create Painting</a></li>
+              <li id="login_view"><a href="user.html"><i class="ri-logout-box-r-line"></i>Sign in</a></li>
+              <li id="logout_view"><a onclick="logout_user()"><i class="ri-logout-box-r-line"></i>Logout</a></li>
+            </ul>
+          </li>
+          <!-- End .avatar-info -->
+
+          <li>
+            <label class="theme-switcher-label d-flex" for="theme-switcher">
+              <input type="checkbox" class="theme-switcher" id="theme-switcher">
+              <div class="switch-handle">
+                <i class="ri-sun-line light-text"></i>
+                <i class="ri-moon-line dark-text"></i>
+              </div>
+            </label>
+          </li>
+          <!-- End Dark & Light Swither -->
+        </ul>
+
+      </div>
+      <!-- End .header-left -->
+    </div>
+  </header>
+  <!-- End header area -->
+
+  <!-- Start banner area -->
+  <section class="inner-page-banner bg-2 bg-image">
+    <div class="container">
+      <div class="inner text-center">
+        <h1 class="title">Auction Search</h1>
+        <nav class="mt-4">
+        </nav>
+      </div>
+    </div>
+    <!-- End .container -->
+  </section>
+  <!-- End banner area -->
+
+  <!-- Start Live Auction -->
+  <section class="ptb-120 live-auction">
+    <div class="container">
+      <div class="row" id="auction_search_view">
+      </div>
+      <!-- End .row -->
+      <div class="row">
+        <div class="col-12 text-center mt-4">
+          <a href="#" class="btn btn-gradient"><span><i class="ri-loader-4-fill"></i> Explore More</span></a>
+        </div>
+      </div>
+    </div>
+    <!-- End .container -->
+
+  </section>
+  <!-- End Live Auction -->
+
+
+  <div class="copyright text-center">
+    <div class="container">
+      <p>Copyright © 2022 <a href="https://themeforest.net/user/ib-themes" target="_blank">ib-themes.</a> All Rights
+        Reserved.</p>
+    </div>
+  </div>
+  <!-- End Footer -->
+
+
+
+  <!-- JS ============================================ -->
+  <script src="assets/js/vendor/jquery.js"></script>
+  <script src="assets/js/vendor/jquery.nice-select.min.js"></script>
+  <script src="assets/js/vendor/modernizer.min.js"></script>
+  <script src="assets/js/vendor/slick.min.js"></script>
+  <script src="assets/js/vendor/bootstrap.min.js"></script>
+  <script src="assets/js/vendor/waypoint.js"></script>
+  <script src="assets/js/vendor/js.cookie.js"></script>
+  <script src="assets/js/vendor/count-down.js"></script>
+  <script src="assets/js/vendor/counter-up.js"></script>
+  <script src="assets/js/vendor/isotop.js"></script>
+  <script src="assets/js/vendor/imageloaded.js"></script>
+  <script src="assets/js/vendor/jquery.custom-file-input.js"></script>
+
+  <!-- main JS -->
+  <script src="assets/js/main.js"></script>
+
+  <script src="./static/script/base_api.js"></script>
+  <script src="./static/script/nav_api.js"></script>
+  <script src="./static/script/search_api.js"></script>
+</body>
+
+</html>
