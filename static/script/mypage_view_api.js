@@ -15,7 +15,6 @@ async function MypageView(){
     )
     response_json = await response.json()
     
-    console.log(response_json);
     response_json.forEach(item => {
       let time_str = time1str((item["created_at"]))
         $('#mypage').append(
@@ -183,8 +182,7 @@ async function AuctionList(){
         }
     )
     response_json = await response.json()
-
-    console.log(response_json);
+    console.log(response_json)
     response_json.forEach(item => {
         $('#action_list').append(
             `
@@ -205,18 +203,18 @@ async function AuctionList(){
                     <div class="product-share-wrapper">
                     종료일&nbsp;&nbsp;&nbsp;<span id='remain-time' style='color:red;'>${item.end_date}</span>
                     </div>
+                    <p></p>
+                    <div class="product-share-wrapper">
+                    <span class="bid-owner">Bid Price : <strong>${item.now_bid} Point</strong></span>
+                    </div>
                     <!-- End product-share-wrapper -->
                     <div class="product-owner py-4 d-flex-between">
-                        <span class="bid-owner">Owned By <strong><a href="#">${item.painting.owner}</a></strong></span>
-                        
+                        <span class="bid-owner">Owned By <strong>${item.painting.owner}</strong></span>
                     </div>
                     <!-- End .product-owner -->
                     <div class="action-wrapper d-flex-between pt-4">
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#bid_history"
-                        class="history d-flex-center"><i class="ri-history-line"></i>View History</a>
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#placeBit"
-                        class="btn  btn-outline btn-small"><span><i class="ri-shopping-bag-line"></i> Place
-                            Bid</span></a>
+                        <a id="${item.id}" onclick="confirm__auction(this)" data-bs-toggle="modal" data-bs-target="#placeBit"
+                        class="btn  btn-outline btn-small"><span><i class="ri-shopping-bag-line"></i>Successful Bid</span></a>
                     </div>
                     <!-- action-wrapper -->
                     </div>
@@ -232,7 +230,6 @@ AuctionList()
 
 
 function AuctionCreate(click_id){
-  console.log(click_id.id)
   window.location.href = `/auction_create.html?id=${click_id.id}`;
 }
 
@@ -243,7 +240,6 @@ function PaintUpdate(click_id){
 
 //유화 삭제
 async function deletePainting(paintings){
-  console.log(paintings)
   var delConfirm = confirm("정말 유화를 삭제하시겠습니까?")
   if (delConfirm) {
   const response = await fetch(`${backendBaseUrl}/paintings/${paintings.id}/`, {
@@ -261,3 +257,34 @@ async function deletePainting(paintings){
           return response_json
       }
 }}
+
+function AuctionCreate(click_id){
+  window.location.href = `/auction_create.html?id=${click_id.id}`;
+}
+
+//경매 낙찰
+async function confirm__auction(auction){
+  var delConfirm = confirm("정말 낙찰을 하시겠습니까?")
+  if (delConfirm) {
+  const response = await fetch(`${backendBaseUrl}/auctions/detail/${auction.id}/`, {
+      method: 'POST',
+      headers: {
+          Accept: "application/json",
+          "Content-type": "application/json",
+          "Authorization": "Bearer " + localStorage.getItem("access")
+      },
+  })
+  response_json = await response.json
+      if (response.status === 200) {
+          alert("낙찰이 완료되었습니다.")
+          window.location.reload()
+          return response_json
+      } else if (response.status === 400) {
+
+        alert("입찰한 사람이 없습니다.")
+
+      } else if (response.status ===403) {
+        alert("접근 권한이 없습니다.")
+      }
+}}
+

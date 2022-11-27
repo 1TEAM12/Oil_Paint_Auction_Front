@@ -1,3 +1,13 @@
+//로그인 토큰 확인
+function profile_service(){
+    const storge = localStorage.getItem("payload");
+    if (storge){
+    }else {
+        alert("로그인이 필요합니다.")
+        location.replace(history.back())
+    }}
+profile_service()
+
 async function Profile(){
     
     const response = await fetch(`${backendBaseUrl}/users/`, {
@@ -23,10 +33,8 @@ async function Profile(){
 
 
     document.getElementById("profile_image").src = `${backendBaseUrl}${response_json.profile_image}`
-    console.log(response_json.like_auction)
 
         response_json.like_auction.forEach(item => {
-            console.log(item)
             $('#action_like_list').append(
                 `
                 <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-6 mb-6">
@@ -65,7 +73,6 @@ async function Auction_History_View(){
     }
     )
     response_json = await response.json()
-    console.log(response_json)
         response_json.forEach(item => {
             let time_before = time2str((item['created_at']))
             
