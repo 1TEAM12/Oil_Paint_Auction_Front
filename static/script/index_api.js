@@ -10,7 +10,6 @@ window.onload = async function AuctionAlllistView(){
     }
     )
     response_json = await response.json()
-    console.log(response_json)
 
     const _WRAP = document.querySelector('.wrap');
     const _UL = document.querySelector('.listWrap');
@@ -55,9 +54,7 @@ window.onload = async function AuctionAlllistView(){
                         <div class="action-wrapper d-flex-between pt-4">
                             <a href="#" data-bs-toggle="modal" data-bs-target="#bid_history" class="history d-flex-center"><i
                                 class="ri-history-line"></i>View History</a>
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#placeBit"
-                            class="btn btn-outline btn-small "><span><i class="ri-shopping-bag-line"></i> Place
-                                Bid</span></a>
+                            
                         </div>
                         <!-- action-wrapper -->
                     </div>
@@ -72,7 +69,7 @@ window.onload = async function AuctionAlllistView(){
             let _BTN = document.createElement('div');
             
             
-            _BTN.innerHTML = `<div style="text-align: center;"><a class="btn btn-gradient btn-medium" id="read_more">read more</a></div>`
+            _BTN.innerHTML = `<div style="text-align: center;"><a class="btn btn-gradient btn-medium" id="read_more">more</a></div>`
             return length > max && _WRAP.appendChild(_BTN)
         }
         
@@ -91,7 +88,7 @@ window.onload = async function AuctionAlllistView(){
         let cnt = 1;
         more(response_json.length, max).addEventListener('click', function(e){
             cnt++;     
-            if(response_json.length < max * cnt){ // 2번 상황
+            if(response_json.length < max * cnt){ 
                 for(let i= max * (cnt - 1); i< response_json.length; i++){
                     _UL.appendChild(listView(response_json[i]));
                 }
@@ -101,7 +98,6 @@ window.onload = async function AuctionAlllistView(){
                 for(let i=max * (cnt - 1); i< max * cnt - 1; i++){
                     _UL.appendChild(listView(response_json[i]));
                 }
-                console.log("in2");
             }
         })
 }
