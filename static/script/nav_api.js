@@ -16,9 +16,11 @@ async function Nav_Profile(){
     const a_nav_user_nickname = document.getElementById("nav_user_nickname")
     const a_nav_user_point = document.getElementById("nav_user_point")
 
+    const now_bid = response_json.point.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+    
     a_nav_user_email.innerText = `이메일 : ${response_json.email}`
     a_nav_user_nickname.innerText = `닉네임 : ${response_json.nickname}`
-    a_nav_user_point.innerText = `보유포인트 : ${response_json.point} Point`
+    a_nav_user_point.innerText = `보유포인트 : ${now_bid} Point`
 
 
     document.getElementById("nav_profile_image").src = `${backendBaseUrl}${response_json.profile_image}`

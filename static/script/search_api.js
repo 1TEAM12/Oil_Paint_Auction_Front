@@ -1,6 +1,5 @@
 function sendSearchKeyword(){
     var inputValue = document.getElementById('search').value;
-    console.log(inputValue);
     window.location.href = `/auction_search.html?search=${inputValue}`;
 }
 
@@ -10,7 +9,6 @@ async function searchParam(){
     let getLink_Name = getLink.split('=');
     let getLink_result = getLink_Name[1]
     let decodeResult = decodeURI(getLink_result);
-    console.log(decodeResult);
 
     if(decodeResult){
         const response = await fetch(`${backendBaseUrl}/auctions/search?search=${decodeResult}`,{
@@ -41,7 +39,9 @@ async function searchParam(){
                     }
     
                     let remain_end_time = diffDay(item.paintings.end_date)
-                
+                    
+                    const now_bid = item.paintings.now_bid.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+
                     $('#auction_search_view').append(
                         `
                         <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-6 mb-6">
@@ -63,7 +63,7 @@ async function searchParam(){
                                 </div>
                                 <p></p>
                                 <div class="product-share-wrapper">
-                                <span class="bid-owner">Bid Price : <strong>${item.paintings.now_bid} Point</strong></span>
+                                <span class="bid-owner">Bid Price : <strong>${now_bid} Point</strong></span>
                                 </div>
                                 <!-- End product-share-wrapper -->
                                 <div class="product-owner py-4 d-flex-between">
@@ -97,8 +97,6 @@ function enterkey(e) {
 
 
 function move_detail_page(click_id){ 
-    console.log(click_id)
-
     window.location.href = `/auction_detail.html?$id=${click_id}`;
 
 }

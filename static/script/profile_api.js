@@ -26,10 +26,13 @@ async function Profile(){
     const h4_profile_nickname = document.getElementById("profile_nickname")
     const p_profile_email = document.getElementById("profile_email")
     const h5_profile_point = document.getElementById("profile_point")
+    
 
+    const now_point = response_json.point.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+    
     h4_profile_nickname.innerText = response_json.nickname
     p_profile_email.innerText = response_json.email
-    h5_profile_point.innerText = `${response_json.point} Point`
+    h5_profile_point.innerText = `${now_point} Point`
 
 
     document.getElementById("profile_image").src = `${backendBaseUrl}${response_json.profile_image}`
@@ -62,38 +65,6 @@ async function Profile(){
         })
 }
 
-async function Auction_History_View(){
-
-    const response = await fetch(`${backendBaseUrl}/auctions/${auction_id}/history/`, {
-        method: 'GET',
-        headers: {
-            Accept: "application/json",
-            "Content-type": "application/json",
-            }
-    }
-    )
-    response_json = await response.json()
-        response_json.forEach(item => {
-            let time_before = time2str((item['created_at']))
-            
-            $('#auction_history_view').append(
-                `
-                <div class="single-item-history d-flex-center">
-                    <div class="avatar">
-                        <img src="${backendBaseUrl}${item['bidder_profile_image']}" alt="history">
-                    <i class="ri-check-line"></i>
-                    </div>
-                    <!-- end avatar -->
-                    <div class="content">
-                    <p>Bid accepted <span class="color-primary fw-500">${item['now_bid']}
-                    Point</span> by <h5 style="font-size:16px;"class="text-white" >${item['bidder']}</h5></p>
-                    <span class="date">${time_before}</span>
-                    </div>
-                </div>
-                `
-            )
-        })
-}
 Profile()
 
 // 회원탈퇴

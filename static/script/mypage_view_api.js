@@ -200,7 +200,7 @@ async function AuctionList(){
       }
 
       let remain_end_time = diffDay(item.end_date)
-
+      const now_bid = item.now_bid.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
         $('#action_list').append(
             `
             <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-6 mb-6">
@@ -222,7 +222,7 @@ async function AuctionList(){
                     </div>
                     <p></p>
                     <div class="product-share-wrapper">
-                    <span class="bid-owner">Bid Price : <strong>${item.now_bid} Point</strong></span>
+                    <span class="bid-owner">Bid Price : <strong>${now_bid} Point</strong></span>
                     </div>
                     <!-- End product-share-wrapper -->
                     <div class="product-owner py-4 d-flex-between">

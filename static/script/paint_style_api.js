@@ -20,7 +20,6 @@ async function StyleSelectView(){
         }
     })
     response_json = await response.json()
-    console.log(response_json)
 
     $('#style-box').empty()
     response_json.forEach(item => {

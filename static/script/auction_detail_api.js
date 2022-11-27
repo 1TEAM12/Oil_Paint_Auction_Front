@@ -61,12 +61,15 @@ async function loadAuction() {
         const auction_delete__view = document.getElementById("auction_delete__view")
         auction_delete__view.setAttribute("style", "display:block;")
     }
+
+    const now_bid = response_json.now_bid.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+
     auction_title.innerText = response_json.painting.title   
     auction_owner.innerText = response_json.painting.owner
     auction_author.innerText = response_json.painting.author
     auction_content.innerText = response_json.painting.content
     auction_like_count.innerText = response_json.auction_like_count
-    auction_now_bid.innerText = response_json.now_bid
+    auction_now_bid.innerText = `${now_bid} Point`
     document.getElementById("auction_owner_profile_image").src = `${backendBaseUrl}${response_json.painting.owner_profile_image}`
     document.getElementById("auction_author_profile_image").src = `${backendBaseUrl}${response_json.painting.author_profile_image}`
 
@@ -145,6 +148,7 @@ async function Auction_History_View(){
     )
     response_json = await response.json()
         response_json.forEach(item => {
+            const now_bid = item['now_bid'].toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
             let time_before = time2str((item['created_at']))
             
             $('#auction_history_view').append(
@@ -156,7 +160,7 @@ async function Auction_History_View(){
                     </div>
                     <!-- end avatar -->
                     <div class="content">
-                    <p>Bid accepted <span class="color-primary fw-500">${item['now_bid']}
+                    <p>Bid accepted <span class="color-primary fw-500">${now_bid}
                     Point</span> by <h5 style="font-size:16px;"class="text-white" >${item['bidder']}</h5></p>
                     <span class="date">${time_before}</span>
                     </div>
@@ -363,8 +367,6 @@ async function deleteComment(comment_id){
 
 // 댓글 수정 GET(특정 댓글 가져오기)
 async function getComment(){
-    console.log(auction_id)
-    console.log(comment_id)
     const response = await fetch(`${backendBaseUrl}/auctions/${auction_id}/comments/${comment_id}/`, {
         method: 'GET',
         headers: {

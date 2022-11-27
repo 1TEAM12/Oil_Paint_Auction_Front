@@ -11,7 +11,6 @@ window.onload = async function AuctionAlllistView(){
     )
     response_json = await response.json()
     
-    console.log(response_json)
     response_json.closing_auction.forEach(item => {
         function diffDay(data) {
             const masTime = new Date(data);
@@ -25,7 +24,7 @@ window.onload = async function AuctionAlllistView(){
             
             return `${diffDay}일 ${diffHour}시간 ${diffMin}분 `;
         }
-        console.log(item)
+        const now_bid = item.now_bid.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 
         let remain_end_time = diffDay(item.end_date)
         $('#auction_deadline_view').append(
@@ -47,7 +46,7 @@ window.onload = async function AuctionAlllistView(){
                 </div>
 
                 <div class="product-share-wrapper">
-                Bid price&nbsp;&nbsp;&nbsp;<strong><span >${item.now_bid} Point</span></strong>
+                Bid price&nbsp;&nbsp;&nbsp;<strong><span >${now_bid} Point</span></strong>
                 </div>
                 <!-- End product-share-wrapper -->
                 <div class="product-owner py-4 d-flex-between">
@@ -77,7 +76,7 @@ window.onload = async function AuctionAlllistView(){
             
             return `${diffDay}일 ${diffHour}시간 ${diffMin}분 `;
         }
-        console.log(item)
+        const now_bid = item.now_bid.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 
         let remain_end_time = diffDay(item.end_date)
         $('#auction_open_view').append(
@@ -99,7 +98,7 @@ window.onload = async function AuctionAlllistView(){
                 </div>
 
                 <div class="product-share-wrapper">
-                Bid price&nbsp;&nbsp;&nbsp;<strong><span >${item.now_bid} Point</span></strong>
+                Bid price&nbsp;&nbsp;&nbsp;<strong><span >${now_bid} Point</span></strong>
                 </div>
                 <!-- End product-share-wrapper -->
                 <div class="product-owner py-4 d-flex-between">
@@ -136,7 +135,7 @@ window.onload = async function AuctionAlllistView(){
         
         return `${diffDay}일 ${diffHour}시간 ${diffMin}분 `;
     }
-
+    const now_bid = item.now_bid.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
     let remain_end_time = diffDay(item.end_date)
 
         let _LI = document.createElement('div');
@@ -160,7 +159,7 @@ window.onload = async function AuctionAlllistView(){
                         </div>
 
                         <div class="product-share-wrapper">
-                        Bid price &nbsp;&nbsp;&nbsp;<strong>${item.now_bid}<span> Point</span></strong>
+                        Bid price &nbsp;&nbsp;&nbsp;<strong>${now_bid}<span> Point</span></strong>
                         </div>
                         <!-- End product-share-wrapper -->
                         <div class="product-owner py-4 d-flex-between">

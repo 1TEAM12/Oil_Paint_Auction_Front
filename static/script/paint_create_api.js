@@ -10,7 +10,6 @@ painting_create_service()
 
 window.onload = () => {
     const style_no = location.href.split('=')[1][0]
-    console.log(style_no)
     StyleLoadView(style_no)
 }
 
@@ -25,8 +24,7 @@ async function StyleLoadView(style_no) {
         }
     })
     response_json = await response.json()
-    console.log(response_json)
-    console.log(response_json[style_no][1])
+
 
     const style_title = response_json[style_no][1]
 
@@ -37,12 +35,8 @@ async function StyleLoadView(style_no) {
 
 async function uploadImg() {
     let style_no = location.href.split('=')[1][0]
-    console.log(style_no)
-    console.log(typeof(style_no))
     style_no = Number(style_no)+1
-    console.log(style_no)
     const before_image = document.getElementById("before_image").files[0]
-    console.log(before_image)
 
     const formData = new FormData()
     formData.append("style", style_no)
@@ -60,12 +54,10 @@ async function uploadImg() {
         body: formData
     })
     const response_json = await response.json()
-    console.log(response_json)
-    console.log("전송 완료")
+
 
     localStorage.setItem("pt_id", response_json.id)
     localStorage.setItem("after_image", response_json.after_image)
-    console.log(response_json.id)
     savePainting()
 }
 
@@ -73,14 +65,12 @@ async function uploadImg() {
 async function savePainting() {
     const painting_id = localStorage.getItem("pt_id")
     // const after_image = localStorage.getItem("after_image")
-    console.log(painting_id)
     const title = document.getElementById("title").value
     const content = document.getElementById("content").value
 
     let storage = localStorage.getItem('payload');
     const personObj = JSON.parse(storage);
     user_id = personObj['user_id'];
-    console.log(user_id);
 
     const formData = new FormData()
     formData.append("painting_id", painting_id)
@@ -140,7 +130,6 @@ function DropFile(dropAreaId, fileListId) {
     }
 
     function previewFile(file) {
-        console.log(file);
         renderFile(file);
     }
 
