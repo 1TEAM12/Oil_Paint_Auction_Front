@@ -71,8 +71,9 @@
         <ul class="header-right-inner">
           <li class=" d-none d-lg-block">
             <form action="#" class="search-bar">
-              <input type="text" name="search" placeholder="Search" id="search">
-              <button class="search-btn" type="submit"> <i class="ri-search-line"></i></button>
+              <input type="text" style="display:none;"/>
+              <input type="text" name="search" placeholder="Search" id="search" onkeypress="enterkey()">
+              <div class="search-btn"> <i class="ri-search-line"></i></div>
             </form>
           </li>
           <!-- End .search-bar -->

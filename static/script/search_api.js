@@ -1,9 +1,9 @@
 function sendSearchKeyword(){
     var inputValue = document.getElementById('search').value;
     console.log(inputValue);
-    window.location.href = `/search.html?search=${inputValue}`;
+    window.location.href = `/auction_search.html?search=${inputValue}`;
 }
-searchParam()
+
 
 async function searchParam(){
     let getLink = window.location.search;
@@ -23,10 +23,9 @@ async function searchParam(){
             response_json = await response.json()
 
         if(response_json.length){
-                const articles = document.getElementById("articles")
+                const auction_search_view = document.getElementById("auction_search_view")
                 console.log(response_json)
                 response_json.forEach(item => {
-                    console.log(item)
                     $('#auction_search_view').append(
                         `
                         <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-6 mb-6">
