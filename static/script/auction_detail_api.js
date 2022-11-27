@@ -38,8 +38,8 @@ async function loadAuction() {
 
 
     response_json = await response.json()
-
-
+    
+    
     if (response.status === 400) {
         alert("경매가 마감되었습니다.")
         location.replace('index.html')
@@ -54,13 +54,22 @@ async function loadAuction() {
     const auction_now_bid = document.getElementById("auction_now_bid")
 
 
+    const user_id = JSON.parse(localStorage.getItem(["payload"])).user_id
+    const nickname = JSON.parse(localStorage.getItem(["payload"])).nickname
+    console.log(response_json.auction_like.indexOf(user_id))
 
-    nickname = JSON.parse(localStorage.getItem(["payload"])).nickname
+    if (response_json.auction_like.indexOf(user_id) == -1){
+        const heart_confirm = document.getElementById("heart_confirm")
+        heart_confirm.innerHTML =`<i class="ri-heart-line"></i><span>${response_json.auction_like_count}</span>`
+    } 
 
     if (nickname === response_json.seller) {
         const auction_delete__view = document.getElementById("auction_delete__view")
         auction_delete__view.setAttribute("style", "display:block;")
     }
+
+
+
 
     const now_bid = response_json.now_bid.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 
