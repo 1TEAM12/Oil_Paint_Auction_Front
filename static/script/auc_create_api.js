@@ -26,8 +26,6 @@ window.onload = async function paintingLoad(){
         }
     )
     response_json = await response.json()
-    console.log(response_json)
-
 
     const image_after = document.getElementById("image_after")
     const image_painting = response_json.after_image
@@ -57,14 +55,18 @@ async function AuctionCreate(){
     })
 
     const response_json = await response.json()
-    console.log(response.status)
 
     if (response.status === 200) {
         alert('등록완료!')
         location.replace('profile.html')
-    }else if(response.status === 400) {
-        alert('이미 등록된 상품입니다.')
-        location.replace('profile.html')
+    }else if (response.status === 400 && response_json["end_date"])  {  
+        alert(response_json["end_date"])
+    }
+    else if (response.status === 400 && response_json["start_bid"])  {  
+        alert(response_json["start_bid"])
+    }
+    else if (response.status === 400 && response_json["message"])  {  
+        alert(response_json["message"])
     }
 }
 

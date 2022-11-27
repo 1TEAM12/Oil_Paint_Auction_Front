@@ -25,7 +25,6 @@ async function Check_Password() {
     })
 
     const result = await response.json()
-    console.log(result)
     if (response.status === 401) {
         alert(result["message"])
         location.replace('index.html')
@@ -37,7 +36,6 @@ async function Set_Password() {
 
     const password = document.getElementById("password").value;
     const repassword = document.getElementById("repassword").value;
-    console.log(uidb64)
     const response = await fetch(`${backendBaseUrl}/users/password-reset-complete/`,{
         headers:{
             'Content-type':'application/json',
@@ -47,7 +45,6 @@ async function Set_Password() {
     })
 
     const result = await response.json()
-    console.log(result)
     if (response.status === 200) {
         alert(result["message"])
         location.replace('user.html')
