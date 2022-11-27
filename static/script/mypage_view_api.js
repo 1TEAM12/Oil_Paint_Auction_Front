@@ -185,6 +185,22 @@ async function AuctionList(){
     )
     response_json = await response.json()
     response_json.forEach(item => {
+
+      function diffDay(data) {
+        const masTime = new Date(data);
+        const todayTime = new Date();
+        
+        const diff = masTime - todayTime;
+        
+        const diffDay = Math.floor(diff / (1000*60*60*24));
+        const diffHour = Math.floor((diff / (1000*60*60)) % 24);
+        const diffMin = Math.floor((diff / (1000*60)) % 60);
+        
+        return `${diffDay}일 ${diffHour}시간 ${diffMin}분 `;
+      }
+
+      let remain_end_time = diffDay(item.end_date)
+
         $('#action_list').append(
             `
             <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-6 mb-6">
@@ -202,7 +218,7 @@ async function AuctionList(){
                     </div>
                     <!-- .header -->
                     <div class="product-share-wrapper">
-                    종료일&nbsp;&nbsp;&nbsp;<span id='remain-time' style='color:red;'>${item.end_date}</span>
+                    종료일&nbsp;&nbsp;&nbsp;<span id='remain-time' style='color:red;'>${remain_end_time}</span>
                     </div>
                     <p></p>
                     <div class="product-share-wrapper">
@@ -256,7 +272,7 @@ async function deletePainting(paintings){
           alert("유화가 삭제되었습니다..")
           window.location.reload()
           return response_json
-      }
+      } 
 }}
 
 function AuctionCreate(click_id){

@@ -10,6 +10,112 @@ window.onload = async function AuctionAlllistView(){
     }
     )
     response_json = await response.json()
+    
+    console.log(response_json)
+    response_json.closing_auction.forEach(item => {
+        function diffDay(data) {
+            const masTime = new Date(data);
+            const todayTime = new Date();
+            
+            const diff = masTime - todayTime;
+            
+            const diffDay = Math.floor(diff / (1000*60*60*24));
+            const diffHour = Math.floor((diff / (1000*60*60)) % 24);
+            const diffMin = Math.floor((diff / (1000*60)) % 60);
+            
+            return `${diffDay}일 ${diffHour}시간 ${diffMin}분 `;
+        }
+        console.log(item)
+
+        let remain_end_time = diffDay(item.end_date)
+        $('#auction_deadline_view').append(
+            `
+            <div class="explore-style-one">
+            <div class="thumb">
+                <a onclick="move_auction_detail_page(${item.id})"> <img src="${backendBaseUrl}${item.painting.after_image}" alt="nft live auction thumbnail"  style="width: 270px; height:270px; object-fit:fill;"></a>
+                <button class="reaction-btn"><i class="ri-heart-fill"></i><span>${item.auction_like_count}</span></button>
+                <!-- End .reaction-count -->
+            </div>
+            <!-- End .thumb -->
+            <div class="content">
+                <div class="header d-flex-between pt-4 pb-3">
+                    <h3 class="title"><a onclick="move_auction_detail_page(${item.id})">${item.painting.title}</a></h3>
+                </div>
+                <!-- .header -->
+                <div class="product-share-wrapper">
+                종료일&nbsp;&nbsp;&nbsp;<span style='color:red;'>약  ${remain_end_time}</span>
+                </div>
+
+                <div class="product-share-wrapper">
+                Bid price&nbsp;&nbsp;&nbsp;<strong><span >${item.now_bid} Point</span></strong>
+                </div>
+                <!-- End product-share-wrapper -->
+                <div class="product-owner py-4 d-flex-between">
+                    <span class="bid-owner">Owned By <strong>${item.painting.owner}</a></strong></span>
+                    
+                </div>
+                <!-- End .product-owner -->
+                
+                <!-- action-wrapper -->
+            </div>
+            <!-- End .content -->
+            </div>
+            `
+        )
+    })
+
+    response_json.open_auctions.forEach(item => {
+        function diffDay(data) {
+            const masTime = new Date(data);
+            const todayTime = new Date();
+            
+            const diff = masTime - todayTime;
+            
+            const diffDay = Math.floor(diff / (1000*60*60*24));
+            const diffHour = Math.floor((diff / (1000*60*60)) % 24);
+            const diffMin = Math.floor((diff / (1000*60)) % 60);
+            
+            return `${diffDay}일 ${diffHour}시간 ${diffMin}분 `;
+        }
+        console.log(item)
+
+        let remain_end_time = diffDay(item.end_date)
+        $('#auction_open_view').append(
+            `
+            <div class="explore-style-one">
+            <div class="thumb">
+                <a onclick="move_auction_detail_page(${item.id})"> <img src="${backendBaseUrl}${item.painting.after_image}" alt="nft live auction thumbnail"  style="width: 270px; height:270px; object-fit:fill;"></a>
+                <button class="reaction-btn"><i class="ri-heart-fill"></i><span>${item.auction_like_count}</span></button>
+                <!-- End .reaction-count -->
+            </div>
+            <!-- End .thumb -->
+            <div class="content">
+                <div class="header d-flex-between pt-4 pb-3">
+                    <h3 class="title"><a onclick="move_auction_detail_page(${item.id})">${item.painting.title}</a></h3>
+                </div>
+                <!-- .header -->
+                <div class="product-share-wrapper">
+                종료일&nbsp;&nbsp;&nbsp;<span style='color:red;'>약  ${remain_end_time}</span>
+                </div>
+
+                <div class="product-share-wrapper">
+                Bid price&nbsp;&nbsp;&nbsp;<strong><span >${item.now_bid} Point</span></strong>
+                </div>
+                <!-- End product-share-wrapper -->
+                <div class="product-owner py-4 d-flex-between">
+                    <span class="bid-owner">Owned By <strong>${item.painting.owner}</a></strong></span>
+                    
+                </div>
+                <!-- End .product-owner -->
+                
+                <!-- action-wrapper -->
+            </div>
+            <!-- End .content -->
+            </div>
+            `
+        )
+    })
+
 
     const _WRAP = document.querySelector('.wrap');
     const _UL = document.querySelector('.listWrap');
@@ -51,6 +157,10 @@ window.onload = async function AuctionAlllistView(){
                         <!-- .header -->
                         <div class="product-share-wrapper">
                         종료일&nbsp;&nbsp;&nbsp;<span style='color:red;'>약  ${remain_end_time}</span>
+                        </div>
+
+                        <div class="product-share-wrapper">
+                        Bid price &nbsp;&nbsp;&nbsp;<strong>${item.now_bid}<span> Point</span></strong>
                         </div>
                         <!-- End product-share-wrapper -->
                         <div class="product-owner py-4 d-flex-between">

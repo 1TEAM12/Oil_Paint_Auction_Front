@@ -76,7 +76,7 @@ async function loadAuction() {
     const remaining_time = response_json.end_date
 
     // 경매 마감 남은 시간
-    const remainTime = document.querySelector("#rremain-time");
+    const remainTime = document.querySelector("#remain-time");
     
     function diffDay() {
         const masTime = new Date(remaining_time);
@@ -251,7 +251,7 @@ async function loadComment() {
                 `<ul class="comment-box-inner" style="height:100px;">
                     <li class="single-comment-box d-flex-between ">
                         <div class="inner d-flex-start" style="position:relative;">
-                                <img class="avatar" src="${backendBaseUrl}/${item['profile_image']}" alt="author">
+                                <img class="avatar" src="${backendBaseUrl}${item['profile_image']}" alt="author">
                             <!-- End .avatar -->
                             <div class="content">
                                 <h5 class="title">${item['user']}<span class="date-post"> ${time_before} &nbsp&nbsp</span> 
