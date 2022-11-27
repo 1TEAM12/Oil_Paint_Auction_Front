@@ -235,7 +235,7 @@ function AuctionCreate(click_id){
 
 
 function PaintUpdate(click_id){
-  window.location.href = `/PaintUpdate.html?id=${click_id.id}`;
+  window.location.href = `/paint_update.html?id=${click_id.id}`;
 }
 
 //유화 삭제
