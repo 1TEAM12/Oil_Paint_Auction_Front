@@ -201,9 +201,10 @@ async function loadComment() {
                                 <div class="more-dropdown details-dropdown"><i class="ri-more-fill" data-bs-toggle="dropdown"></i>
                                     <ul class="dropdown-menu dropdown-menu-dark">
                                     <div id="container">
-                                        <button class="dropdown-item");" id="btn-modal${item['id']}" onclick=doDisplay(${item['id']})>수정</button>
-                                    </div>
-                                    <li><a class="dropdown-item" onclick="deleteComment(${item['id']})">삭제</a></li>
+                                        <button class="dropdown-item");" id="btn-modal${item['id']}" onclick=doDisplay(${item['id']})>Edit</button>
+                                        <p></p>
+                                        <a class="dropdown-item" onclick="deleteComment(${item['id']})">Delete</a>
+                                        </div>
                                     </ul>
                                 </div>
                                 </h5>
