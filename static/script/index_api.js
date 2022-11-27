@@ -51,7 +51,7 @@ window.onload = async function AuctionAlllistView(){
     const _UL = document.querySelector('.listWrap');
 
     function listView(item){
-    console.log(item)
+
     // 경매 마감 남은 시간
     
     
