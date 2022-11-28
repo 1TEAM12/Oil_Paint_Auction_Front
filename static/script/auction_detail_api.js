@@ -38,13 +38,6 @@ async function loadAuction() {
 
 
     response_json = await response.json()
-    
-    
-    if (response.status === 400) {
-        alert("경매가 마감되었습니다.")
-        location.replace('index.html')
-    } else {
-
 
     const auction_title = document.getElementById("auction_title")
     const auction_owner = document.getElementById("auction_owner")
@@ -112,7 +105,7 @@ async function loadAuction() {
     diffDay();
     setInterval(diffDay, 1000);
     }
-}
+
 
 // 낙찰가 Update
 async function BidUpdate(){
@@ -136,6 +129,7 @@ async function BidUpdate(){
 
     if (response.status === 200) {
         alert("입찰이 완료되었습니다.")
+        window.location.reload()
     }else if (response.status === 400 && response_json["error"])  {
         alert(response_json["error"])
         
