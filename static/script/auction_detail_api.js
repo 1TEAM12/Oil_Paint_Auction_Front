@@ -136,11 +136,11 @@ async function BidUpdate(){
 
     if (response.status === 200) {
         alert("입찰이 완료되었습니다.")
-        location.reload()
-
-    }else if (response.status === 400)  {  
+    }else if (response.status === 400 && response_json["error"])  {
         alert(response_json["error"])
-
+        
+    }else if(response.status === 400){
+        alert("입찰가를 입력해주세요")
     }
 }
 
