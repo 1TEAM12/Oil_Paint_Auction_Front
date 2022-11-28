@@ -48,7 +48,6 @@ async function loadAuction() {
 
 
     const user_id = JSON.parse(localStorage.getItem(["payload"])).user_id
-    const nickname = JSON.parse(localStorage.getItem(["payload"])).nickname
     console.log(response_json.auction_like.indexOf(user_id))
 
     if (response_json.auction_like.indexOf(user_id) == -1){
@@ -56,7 +55,7 @@ async function loadAuction() {
         heart_confirm.innerHTML =`<i class="ri-heart-line"></i><span>${response_json.auction_like_count}</span>`
     } 
 
-    if (nickname === response_json.seller) {
+    if (user_id === response_json.seller) {
         const auction_delete__view = document.getElementById("auction_delete__view")
         auction_delete__view.setAttribute("style", "display:block;")
     }
