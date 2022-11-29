@@ -10,7 +10,7 @@ window.onload = async function AuctionAlllistView(){
     }
     )
     response_json = await response.json()
-    
+
     response_json.closing_auction.forEach(item => {
         function diffDay(data) {
             const masTime = new Date(data);

@@ -18,13 +18,15 @@ async function searchParam(){
             },
             method:'GET',
         })
-            response_json = await response.json()
-
+            const response_json = await response.json()
+            
         if(response_json.length){
-                const auction_search_view = document.getElementById("auction_search_view")
+            
+                response_json.forEach((item, key) => {
+                    console.log(item)
+                    console.log(item.painting[key])
 
-                response_json.forEach(item => {
-
+                    
                     function diffDay(data) {
                         const masTime = new Date(data);
                         const todayTime = new Date();
@@ -38,24 +40,23 @@ async function searchParam(){
                         return `${diffDay}일 ${diffHour}시간 ${diffMin}분 `;
                     }
     
-                    let remain_end_time = diffDay(item.paintings.end_date)
-                    
-                    const now_bid = item.paintings.now_bid.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+                    let remain_end_time = diffDay(item.paintings[key].end_date)
+                    const now_bid = item.paintings[key].now_bid.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 
                     $('#auction_search_view').append(
                         `
                         <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-6 mb-6">
                             <div class="explore-style-one">
                                 <div class="thumb">
-                                <a href="auction_details.html?$id=${item.paintings.id}/"><img src="${backendBaseUrl}${item.paintings.painting.after_image}"
+                                <a href="auction_details.html?$id=${item.paintings[key].id}/"><img src="${backendBaseUrl}${item.paintings[key].painting.after_image}"
                                     alt="nft live auction thumbnail"></a>
-                                <button class="reaction-btn"><i class="ri-heart-fill"></i><span>${item.paintings.auction_like_count}</span></button>
+                                <button class="reaction-btn"><i class="ri-heart-fill"></i><span>${item.paintings[key].auction_like_count}</span></button>
                                 <!-- End .reaction-count -->
                                 </div>
                                 <!-- End .thumb -->
                                 <div class="content">
                                 <div class="header d-flex-between pt-4 pb-3">
-                                    <h3 class="title"><a href="auction_details.html">${item.paintings.painting.title}</a></h3>
+                                    <h3 class="title"><a href="auction_details.html">${item.paintings[key].painting.title}</a></h3>
                                 </div>
                                 <!-- .header -->
                                 <div class="product-share-wrapper">
@@ -67,7 +68,7 @@ async function searchParam(){
                                 </div>
                                 <!-- End product-share-wrapper -->
                                 <div class="product-owner py-4 d-flex-between">
-                                    <span class="bid-owner">Owned By <strong>${item.paintings.painting.owner}</strong></span>
+                                    <span class="bid-owner">Owned By <strong>${item.paintings[key].painting.owner}</strong></span>
                                 </div>
                                 <!-- End .product-owner -->
                                 </div>
